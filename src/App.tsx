@@ -5,11 +5,20 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Index from './pages/index';
 
+const pages = [
+  {
+    path: '/',
+    element: <Index />,
+  },
+];
+
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path='/' element={<Index />} />
+        {pages.map(obj => 
+          <Route path={obj.path} element={obj.element} />
+        )}
       </Routes>
     </Router>
   );

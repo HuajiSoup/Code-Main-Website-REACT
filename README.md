@@ -1,13 +1,18 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Code-Main-Website-REACT
 https://huaji-universe.top/ refactored with REACT
 =======
 # Getting Started with Create React App
+=======
+# WHAT IS THIS?
+>>>>>>> 44c379d (主页标题还原)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the source code of <a href="https://huaji-universe.top/">稽之宇宙</a> .
 
-## Available Scripts
+# LIBS
 
+<<<<<<< HEAD
 In the project directory, you can run:
 
 ### `npm start`
@@ -49,3 +54,6 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 >>>>>>> f0eb9d4 (基础结构创建)
+=======
+- React
+>>>>>>> 44c379d (主页标题还原)

@@ -1,0 +1,81 @@
+$cubic-ease-out: cubic-bezier(.22,.61,.36,1);
+
+.welcome-wrapper {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: #202020;
+    background: url("./assets/bg-huaji-universe.jpg") center / cover no-repeat;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .title-box {
+        position: relative;
+        left: 3vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        color: aliceblue;
+
+        h1.main-title {
+            display: inline;
+            width: max-content;
+
+            transform: scale(1.0);
+            transition: transform 200ms $cubic-ease-out, text-shadow 500ms $cubic-ease-out;
+
+            &:hover {
+                transform: scale(1.05);
+                text-shadow: #fa0 0 0 10px;
+            }
+            &:nth-child(1) {
+                font-size: 6rem;
+                line-height: 1.5;
+                font-family: sans-serif;
+                font-weight: 1000;
+                letter-spacing: -0.4vw;
+                animation: titleAppear 500ms 100ms cubic-bezier(.22,.61,.36,1) backwards;
+            }
+            &:nth-child(2) {
+                font-size: 4.5em;
+                line-height: 1.2;
+                font-family: serif;
+                font-weight: 350;
+                letter-spacing: 0.4vw;
+                animation: titleAppear 500ms 650ms cubic-bezier(.22,.61,.36,1) backwards;
+            }
+            &:nth-child(3) {
+                font-size: 3em;
+                line-height: 2.5;
+                font-family: Arial, Helvetica, sans-serif;
+                color: rgba(240, 248, 255, 0.27);
+                -webkit-text-stroke: aliceblue 2px;
+                animation: titleAppear 500ms 1200ms cubic-bezier(.22,.61,.36,1) backwards;
+            }
+        }
+
+        p.intro {
+            display: inline-block;
+            margin: 40px 0;
+            width: 40vw;
+            font-size: 1.2rem;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    }
+}
+
+@keyframes titleAppear {
+    from {
+        transform: scale(1.5);
+        opacity: 0;
+    } to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
