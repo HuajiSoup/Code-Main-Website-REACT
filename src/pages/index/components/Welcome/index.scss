@@ -1,14 +1,17 @@
 $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
 
 .welcome-wrapper {
-    position: fixed;
-    left: 0;
+    // position: sticky;
     top: 0;
-    width: 100vw;
-    height: 100vh;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
 
     background-color: #202020;
-    background: url("./assets/bg-huaji-universe.jpg") center / cover no-repeat;
+    background: 
+        linear-gradient(to right, #00c0fa 15%, transparent 60%),
+        url("./assets/bg-huaji-universe.jpg") center / cover no-repeat,
+    ;
 
     display: flex;
     flex-direction: row;
