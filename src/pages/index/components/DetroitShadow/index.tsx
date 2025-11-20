@@ -19,10 +19,6 @@ const DetroitShadow: React.FC = () => {
         }
     }, []);
 
-    useMotionValueEvent(scrollYProgress, "change", (progress) => {
-        console.log(progress);
-    });
-
     return (
         <canvas className="detroit" ref={canvasRef}></canvas>
     );

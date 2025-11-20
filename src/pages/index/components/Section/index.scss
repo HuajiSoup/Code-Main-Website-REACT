@@ -14,24 +14,28 @@
     section {
         color: aliceblue;
 
-        h2.section-index {
-            font-size: 2rem;
-            font-family: monospace;
-        }
-        h2.section-title {
-            font-size: 5rem;
-            font-weight: 800;
-            font-family: sans-serif;
+        h2 {
+            text-shadow: black 0px 0px 10px;
 
-            position: relative;
-            &::before {
-                content: "";
-                position: absolute;
-                top: 2px;
-                bottom: 2px;
-                left: -20px;
-                width: 12px;
-                background-color: aliceblue;
+            &.section-index {
+                font-size: 2rem;
+                font-family: monospace;
+            }
+            &.section-title {
+                font-size: 5rem;
+                font-weight: 800;
+                font-family: sans-serif;
+    
+                position: relative;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 2px;
+                    bottom: 2px;
+                    left: -20px;
+                    width: 12px;
+                    background-color: aliceblue;
+                }
             }
         }
         p {
