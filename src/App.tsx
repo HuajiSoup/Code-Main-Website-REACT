@@ -24,4 +24,8 @@ function App() {
   );
 }
 
+// function App() {
+//   return <ScrollLinked></ScrollLinked>
+// }
+
 export default App;

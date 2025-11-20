@@ -2,27 +2,37 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
 
 .welcome-wrapper {
     // position: sticky;
+    position: relative;
     top: 0;
     z-index: 0;
     width: 100%;
-    height: 100%;
-
-    background-color: #202020;
-    background: 
-        linear-gradient(to right, #00c0fa 15%, transparent 60%),
-        url("./assets/bg-huaji-universe.jpg") center / cover no-repeat,
-    ;
+    height: 100vh;
+    background-color: transparent;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
 
+    scroll-snap-align: start;
+
+    .background {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        
+        &#shadow {
+            background: linear-gradient(to left, #00c0fa 15%, transparent 55%);
+        }
+    }
+
     .title-box {
-        position: relative;
-        left: 3vw;
+        position: absolute;
+        right: 3vw;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        align-items: flex-end;
 
         color: aliceblue;
 
