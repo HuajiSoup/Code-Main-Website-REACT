@@ -20,13 +20,14 @@
             &.section-index {
                 font-size: 2rem;
                 font-family: monospace;
+                position: relative;
             }
             &.section-title {
                 font-size: 5rem;
                 font-weight: 800;
                 font-family: sans-serif;
-    
                 position: relative;
+
                 &::before {
                     content: "";
                     position: absolute;

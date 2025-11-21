@@ -17,8 +17,7 @@ class DetroitTriangle {
     public timeFactorK: number;
     public timeFactorB: number;
 
-    // baking path to minimize calc
-    private path: Path2D | null = null;
+    private path: Path2D | null;
 
     constructor(
         size: number,
@@ -33,6 +32,7 @@ class DetroitTriangle {
         this.timeFactorK = rand(0.2, 1.2);
         this.timeFactorB = rand(0, 1000);
 
+        // baking path to minimize calc
         try {
             const p = new Path2D();
             if (isUp) {
@@ -46,7 +46,9 @@ class DetroitTriangle {
             }
             p.closePath();
             this.path = p;
-        } catch (e) {
+        } catch (err) {
+            console.log("Failed to initializing component <DetroitShadow>, error info:");
+            console.error(err);
             this.path = null;
         }
     }
@@ -143,10 +145,9 @@ class DetroitDrawer {
 }
 
 const DetroitShadow: React.FC = () => {
+    // keep a ref copy so the animation loop reads latest triangles without re-registering RAF
     const canvasRef = useRef<Canva | null>(null);
     const ctxRef = useRef<Ctx2D | null>(null);
-
-    // keep a ref copy so the animation loop reads latest triangles without re-registering RAF
     const drawerRef = useRef<DetroitDrawer | null>(null);
     const rafIDRef = useRef<number | null>(null);
 
@@ -155,7 +156,6 @@ const DetroitShadow: React.FC = () => {
         offset: ["start end", "start start"],
     });
     const shadowProgress = useSpring(scrollYProgress, {
-
         bounce: 0,
         visualDuration: 1.5,
     });
