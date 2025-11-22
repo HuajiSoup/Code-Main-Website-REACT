@@ -9,7 +9,7 @@ import img2 from "./assets/bg-mc.jpg";
 
 const sectionContent = [
     {
-        id: 1,
+        id: 0,
         title: "稽 之传承",
         content: [
             (<p>
@@ -32,7 +32,7 @@ const sectionContent = [
         img: img1,
     },
     {
-        id: 2,
+        id: 1,
         title: "稽 之发扬",
         content: [
             (<p>
@@ -62,7 +62,7 @@ const Index: React.FC = () => {
             <div className="background" id="backlogo"></div>
             <div className="index-wrapper">
                 <Welcome></Welcome>
-                <SectionList children={sectionContent}></SectionList>
+                <SectionList content={sectionContent}></SectionList>
             </div>
         </>
     );

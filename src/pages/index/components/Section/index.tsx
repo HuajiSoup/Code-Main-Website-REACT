@@ -2,7 +2,8 @@ import React, { JSX, useRef } from "react";
 import "./index.scss";
 
 import SpaceHolder from "@/components/SpaceHolder";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useTransform } from "motion/react";
+import { useScrollValues } from "../SectionList";
 
 type SectionProps = {
     title: string,
@@ -12,11 +13,11 @@ type SectionProps = {
     id: number,
 };
 
-type SectionWrapperProps = {
+type SectionTextWrapperProps = {
     contents: JSX.Element[],
 }
 
-const ContentWrapper: React.FC<SectionWrapperProps> = ({ contents }) => {
+const SectionTextWrapper: React.FC<SectionTextWrapperProps> = ({ contents }) => {
     return (
         <div className="section-content-wrapper">
             {contents.map((content, index) => (
@@ -42,11 +43,11 @@ const ContentWrapper: React.FC<SectionWrapperProps> = ({ contents }) => {
 
 const Section: React.FC<SectionProps> = (props) => {
     const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const { scrollYProgress } = useScroll({
-        target: wrapperRef, 
-        offset: ["end start", "start end"]
-    });
-    const titleScroll = useTransform(scrollYProgress, [0, 1], [-750, 750]);
+    const { scrollY } = useScrollValues();
+    const titleScroll = useTransform(scrollY,
+        [window.innerHeight * (props.id), window.innerHeight * (props.id + 2)],
+        [750, -750],
+    );
 
     return (
         <div
@@ -55,18 +56,22 @@ const Section: React.FC<SectionProps> = (props) => {
             style={ {background: `url(${props.img}) center / cover no-repeat`, }}
         >
             <section>
-                <motion.div style={{y: titleScroll}}>
-                    <motion.h2 className="section-index">{`#00${props.id}`}</motion.h2>
-                    <motion.h2 className="section-title">{props.title}</motion.h2>
+                <motion.div
+                    style={{y: titleScroll}}
+                    initial={{visibility: "hidden"}}
+                    animate={{visibility: "visible"}}
+                >
+                    <h2 className="section-index">{`#00${props.id + 1}`}</h2>
+                    <h2 className="section-title">{props.title}</h2>
                 </motion.div>
 
-                <SpaceHolder height={"14vh"}></SpaceHolder>
+                <SpaceHolder height={"14vh"} />
 
-                <ContentWrapper contents={props.content}></ContentWrapper>
+                <SectionTextWrapper contents={props.content} />
             </section>
         </div>
     );
 };
 
-export default Section;
 export type {SectionProps};
+export default Section;

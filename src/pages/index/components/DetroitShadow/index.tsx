@@ -1,10 +1,12 @@
 import React, { useEffect, useRef } from "react";
 
-import { useScroll, useSpring, useTime, useMotionValueEvent } from "motion/react";
+import { useSpring, useTime, useMotionValueEvent, useInView, MotionValue, useTransform } from "motion/react";
 
 import "./index.scss";
 import { clamp, rand } from "@/utils/math";
 import { canvasCtxScaledAsDPR } from "@/utils/canvas";
+import { SectionProps } from "../Section";
+import { useScrollValues } from "../SectionList";
 
 type Ctx2D = CanvasRenderingContext2D;
 type Canva = HTMLCanvasElement;
@@ -144,28 +146,34 @@ class DetroitDrawer {
     }
 }
 
-const DetroitShadow: React.FC = () => {
+function useColorTransform(scrollYProgress: MotionValue<number>, colorIDMap: SectionProps[]) {
+    const rangeY     = colorIDMap.map(content => (content.id + 1)*window.innerHeight);
+    const rangeColor = colorIDMap.map(content => content.color);
+    return useTransform(scrollYProgress, rangeY, rangeColor);
+}
+
+const DetroitShadow: React.FC<{content: SectionProps[]}> = ({content: colorIDMap}) => {
     // keep a ref copy so the animation loop reads latest triangles without re-registering RAF
     const canvasRef = useRef<Canva | null>(null);
     const ctxRef = useRef<Ctx2D | null>(null);
     const drawerRef = useRef<DetroitDrawer | null>(null);
     const rafIDRef = useRef<number | null>(null);
 
-    const { scrollYProgress } = useScroll({
-        target: canvasRef,
-        offset: ["start end", "start start"],
-    });
-    const shadowProgress = useSpring(scrollYProgress, {
-        bounce: 0,
-        visualDuration: 1.5,
-    });
-    const time = useTime();
+    const SPRING_CONFIG = { bounce: 0, visualDuration: 1.5 };
+    const inView = useInView(canvasRef, { amount: 0.2 });
+    const shadowProgressMV = useSpring(0, SPRING_CONFIG);
+    const timeMV = useTime();
+    const { scrollY } = useScrollValues();
+    const colorMV = useColorTransform(scrollY, colorIDMap);
+
     const shadowProgressRef = useRef<number>(0);
     const timeRef = useRef<number>(0);
 
-    // subscribe MotionValue changes and keep latest in refs for the RAF loop
-    useMotionValueEvent(shadowProgress, 'change', v => { shadowProgressRef.current = v; });
-    useMotionValueEvent(time, 'change', v => { timeRef.current = v; });
+    useMotionValueEvent(shadowProgressMV, 'change', v => { shadowProgressRef.current = v; });
+    useMotionValueEvent(timeMV, 'change', v => { timeRef.current = v; });
+    useMotionValueEvent(colorMV, 'change', v => {
+        if (ctxRef.current) ctxRef.current.fillStyle = v;
+    });
 
     // Canvas init
     useEffect(() => {
@@ -176,7 +184,7 @@ const DetroitShadow: React.FC = () => {
         canvasCtxScaledAsDPR(canvas, ctx, window);
 
         ctxRef.current = ctx;
-        ctx.fillStyle = "#FFA600";
+        ctx.fillStyle = colorMV.get();
         const triangles = spawnTriangles(canvas, true, 0.7, 200);
         drawerRef.current = new DetroitDrawer(ctx, triangles, canvas);
 
@@ -195,7 +203,11 @@ const DetroitShadow: React.FC = () => {
                 rafIDRef.current = null;
             }
         };
-    }, []);
+    }, [colorMV]);
+
+    useEffect(() => {
+        shadowProgressMV.set(inView ? 1 : 0);
+    }, [inView, shadowProgressMV]);
 
     return (
         <div className="detroit-wrapper">
