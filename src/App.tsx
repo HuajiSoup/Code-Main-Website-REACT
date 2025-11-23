@@ -1,9 +1,10 @@
 import React from 'react';
-import './App.scss';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Index from './pages/index';
+
+import './App.scss';
 
 const pages = [
   {

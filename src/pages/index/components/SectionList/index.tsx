@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useRef } from "react";
-import "./index.scss";
-
-import Section from "../Section";
-import { SectionProps } from "../Section";
-import DetroitShadow from "../DetroitShadow";
 
 import { MotionValue, useScroll } from "motion/react";
+
+import { SectionProps } from "../Section";
+import Section from "../Section";
+import DetroitShadow from "../DetroitShadow";
+
+import "./index.scss";
 
 type ScrollContextValue = {
     scrollY: MotionValue<number>,

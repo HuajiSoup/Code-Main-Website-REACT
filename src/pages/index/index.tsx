@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 
 import Welcome from "./components/Welcome";
 import SectionList from "./components/SectionList";
+import Header from "@/components/Header";
 
-import './index.scss';
 import img1 from "./assets/bg-newyear.jpg";
 import img2 from "./assets/bg-mc.jpg";
+
+import './index.scss';
 
 const sectionContent = [
     {
@@ -59,11 +61,16 @@ const Index: React.FC = () => {
 
     return (
         <>  
-            <div className="background" id="backlogo"></div>
-            <div className="index-wrapper">
-                <Welcome></Welcome>
-                <SectionList content={sectionContent}></SectionList>
-            </div>
+            <header>
+                <Header />
+            </header>
+            <main>
+                <div className="background" id="backlogo"></div>
+                <div className="index-wrapper">
+                    <Welcome></Welcome>
+                    <SectionList content={sectionContent}></SectionList>
+                </div>
+            </main>
         </>
     );
 };

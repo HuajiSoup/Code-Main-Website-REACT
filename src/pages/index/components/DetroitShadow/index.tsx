@@ -2,11 +2,14 @@ import React, { useEffect, useRef } from "react";
 
 import { useSpring, useTime, useMotionValueEvent, useInView, MotionValue, useTransform } from "motion/react";
 
-import "./index.scss";
+import { useScrollValues } from "../SectionList";
+
 import { clamp, rand } from "@/utils/math";
 import { canvasCtxScaledAsDPR } from "@/utils/canvas";
+
 import { SectionProps } from "../Section";
-import { useScrollValues } from "../SectionList";
+
+import "./index.scss";
 
 type Ctx2D = CanvasRenderingContext2D;
 type Canva = HTMLCanvasElement;

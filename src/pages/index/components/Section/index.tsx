@@ -1,9 +1,12 @@
 import React, { JSX, useRef } from "react";
-import "./index.scss";
+
+import { motion, useTransform } from "motion/react";
+
+import { useScrollValues } from "../SectionList";
 
 import SpaceHolder from "@/components/SpaceHolder";
-import { motion, useTransform } from "motion/react";
-import { useScrollValues } from "../SectionList";
+
+import "./index.scss";
 
 type SectionProps = {
     title: string,
@@ -65,7 +68,7 @@ const Section: React.FC<SectionProps> = (props) => {
                     <h2 className="section-title">{props.title}</h2>
                 </motion.div>
 
-                <SpaceHolder height={"14vh"} />
+                <SpaceHolder height={"8vh"} />
 
                 <SectionTextWrapper contents={props.content} />
             </section>
