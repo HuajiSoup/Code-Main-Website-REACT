@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 
+import { SectionProps } from "./components/Section";
+
 import Welcome from "./components/Welcome";
 import SectionList from "./components/SectionList";
 import Header from "@/components/Header";
 
 import img1 from "./assets/bg-newyear.jpg";
 import img2 from "./assets/bg-mc.jpg";
+import img3 from "./assets/bg-mountain.jpg";
 
 import './index.scss';
 
-const sectionContent = [
+const sectionContent: SectionProps[] = [
     {
         id: 0,
         title: "稽 之传承",
@@ -52,6 +55,46 @@ const sectionContent = [
         color: "#008800",
         img: img2,
     },
+    {
+        id: 2,
+        title: "稽 之先驱",
+        content: [
+            (<p>
+                高速的时代，一切以速度为王。
+                如今，一人一台电脑已经不稀奇，一人一个滑稽的时代来临力！（喜 <br />
+                稽之宇宙以<b>超低价格、超强功能、超酷外形</b>劲爆出击，
+                我们为你提供最新的<b>美国大片</b>与<b>滑稽资讯</b>。<br />
+                停！可以放大再放大，看！每一根毛都看的清清楚楚！<br />
+            </p>),
+            (<p>
+                稽之宇宙的滑稽资讯有特殊的发布技巧，我们会假装四处看风景，然后马上就到你家门口。<br />
+                最新最热的滑稽新闻速报，让您第一时间了解最新最热的滑稽新闻，让您站在滑稽生态最前线！<br />
+                很好与优秀，只差一点点距离，这段距离叫<b>滑稽</b>。
+            </p>)
+        ],
+        color: "#555555",
+        img: img3,
+    },
+    {
+        id: 3,
+        title: "稽 之憧憬",
+        content: [
+            (<p>
+                稽之宇宙的野心绝不仅仅是稽化中文互联网。<br />
+                滑稽从来不是一个单调的表情包，滑稽有精神，滑稽有格调<sup>?</sup>，稽之宇宙的目的是——
+                <b>稽化全宇宙</b>！进而成为具象化的真正的“稽之宇宙”。<br />
+                在这个宇宙中，不再有饥荒、不再有战火、不再有不平等、不再有不和谐，农业不发达都会互相支援的
+                <b>滑稽乌托邦</b>！
+            </p>),
+            (<p>
+                我们深知这并非一日之功，因此正如一句古语所言：<em>我们遇到什么困难也不要怕，微笑着面对它！
+                消除恐惧的最好办法就是面对恐惧！</em><br />
+                今天，滑稽的接力棒已然落在我们手中，不要停下来啊！只要我们不停下来，道路就会不断延伸！
+            </p>)
+        ],
+        color: "#663399",
+        img: "",
+    }
 ]
 
 const Index: React.FC = () => {
@@ -61,9 +104,7 @@ const Index: React.FC = () => {
 
     return (
         <>  
-            <header>
-                <Header />
-            </header>
+            <Header />
             <main>
                 <div className="background" id="backlogo"></div>
                 <div className="index-wrapper">

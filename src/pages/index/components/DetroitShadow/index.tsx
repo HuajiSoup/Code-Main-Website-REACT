@@ -162,7 +162,7 @@ const DetroitShadow: React.FC<{content: SectionProps[]}> = ({content: colorIDMap
     const drawerRef = useRef<DetroitDrawer | null>(null);
     const rafIDRef = useRef<number | null>(null);
 
-    const SPRING_CONFIG = { bounce: 0, visualDuration: 1.5 };
+    const SPRING_CONFIG = { bounce: 0, visualDuration: 1.8 };
     const inView = useInView(canvasRef, { amount: 0.2 });
     const shadowProgressMV = useSpring(0, SPRING_CONFIG);
     const timeMV = useTime();
@@ -188,7 +188,7 @@ const DetroitShadow: React.FC<{content: SectionProps[]}> = ({content: colorIDMap
 
         ctxRef.current = ctx;
         ctx.fillStyle = colorMV.get();
-        const triangles = spawnTriangles(canvas, true, 0.7, 200);
+        const triangles = spawnTriangles(canvas, true, 0.6, 200);
         drawerRef.current = new DetroitDrawer(ctx, triangles, canvas);
 
         function animateLoop() {
