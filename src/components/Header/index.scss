@@ -18,6 +18,7 @@ header {
             margin: 0 5px;
             background: url() center / contain no-repeat;
             position: relative;
+            cursor: pointer;
     
             &::after {
                 content: "";

@@ -1,10 +1,9 @@
 import React, { createContext, useContext, useRef } from "react";
-
 import { MotionValue, useScroll } from "motion/react";
 
+import DetroitShadow from "../DetroitShadow";
 import { SectionProps } from "../Section";
 import Section from "../Section";
-import DetroitShadow from "../DetroitShadow";
 
 import "./index.scss";
 
@@ -42,9 +41,11 @@ const SectionList: React.FC<SectionListProps> = ({content}) => {
         <scrollContext.Provider value={valueRef.current}>
             <div className="sectionlist" ref={sectionListRef}>
                 <DetroitShadow content={content} />
-                {content.map(section => 
-                    <Section key={section.id} {...section}></Section>
-                )}
+                <div className="sections-wrapper">
+                    {content.map(section => 
+                        <Section key={section.id} {...section}></Section>
+                    )}
+                </div>
             </div>
         </scrollContext.Provider>
     );

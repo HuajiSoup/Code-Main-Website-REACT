@@ -2,13 +2,15 @@ import React, { useEffect } from "react";
 
 import { SectionProps } from "./components/Section";
 
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import Welcome from "./components/Welcome";
 import SectionList from "./components/SectionList";
-import Header from "@/components/Header";
 
 import img1 from "./assets/bg-newyear.jpg";
 import img2 from "./assets/bg-mc.jpg";
 import img3 from "./assets/bg-mountain.jpg";
+import img4 from "./assets/bg-aurora.jpg";
 
 import './index.scss';
 
@@ -92,8 +94,8 @@ const sectionContent: SectionProps[] = [
                 今天，滑稽的接力棒已然落在我们手中，不要停下来啊！只要我们不停下来，道路就会不断延伸！
             </p>)
         ],
-        color: "#663399",
-        img: "",
+        color: "#413399",
+        img: img4,
     }
 ]
 
@@ -112,6 +114,7 @@ const Index: React.FC = () => {
                     <SectionList content={sectionContent}></SectionList>
                 </div>
             </main>
+            <Footer />
         </>
     );
 };

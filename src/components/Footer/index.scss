@@ -1,0 +1,15 @@
+footer {
+    background-color: #171717;
+    scroll-snap-align: start;
+    width: 100vw;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    .footer-contact-wrapper {
+        color: #808080;
+        font-size: 1.3rem;
+    }
+}

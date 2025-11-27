@@ -1,10 +1,9 @@
 .detroit-wrapper {
     position: sticky;
     width: 100%;
-    height: 0;
+    height: 100vh;
     left: 0;
     top: 0;
-    overflow: visible;
 
     canvas.detroit {
         position: absolute;

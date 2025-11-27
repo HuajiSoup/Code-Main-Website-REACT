@@ -1,13 +1,11 @@
 import React, { useEffect, useRef } from "react";
+import { MotionValue, useInView, useMotionValueEvent, useSpring, useTime, useTransform } from "motion/react";
 
-import { useSpring, useTime, useMotionValueEvent, useInView, MotionValue, useTransform } from "motion/react";
-
-import { useScrollValues } from "../SectionList";
-
-import { clamp, rand } from "@/utils/math";
 import { canvasCtxScaledAsDPR } from "@/utils/canvas";
+import { clamp, rand } from "@/utils/math";
 
 import { SectionProps } from "../Section";
+import { useScrollValues } from "../SectionList";
 
 import "./index.scss";
 
@@ -64,14 +62,14 @@ class DetroitTriangle {
 
 function spawnTriangles(
     canvas: Canva,
-    horizonal: boolean = true,
-    coverage: number = 0.5,
-    size: number = 100,
+    horizonal = true,
+    coverage = 0.5,
+    size = 100,
 ) {
     // use clientWidth/clientHeight (CSS pixels) so precomputed paths align with scaled context
     const width = canvas.clientWidth;
     const height = canvas.clientHeight;
-    let triangleList: DetroitTriangle[] = [];
+    const triangleList: DetroitTriangle[] = [];
 
     if (horizonal) {
         const limit = width * coverage;

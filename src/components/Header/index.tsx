@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./index.scss";
+import React, { useRef, useState } from "react";
 
 import logo from "@/assets/logo_text_header.png";
+
+import "./index.scss";
 
 const Huajireka: React.FC = () => {
     return (<>

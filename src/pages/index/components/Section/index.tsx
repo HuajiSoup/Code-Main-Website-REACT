@@ -1,10 +1,9 @@
 import React, { JSX, useRef } from "react";
-
 import { motion, useTransform } from "motion/react";
 
-import { useScrollValues } from "../SectionList";
-
 import SpaceHolder from "@/components/SpaceHolder";
+
+import { useScrollValues } from "../SectionList";
 
 import "./index.scss";
 
