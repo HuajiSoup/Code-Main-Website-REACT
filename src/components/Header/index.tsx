@@ -21,7 +21,7 @@ const Header: React.FC = () => {
             <div className="header-wrapper">
                 <div
                     className="logo-toggle"
-                    style={{ backgroundImage: `url(${logo})` }}
+                    style={{ background: `url(${logo}) center / contain no-repeat` }}
                     onClick={toggle}
                 ></div>
             </div>

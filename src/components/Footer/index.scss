@@ -11,5 +11,29 @@ footer {
     .footer-contact-wrapper {
         color: #808080;
         font-size: 1.3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        p {
+            line-height: 200%;
+        }
+
+        .contact-list {
+            display: flex;
+            flex-direction: row;
+
+            a .contact-icon {
+                width: 45px;
+                height: 45px;
+                margin: 5px;
+                border-radius: 50%;
+                transition: transform 200ms ease-in-out;
+
+                &:hover {
+                    transform: scale(1.2);
+                }
+            }
+        }
     }
 }

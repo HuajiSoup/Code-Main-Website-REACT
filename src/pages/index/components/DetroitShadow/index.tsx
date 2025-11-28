@@ -3,6 +3,7 @@ import { MotionValue, useInView, useMotionValueEvent, useSpring, useTime, useTra
 
 import { canvasCtxScaledAsDPR } from "@/utils/canvas";
 import { clamp, rand } from "@/utils/math";
+import { throttle } from "@/utils/timer";
 
 import { SectionProps } from "../Section";
 import { useScrollValues } from "../SectionList";
@@ -176,18 +177,31 @@ const DetroitShadow: React.FC<{content: SectionProps[]}> = ({content: colorIDMap
         if (ctxRef.current) ctxRef.current.fillStyle = v;
     });
 
-    // Canvas init
+    // Canvas init and resize (shared init function)
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        const ctx = canvas.getContext("2d");
-        if (!ctx) return;
-        canvasCtxScaledAsDPR(canvas, ctx, window);
+        const ctxFromCanvas = canvas.getContext("2d");
+        if (!ctxFromCanvas) return;
+        ctxRef.current = ctxFromCanvas;
 
-        ctxRef.current = ctx;
-        ctx.fillStyle = colorMV.get();
-        const triangles = spawnTriangles(canvas, true, 0.6, 200);
-        drawerRef.current = new DetroitDrawer(ctx, triangles, canvas);
+        function initCanvas() {
+            const canvas = canvasRef.current;
+            if (!canvas) return;
+            const ctx = ctxRef.current ?? canvas.getContext("2d");
+            if (!ctx) return;
+
+            canvasCtxScaledAsDPR(canvas, ctx, window);
+            const triangles = spawnTriangles(canvas, true, 0.6, 200);
+            drawerRef.current = new DetroitDrawer(ctx, triangles, canvas);
+            ctx.fillStyle = colorMV.get();
+        }
+        initCanvas();
+
+        // listen resize (throttled)
+        const throtInit = throttle(initCanvas);
+        window.addEventListener('resize', throtInit);
+        window.addEventListener('orientationchange', throtInit);
 
         function animateLoop() {
             if (shadowProgressRef.current > 0.1) {
@@ -199,6 +213,8 @@ const DetroitShadow: React.FC<{content: SectionProps[]}> = ({content: colorIDMap
 
         // cleanup on unmount
         return () => {
+            window.removeEventListener('resize', throtInit);
+            window.removeEventListener('orientationchange', throtInit);
             if (rafIDRef.current != null) {
                 cancelAnimationFrame(rafIDRef.current);
                 rafIDRef.current = null;
