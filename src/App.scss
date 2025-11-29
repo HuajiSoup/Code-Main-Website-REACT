@@ -2,7 +2,6 @@
     margin: 0;
 }
 
-
 html {
     scroll-snap-type: y mandatory;
     
@@ -10,5 +9,6 @@ html {
         width: 100vw;
         background-color: #000000;
         overflow: hidden auto;
+        font-family: Arial, Helvetica, sans-serif;
     }
 }

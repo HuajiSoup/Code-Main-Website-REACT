@@ -5,21 +5,19 @@ import SpaceHolder from "@/components/SpaceHolder";
 
 import { useScrollValues } from "../SectionList";
 
+import { SectionContent } from "../..";
+
 import "./index.scss";
 
-type SectionProps = {
-    title: string,
-    content: JSX.Element[],
-    color: string,
-    img: string,
-    id: number,
+type SectionProps = SectionContent & {
+    listlength: number,
 };
 
-type SectionTextWrapperProps = {
+type Paragraphs = {
     contents: JSX.Element[],
 }
 
-const SectionTextWrapper: React.FC<SectionTextWrapperProps> = ({ contents }) => {
+const SectionTextWrapper: React.FC<Paragraphs> = ({ contents }) => {
     return (
         <div className="section-content-wrapper">
             {contents.map((content, index) => (
@@ -44,16 +42,14 @@ const SectionTextWrapper: React.FC<SectionTextWrapperProps> = ({ contents }) => 
 };
 
 const Section: React.FC<SectionProps> = (props) => {
-    const wrapperRef = useRef<HTMLDivElement | null>(null);
-    const { scrollY } = useScrollValues();
-    const titleScroll = useTransform(scrollY,
-        [window.innerHeight * (props.id), window.innerHeight * (props.id + 2)],
-        [750, -750],
+    const { scrollYProgress } = useScrollValues();
+    const titleScroll = useTransform(scrollYProgress,
+        [props.id / props.listlength, (props.id + 2) / props.listlength],
+        [700, -700],
     );
 
     return (
         <div
-            ref={wrapperRef}
             className="section-wrapper"
             style={ {background: `url(${props.img}) center / cover no-repeat`, }}
         >

@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-
-import { SectionProps } from "./components/Section";
+import React, { JSX, useEffect } from "react";
 
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -14,7 +12,15 @@ import img4 from "./assets/bg-aurora.jpg";
 
 import './index.scss';
 
-const sectionContent: SectionProps[] = [
+type SectionContent = {
+    title: string,
+    content: JSX.Element[],
+    color: string,
+    img: string,
+    id: number,
+}
+
+const sections = [
     {
         id: 0,
         title: "稽 之传承",
@@ -111,7 +117,7 @@ const Index: React.FC = () => {
                 <div className="background" id="backlogo"></div>
                 <div className="index-wrapper">
                     <Welcome></Welcome>
-                    <SectionList content={sectionContent}></SectionList>
+                    <SectionList content={sections}></SectionList>
                 </div>
             </main>
             <Footer />
@@ -119,4 +125,5 @@ const Index: React.FC = () => {
     );
 };
 
+export type { SectionContent };
 export default Index;

@@ -5,8 +5,8 @@ import { canvasCtxScaledAsDPR } from "@/utils/canvas";
 import { clamp, rand } from "@/utils/math";
 import { throttle } from "@/utils/timer";
 
-import { SectionProps } from "../Section";
 import { useScrollValues } from "../SectionList";
+import { SectionContent } from "../..";
 
 import "./index.scss";
 
@@ -148,13 +148,13 @@ class DetroitDrawer {
     }
 }
 
-function useColorTransform(scrollYProgress: MotionValue<number>, colorIDMap: SectionProps[]) {
-    const rangeY     = colorIDMap.map(content => (content.id + 1)*window.innerHeight);
+function useColorTransform(scrollYProgress: MotionValue<number>, colorIDMap: SectionContent[]) {
+    const rangeY     = colorIDMap.map((content, index) => (index+1) / colorIDMap.length);
     const rangeColor = colorIDMap.map(content => content.color);
     return useTransform(scrollYProgress, rangeY, rangeColor);
 }
 
-const DetroitShadow: React.FC<{content: SectionProps[]}> = ({content: colorIDMap}) => {
+const DetroitShadow: React.FC<{content: SectionContent[]}> = ({content: colorIDMap}) => {
     // keep a ref copy so the animation loop reads latest triangles without re-registering RAF
     const canvasRef = useRef<Canva | null>(null);
     const ctxRef = useRef<Ctx2D | null>(null);
@@ -165,8 +165,8 @@ const DetroitShadow: React.FC<{content: SectionProps[]}> = ({content: colorIDMap
     const inView = useInView(canvasRef, { amount: 0.2 });
     const shadowProgressMV = useSpring(0, SPRING_CONFIG);
     const timeMV = useTime();
-    const { scrollY } = useScrollValues();
-    const colorMV = useColorTransform(scrollY, colorIDMap);
+    const { scrollYProgress } = useScrollValues();
+    const colorMV = useColorTransform(scrollYProgress, colorIDMap);
 
     const shadowProgressRef = useRef<number>(0);
     const timeRef = useRef<number>(0);

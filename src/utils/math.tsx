@@ -11,3 +11,7 @@ export function randint(min: number, max: number) {
 export function clamp(min: number, x: number, max: number) {
     return x < max ? x > min ? x : min : max;
 }
+
+export function randElem<T>(list: T[]) {
+    return list[randint(0, list.length-1)];
+}

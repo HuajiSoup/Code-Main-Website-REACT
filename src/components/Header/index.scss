@@ -80,6 +80,22 @@ header {
                     background-color: rgba($color: #505050, $alpha: 0.8);
                 }
             }
+
+            .huajireka-wrapper {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                .huajireka-photo {
+                    width: 50px;
+                    height: 50px;
+                    margin: 7px;
+                    border: 2px aliceblue solid;
+                    border-radius: 100%;
+                    background: url("../../assets/huajisoup.png") center / cover no-repeat;
+                    flex-shrink: 0;
+                }
+            }
         }
     }
 }

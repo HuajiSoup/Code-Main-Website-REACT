@@ -2,7 +2,7 @@ import React, { createContext, useContext, useRef } from "react";
 import { MotionValue, useScroll } from "motion/react";
 
 import DetroitShadow from "../DetroitShadow";
-import { SectionProps } from "../Section";
+import { SectionContent } from "../..";
 import Section from "../Section";
 
 import "./index.scss";
@@ -22,7 +22,7 @@ function useScrollValues(): ScrollContextValue {
 
 
 type SectionListProps = {
-    content: SectionProps[],
+    content: SectionContent[],
 };
 
 const SectionList: React.FC<SectionListProps> = ({content}) => {
@@ -34,8 +34,6 @@ const SectionList: React.FC<SectionListProps> = ({content}) => {
     const valueRef = useRef<ScrollContextValue>(
         { scrollY, scrollYProgress }
     );
-    
-    // useMotionValueEvent(scrollY, "change", latest => console.log(latest));
 
     return (
         <scrollContext.Provider value={valueRef.current}>
@@ -43,7 +41,7 @@ const SectionList: React.FC<SectionListProps> = ({content}) => {
                 <DetroitShadow content={content} />
                 <div className="sections-wrapper">
                     {content.map(section => 
-                        <Section key={section.id} {...section}></Section>
+                        <Section key={section.id} listlength={content.length} {...section}></Section>
                     )}
                 </div>
             </div>

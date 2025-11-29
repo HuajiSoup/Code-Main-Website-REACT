@@ -1,4 +1,4 @@
-function debounce(
+export function debounce(
     callback: Function,
     wait: number = 250,
 ) {
@@ -10,7 +10,7 @@ function debounce(
     };
 }
 
-function throttle(
+export function throttle(
     callback: Function,
     wait: number = 250,
 ) {
@@ -25,5 +25,3 @@ function throttle(
         timeoutID = window.setTimeout(callbackT, wait);
     };
 }
-
-export { debounce, throttle };
