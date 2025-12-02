@@ -1,15 +1,20 @@
 import React from 'react';
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 
-import Index from './pages/index';
+import PageIndex from './pages/index';
+import PageThings from './pages/things';
 
 import './App.scss';
 
 const pages = [
   {
     path: '/',
-    element: <Index />,
+    element: <PageIndex />,
   },
+  {
+    path: '/things',
+    element: <PageThings />
+  }
 ];
 
 function App() {

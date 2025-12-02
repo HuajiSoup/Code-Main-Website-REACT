@@ -105,25 +105,23 @@ const sections = [
     }
 ]
 
-const Index: React.FC = () => {
+const PageIndex: React.FC = () => {
     useEffect(() => {
         document.title = "稽之宇宙 | Huaji Universe";
     }, []);
 
-    return (
-        <>  
-            <Header />
-            <main>
-                <div className="background" id="backlogo"></div>
-                <div className="index-wrapper">
-                    <Welcome></Welcome>
-                    <SectionList content={sections}></SectionList>
-                </div>
-            </main>
-            <Footer />
-        </>
-    );
+    return (<>
+        <Header />
+        <main>
+            <div className="background" id="backlogo"></div>
+            <div className="index-wrapper">
+                <Welcome />
+                <SectionList content={sections} />
+            </div>
+        </main>
+        <Footer />
+    </>);
 };
 
 export type { SectionContent };
-export default Index;
+export default PageIndex;

@@ -1,10 +1,19 @@
 import React, { memo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { randElem } from "@/utils/math";
 
 import logo from "@/assets/logo_text_header.png";
+import svgHome from "@/assets/menu/icon-home.svg";
+import svgToys from "@/assets/menu/icon-hammer.svg";
 
 import "./index.scss";
+
+type PortalContent = {
+    title: string;
+    icon: string;
+    href: string;
+}
 
 const texts = [
     "滑稽，是一种态度。",
@@ -13,6 +22,19 @@ const texts = [
     "稽你太美。",
     "滑稽是人类进步的阶梯。",
     "我要成为大稽霸！"
+];
+
+const portals: PortalContent[] = [
+    {
+        title: "主站",
+        icon: svgHome,
+        href: "/",
+    },
+    {
+        title: "玩具",
+        icon: svgToys,
+        href: "/things"
+    }
 ];
 
 const Huajireka: React.FC = memo(() => {
@@ -27,7 +49,18 @@ const Huajireka: React.FC = memo(() => {
     </>);
 });
 
-const Header: React.FC = () => {
+const Portal: React.FC<PortalContent> = (props) => {
+    return (
+        <Link to={props.href}>
+            <div className="portal">
+                <img src={props.icon} alt="" className="portal-icon" />
+                <p><b>{props.title}</b></p>
+            </div>
+        </Link>
+    );
+};
+
+const Header: React.FC = memo(() => {
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -45,15 +78,19 @@ const Header: React.FC = () => {
             
             <div className={menuOpen ? "navi-menu open" : "navi-menu closed"} ref={menuRef}>
                 <div className="navi-menu-wrapper">
-                    <div
-                        className="navi-menu-exit"
-                        onClick={toggle}
-                    >← 返回</div>
+                    <div className="navi-menu-exit" onClick={toggle}>← 返回</div>
+
                     <Huajireka />
+
+                    <div className="portals-wrapper">
+                        {portals.map((portal, index) => (
+                            <Portal key={index} {...portal} />
+                        ))}
+                    </div>
                 </div>
             </div>
         </header>
     );
-};
+});
 
 export default Header;
