@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import { MotionValue, useInView, useMotionValueEvent, useSpring, useTime, useTransform } from "motion/react";
 
-import { canvasCtxScaledAsDPR } from "@/utils/canvas";
-import { clamp, rand } from "@/utils/math";
-import { throttle } from "@/utils/timer";
+import { canvasCtxScaledAsDPR } from "../../../../utils/canvas";
+import { clamp, rand } from "../../../../utils/math";
+import { throttle } from "../../../../utils/timer";
 
 import { useScrollValues } from "../SectionList";
 import { SectionContent } from "../..";
@@ -204,7 +204,7 @@ const DetroitShadow: React.FC<{content: SectionContent[]}> = ({content: colorIDM
         window.addEventListener('orientationchange', throtInit);
 
         function animateLoop() {
-            if (shadowProgressRef.current > 0.1) {
+            if (shadowProgressRef.current > 0.05) {
                 drawerRef.current?.drawHorizonal(shadowProgressRef.current, timeRef.current);
             }
             rafIDRef.current = requestAnimationFrame(animateLoop);

@@ -1,7 +1,7 @@
 import React from "react";
 
-import iconGithub from "@/assets/links/link-github.png";
-import iconBili   from "@/assets/links/link-bilibili.png";
+import iconGithub from "../../assets/links/link-github.png";
+import iconBili   from "../../assets/links/link-bilibili.png";
 
 import "./index.scss";
 

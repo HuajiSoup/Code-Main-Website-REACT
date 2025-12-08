@@ -1,11 +1,11 @@
 import React, { memo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 
-import { randElem } from "@/utils/math";
+import { randElem } from "../../utils/math";
 
-import logo from "@/assets/logo_text_header.png";
-import svgHome from "@/assets/menu/icon-home.svg";
-import svgToys from "@/assets/menu/icon-hammer.svg";
+import logo from "../../assets/logo_text_header.png";
+import svgHome from "../../assets/menu/icon-home.svg";
+import svgPaper from "../../assets/menu/icon-newspaper.svg";
 
 import "./index.scss";
 
@@ -31,9 +31,9 @@ const portals: PortalContent[] = [
         href: "/",
     },
     {
-        title: "玩具",
-        icon: svgToys,
-        href: "/things"
+        title: "博客",
+        icon: svgPaper,
+        href: "/blog"
     }
 ];
 

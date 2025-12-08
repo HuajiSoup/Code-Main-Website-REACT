@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 
 import PageIndex from './pages/index';
-import PageThings from './pages/things';
+import PageBlog from './pages/blog';
 
 import './App.scss';
 
@@ -12,8 +12,8 @@ const pages = [
     element: <PageIndex />,
   },
   {
-    path: '/things',
-    element: <PageThings />
+    path: '/blog',
+    element: <PageBlog />
   }
 ];
 
@@ -28,9 +28,5 @@ function App() {
     </Router>
   );
 }
-
-// function App() {
-//   return <ScrollLinked></ScrollLinked>
-// }
 
 export default App;
