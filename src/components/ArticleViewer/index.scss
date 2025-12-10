@@ -1,0 +1,37 @@
+.blog-article-wrapper {
+    box-sizing: border-box;
+    width: min(1000px, 90%);
+    height: fit-content;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #343841;
+    color: aliceblue;
+    box-shadow: 0px 0px 8px black;
+
+    .blog-article-header {
+        h2.blog-article-title {
+            margin: 15px 0;
+            font-size: 3em;
+            font-weight: 100;
+            text-align: center;
+        }
+        p.blog-article-desc {
+            margin: 10px 0;
+            font-size: 1.5em;
+            text-align: center;
+        }
+        p.blog-article-time {
+            color: gray;
+            font-size: 1em;
+            font-style: italic;
+        }
+    }
+    hr {margin: 10px 0;}
+    .blog-article-body {
+        line-height: 1.5;
+
+        img {
+            margin: 8px 0;
+        }
+    }
+}

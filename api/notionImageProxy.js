@@ -6,7 +6,7 @@ export default async function handler(req, res) {
 
   // Pass through real headers so browser can cache
   res.setHeader("Content-Type", imgRes.headers.get("Content-Type"));
-  res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+  res.setHeader("Cache-Control", "public, max-age=2562000, immutable");
 
   const buffer = Buffer.from(await imgRes.arrayBuffer());
   res.send(buffer);

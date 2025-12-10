@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { transform } from "motion";
 
 import { rand, randElem } from "../../utils/math";
@@ -89,7 +89,7 @@ const Banner: React.FC<PageTitleProps> = ({ title }) => {
                 [0, -100, 0],
             ),
             color: transform(progress,
-                [1/8, 2/8, 3/8, 4/8, 5/8, 6/8, 7/8, 1],
+                [0, 1/8, 2/8, 3/8, 4/8, 5/8, 6/8, 7/8],
                 ["#172549","#cc8e81","#f0ca90","#87cefa","#4b96ea","#ee7f22","#a86771","#172549"]
             ),
         };

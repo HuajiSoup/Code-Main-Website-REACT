@@ -14,6 +14,10 @@ const pages = [
   {
     path: '/blog',
     element: <PageBlog />
+  },
+  {
+    path: '/blog/:blogID',
+    element: <PageBlog />
   }
 ];
 

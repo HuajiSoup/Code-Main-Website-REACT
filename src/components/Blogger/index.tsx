@@ -1,17 +1,14 @@
 import React, { memo, useEffect, useState } from "react";
-
 import "./index.scss";
 
-type BlogInfo = {
-    id: number;
-    title: string | null;
-    icon: string | null;
-    cover: string | null;
-    desc: string | null;
-    section: string;
-    tags: string[];
-    lastEdit: string | null;
-    show: boolean;
+import { Link, useNavigate } from "react-router-dom";
+
+import ArticleViewer from "../ArticleViewer";
+
+import { BlogInfo, postToBlogInfo } from "src/utils/notion";
+
+type BloggerProps = {
+    blogID?: string;
 }
 
 type NameColorPair = {
@@ -24,33 +21,17 @@ const sectionColor: NameColorPair = {
     "生活": "#0c9300",
 }
 
-const dataToPosts = (data: any[]): BlogInfo[] => {
-    let blogs: BlogInfo[] = [];
-    data.forEach((post, id) => {
-        const date = new Date(post.properties?.time?.last_edited_time ?? "");
-        
-        blogs.push({
-            id: id,
-            title: post.properties?.title?.title[0]?.plain_text,
-            icon: post.icon?.emoji,
-            cover: post.cover?.file?.url,
-            desc: post.properties?.desc?.rich_text[0]?.plain_text,
-            section: post.properties?.section?.select?.name,
-            tags: post.properties?.tags.multi_select?.map((tag: { name: string; }) => tag.name),
-            lastEdit: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
-            show: true,
-        });
-    });
-
-    return blogs;
-}
-
 const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
+    const navigate = useNavigate();
+    const nav = () => navigate(`/blog/${blog.pageID}`);
+
     return (<>
         <div className="blog-content-card">
             <div className="blog-card-text-wrapper">
                 <div className="blog-title-wrapper">
-                    <h2 className="blog-title">{blog.icon}{blog.title ?? "无题"}</h2>
+                    <h2 className="blog-title" onClick={nav}>
+                        {blog.emoji ?? "🍟"}◇{blog.title ?? "无题"}
+                    </h2>
                     <p className="blog-time">{blog.lastEdit}</p>
                 </div>
 
@@ -73,6 +54,7 @@ const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
             </div>
 
             <div className="blog-card-cover-image"
+                onClick={nav}
                 style={ blog.cover ? { backgroundImage: 
                     `url('api/notionImageProxy?url=${encodeURIComponent(blog.cover)}')`
                 } : {} }
@@ -81,7 +63,7 @@ const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
     </>);
 };
 
-const Blogger: React.FC = memo(() => {
+const Blogger: React.FC<BloggerProps> = memo((props) => {
     const [blogs, setBlogs] = useState<BlogInfo[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
@@ -94,7 +76,8 @@ const Blogger: React.FC = memo(() => {
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 
                 const data = await res.json();
-                setBlogs(dataToPosts(data.results));
+                const posts = data.results.map(postToBlogInfo);
+                setBlogs(posts);
             } catch (err) {
                 console.error(err);
                 setError(err instanceof Error ? err.message : String(err));
@@ -137,13 +120,16 @@ const Blogger: React.FC = memo(() => {
 
     return (<>
         <div className="blogger-root">
-            <div className="blogs-list">
-                { loading && <div className="blog-status-card loading">▶️内容绝赞加载中...</div> }
-                { !loading && error && <div className="blog-status-card error">🚫文章加载失败！{error}</div> }
-                { !loading && !error && blogs.map(blog => (
-                    blog.show ? <BlogCard key={blog.id} blog={blog} /> : <></>
-                ))}
-            </div>
+            { props.blogID
+                ? <ArticleViewer blogID={props.blogID} />
+                : <div className="blogs-list">
+                    { loading && <div className="blog-status-card loading">▶️内容绝赞加载中...</div> }
+                    { !loading && error && <div className="blog-status-card error">🚫文章加载失败！{error}</div> }
+                    { !loading && !error && blogs.map((blog, index) => (
+                        <BlogCard key={index} blog={blog} />
+                    ))}
+                </div>
+            }
         </div>
     </>);
 });

@@ -1,7 +1,7 @@
 import { Client } from "@notionhq/client";
 
 const notion = new Client({
-  auth: process.env.BLOGS_DB_APIKEY,
+  auth: process.env.NOTION_APIKEY,
 });
 
 export default async function handler(req, res) {

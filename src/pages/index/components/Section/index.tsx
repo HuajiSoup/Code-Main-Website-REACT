@@ -1,4 +1,4 @@
-import React, { JSX, useRef } from "react";
+import React, { JSX } from "react";
 import { motion, useTransform } from "motion/react";
 
 import SpaceHolder from "../../../../components/SpaceHolder";
