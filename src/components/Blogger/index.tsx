@@ -1,83 +1,47 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { memo, useEffect, useRef, useState } from "react";
 import "./index.scss";
 
-import { Link, useNavigate } from "react-router-dom";
+import { AnimatePresence } from "motion/react";
 
 import ArticleViewer from "../ArticleViewer";
+import AnimatedPanel from "./AnimatedPanel";
+import BlogCard from "./BlogCard";
 
 import { BlogInfo, postToBlogInfo } from "src/utils/notion";
+import { sectionColor } from "./BlogCard";
+import SearchBar, { SearchBarHandle } from "../SearchBar";
 
 type BloggerProps = {
     blogID?: string;
 }
 
-type NameColorPair = {
-    [key : string] : string;
-}
-
-const sectionColor: NameColorPair = {
-    "学术": "#ffaa00",
-    "技术": "#0083d0",
-    "生活": "#0c9300",
-}
-
-const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
-    const navigate = useNavigate();
-    const nav = () => navigate(`/blog/${blog.pageID}`);
-
-    return (<>
-        <div className="blog-content-card">
-            <div className="blog-card-text-wrapper">
-                <div className="blog-title-wrapper">
-                    <h2 className="blog-title" onClick={nav}>
-                        {blog.emoji ?? "🍟"}◇{blog.title ?? "无题"}
-                    </h2>
-                    <p className="blog-time">{blog.lastEdit}</p>
-                </div>
-
-                <hr />
-                
-                <div className="blog-detail-wrapper">
-                    <p className="blog-desc">
-                        <span className="blog-section"
-                            style={{backgroundColor: sectionColor[blog.section] ?? "#3d3d3d"}}
-                        >{blog.section}</span>
-                        {blog.desc ?? <i>没写简介喵</i>}
-                    </p>
-
-                    <div className="blog-tags-list">
-                        {blog.tags.map((tag, index) => (
-                            <span key={index} className="blog-tag"># {tag}</span>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            <div className="blog-card-cover-image"
-                onClick={nav}
-                style={ blog.cover ? { backgroundImage: 
-                    `url('api/notionImageProxy?url=${encodeURIComponent(blog.cover)}')`
-                } : {} }
-            ></div>
-        </div>
-    </>);
-};
-
 const Blogger: React.FC<BloggerProps> = memo((props) => {
     const [blogs, setBlogs] = useState<BlogInfo[]>([]);
+    const [showBlogs, setShowBlogs] = useState<BlogInfo[]>([]);
+
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const [search, setSearch] = useState<string>("");
 
+    const inputRef = useRef<SearchBarHandle | null>(null);
+    const searchAdd = (v: string) => {
+        inputRef.current?.setInput(search ? `${search} ${v}` : v);
+    }
+    
+    // internet
     useEffect(() => {
         const fetchBlogs = async () => {
+            if (blogs.length) return;
+
             setLoading(true);
             try {
                 const res = await fetch("/api/notion");
                 if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
                 
                 const data = await res.json();
-                const posts = data.results.map(postToBlogInfo);
-                setBlogs(posts);
+                const blogs: BlogInfo[] = data.results.map(postToBlogInfo);
+                setBlogs(blogs);
+                setShowBlogs(blogs);
             } catch (err) {
                 console.error(err);
                 setError(err instanceof Error ? err.message : String(err));
@@ -85,7 +49,6 @@ const Blogger: React.FC<BloggerProps> = memo((props) => {
                 setLoading(false);
             }
         };
-
         fetchBlogs();
 
         // const testBlogs: BlogInfo[] = [
@@ -116,20 +79,78 @@ const Blogger: React.FC<BloggerProps> = memo((props) => {
         // ];
         // setBlogs(testBlogs);
         // setLoading(false);
-    }, []);
+    }, [blogs]);
+
+    // search
+    useEffect(() => {
+        if (search === "") {
+            setShowBlogs(blogs);
+            return;
+        }
+        
+        const terms = search.split(" ");
+        setShowBlogs(blogs.filter(blog => {
+            for (const term of terms) {
+                if (!term) continue;
+                if (blog.title?.indexOf(term) !== -1
+                    || blog.desc?.indexOf(term) !== -1
+                    || blog.section === term
+                    || blog.tags.includes(term)) return true;
+            }
+            return false;
+        }));
+    }, [search, blogs]);
 
     return (<>
         <div className="blogger-root">
-            { props.blogID
-                ? <ArticleViewer blogID={props.blogID} />
-                : <div className="blogs-list">
-                    { loading && <div className="blog-status-card loading">▶️内容绝赞加载中...</div> }
-                    { !loading && error && <div className="blog-status-card error">🚫文章加载失败！{error}</div> }
-                    { !loading && !error && blogs.map((blog, index) => (
-                        <BlogCard key={index} blog={blog} />
-                    ))}
+            <div className="blog-menu-wrapper">
+                <div className="menu-search-wrapper">
+                    <SearchBar setTermCallback={setSearch} changeInterval={250} ref={inputRef} />
                 </div>
-            }
+
+                <div className="menu-sections-wrapper">
+                    <p>📚分类</p>
+                    <hr />
+                    <div className="menu-sections-list">
+                        { Object.keys(sectionColor).map((section, index) => (
+                            <div className="menu-section-btn" key={index}
+                                onClick={() => searchAdd(section)}
+                            >{section}</div>
+                        )) }
+                    </div>
+                </div>
+
+                <div className="menu-tags-wrapper">
+                    <p>🏷️标签</p>
+                    <hr />
+                    <div className="menu-tags-list">
+                        { ([] as string[]).concat( ...blogs.map(blog => blog.tags) ).map((tag, index) => (
+                            <div className="menu-tag-btn" key={index}
+                                onClick={() => searchAdd(tag)}
+                            ># {tag}</div>
+                        )) }
+                    </div>
+                </div>
+            </div>
+
+            <AnimatePresence mode="wait">
+                { props.blogID
+                ? <AnimatedPanel className="blog-article-wrapper" key="article">
+                    { props.blogID && <ArticleViewer blogID={props.blogID} />}
+                </AnimatedPanel>
+
+                : <AnimatedPanel className="blogs-list" key="list">
+                    { loading && <div className="blog-status-card loading">▶️博客绝赞加载中...</div> }
+                    { !loading && error && <div className="blog-status-card error">🚫文章列表加载失败！{error}</div> }
+                    { !loading && !error && showBlogs.length
+                        ? showBlogs.map((blog, index) => (
+                            <BlogCard key={index} blog={blog} />
+                        ))
+                        : <div className="blog-status-card">🔍未搜索到匹配“{search}”的结果！</div>
+                    }
+                </AnimatedPanel>
+                }
+            </AnimatePresence>
         </div>
     </>);
 });

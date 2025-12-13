@@ -17,6 +17,7 @@ export default async function handler(req, res) {
       }
     });
 
+    res.setHeader("Cache-Control", "s-maxage=86400, stale-while-revalidate=604800");
     res.status(200).json(response);
   } catch (error) {
     console.error("Failed to fetch content, error: \n", error);

@@ -3,29 +3,48 @@
     padding: 30px 0;
     background-color: #22252a;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+
+    @mixin blog-card {
+        width: 100%;
+        height: 180px;
+        padding: 15px 20px;
+        margin: 10px 0;
+        color: aliceblue;
+        box-sizing: border-box;
+        background-color: #343841;
+        border-radius: 15px;
+        box-shadow: 0px 0px 8px black;
+    }
+    @mixin blog-tag {
+        display: inline-block;
+        margin: 5px 3px;
+        padding: 6px 8px;
+        border-radius: 8px;
+        background-color: transparent;
+        font-size: 0.8em;
+        border: 1px gray solid;
+        cursor: pointer;
+        transition: background-color 75ms linear;
+
+        &:hover {
+            background-color: rgba($color: #ffffff, $alpha: 0.2);
+        }
+    }
 
     .blogs-list {
+        top: 30px;
         width: min(1000px, 90%);
+        height: max-content;
+        margin: 0px 10px;
         display: flex;
         flex-direction: column;
         align-items: center;
 
-        .blog-card {
-            width: 95%;
-            height: 180px;
-            padding: 15px 20px;
-            margin: 10px 0;
-            color: aliceblue;
-            box-sizing: border-box;
-            background-color: #343841;
-            border-radius: 20px;
-            box-shadow: 0px 0px 8px black;
-        }
-
         .blog-status-card {
-            @extend .blog-card;
+            @include blog-card;
             height: max-content;
             min-height: 50px;
             font-weight: bold;
@@ -37,7 +56,7 @@
         }
 
         .blog-content-card {
-            @extend .blog-card;
+            @include blog-card;
             padding: 0;
             display: flex;
             flex-direction: row;
@@ -112,19 +131,7 @@
     
                     .blog-tags-list {
                         span.blog-tag {
-                            display: inline-block;
-                            margin: 0 3px;
-                            padding: 6px 8px;
-                            border-radius: 8px;
-                            background-color: transparent;
-                            font-size: 0.8em;
-                            border: 1px gray solid;
-                            cursor: pointer;
-                            transition: background-color 100ms linear;
-    
-                            &:hover {
-                                background-color: rgba($color: #ffffff, $alpha: 0.4);
-                            }
+                            @include blog-tag;
                         }
                     }
                 }
@@ -133,7 +140,7 @@
             .blog-card-cover-image {
                 width: min(200px, 30%);
                 height: 100%;
-                border-radius: 0px 20px 20px 0;
+                border-radius: 0px 15px 15px 0;
                 background-color: transparent;
                 background: linear-gradient(-30deg, cyan, lime) center / cover no-repeat;
                 transition: opacity 100ms linear;
@@ -141,6 +148,62 @@
                 
                 &:hover {
                     opacity: 0.7;
+                }
+            }
+        }
+    }
+
+    .blog-menu-wrapper {
+        width: min(300px, 30%);
+        height: 100px;
+        margin: 0px 10px;
+        position: sticky;
+        top: 75px;
+        
+        .menu-search-wrapper {
+            width: 100%;
+            height: 30px
+        }
+
+        .menu-sections-wrapper {
+            @include blog-card;
+            height: fit-content;
+            p {
+                padding-left: 10px;
+                position: relative;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 4%;
+                    bottom: 4%;
+                    width: 4px;
+                    border-radius: 1px;
+                    background-color: #00ffff;
+                }
+            }
+            hr {
+                margin: 10px 0;
+            }
+            .menu-sections-list {
+                .menu-section-btn {
+                    line-height: 2.2;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 100ms linear, padding-left 100ms ease-out;
+
+                    &:hover {
+                        background-color: rgba($color: #ffffff, $alpha: 0.2);
+                        padding-left: 5px;
+                    }
+                }
+            }
+        }
+        .menu-tags-wrapper {
+            @extend .menu-sections-wrapper;
+            .menu-tags-list {
+                .menu-tag-btn {
+                    @include blog-tag;
                 }
             }
         }

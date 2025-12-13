@@ -19,7 +19,7 @@ export function postToBlogInfo(post: any): BlogInfo {
         cover: post.cover?.file?.url,
         desc: post.properties?.desc?.rich_text[0]?.plain_text,
         section: post.properties?.section?.select?.name,
-        tags: post.properties?.tags.multi_select?.map((tag: { name: string; }) => tag.name),
+        tags: post.properties?.tags.multi_select?.map((tag: { name: string; }) => tag.name) ?? [],
         lastEdit: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
     }
 }
