@@ -4,6 +4,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Welcome from "./components/Welcome";
 import SectionList from "./components/SectionList";
+import Menu from "./components/Menu";
 
 import img1 from "./assets/bg-newyear.jpg";
 import img2 from "./assets/bg-mc.jpg";
@@ -26,9 +27,8 @@ const sections = [
         title: "稽 之传承",
         content: [
             (<p>
-                “伸颈，侧目，微笑，默叹，以为妙绝。” <br />
-                这是清代名作《口技》中的内容，也是对滑稽的最早记载。
-                现在一般认为滑稽是古汉语的一部分，并在21世纪初达到鼎盛。<br />
+                <i>“伸颈，侧目，微笑，默叹，以为妙绝。”</i><br />
+                今天考古学家一般认为滑稽是古汉语的一部分，并在21世纪初达到鼎盛。<br />
                 面对21世纪初逐渐加速的社会经济和巨大的社会压力，当时的青年人无法改变现状，只好把复杂的情感寄托在滑稽脸中，笑对人生。<br />
                 虽然那个时代已经离我们很远，也没有任何当时的影像资料留存，但我们仍能感受到时代洪流下年轻人的乐观主义精神。
             </p>),
@@ -117,6 +117,7 @@ const PageIndex: React.FC = () => {
             <div className="index-wrapper">
                 <Welcome />
                 <SectionList content={sections} />
+                <Menu />
             </div>
         </main>
         <Footer />

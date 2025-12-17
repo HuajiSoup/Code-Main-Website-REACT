@@ -13,8 +13,8 @@ const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
     const navigate = useNavigate();
     const nav = () => {
         window.scrollTo({top: 0, behavior: "smooth"});
-        navigate(`/blog/${blog.pageID}`)
-    };
+        navigate(`/blog/${blog.pageID}`);
+    }
 
     return (<>
         <div className="blog-content-card">
@@ -47,7 +47,7 @@ const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
             <div className="blog-card-cover-image"
                 onClick={nav}
                 style={ blog.cover ? { backgroundImage: 
-                    `url('api/notionImageProxy?url=${encodeURIComponent(blog.cover)}')`
+                    `url('/api/notionImageProxy?url=${encodeURIComponent(blog.cover)}')`
                 } : {} }
             ></div>
         </div>

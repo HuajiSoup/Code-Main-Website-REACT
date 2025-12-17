@@ -1,0 +1,22 @@
+.index-menu-wrapper {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    scroll-snap-align: start;
+    background-color: #111122;
+    overflow: hidden;
+
+    .huaji-sun {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        bottom: 0;
+        background: radial-gradient(
+            ellipse 120vw 60vw
+            at 50% calc(100vh + 47.5vw),
+            #fcf0b3 0%, #f6bc6a 95%, #eca555 95%, #eca555 100%, 
+            rgba(#ffcc66, 0.3) 100%, transparent 120%
+        );
+    }
+}

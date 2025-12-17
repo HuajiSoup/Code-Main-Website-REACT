@@ -4,6 +4,20 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    color: aliceblue;
+
+    .blog-article-exit {
+        width: max-content;
+        margin-bottom: 10px;
+        font-size: 1em;
+        padding: 10px 20px;
+        border-radius: 20px;
+        background-color: #343841;
+        box-shadow: 0px 0px 8px #1b1b1b;
+        align-self: flex-start;
+
+        cursor: pointer;
+    }
 
     .blog-article-card {
         box-sizing: border-box;
@@ -12,8 +26,7 @@
         padding: 20px;
         border-radius: 10px;
         background-color: #343841;
-        color: aliceblue;
-        box-shadow: 0px 0px 8px black;
+        box-shadow: 0px 0px 8px #1b1b1b;
     
         .blog-article-header {
             h2.blog-article-title {
@@ -38,6 +51,11 @@
         }
         .blog-article-body {
             line-height: 1.5;
+
+            & > p:first-child::first-letter {
+                font-weight: bold;
+                font-size: 2.2em;
+            }
     
             img {
                 margin: 8px 0;

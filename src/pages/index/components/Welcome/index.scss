@@ -29,6 +29,7 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
     .title-box {
         position: absolute;
         right: 3vw;
+        font-size: 1.5rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -48,7 +49,7 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
                 text-shadow: #fa0 0 0 10px;
             }
             &:nth-child(1) {
-                font-size: 6rem;
+                font-size: 4em;
                 line-height: 1.5;
                 font-family: sans-serif;
                 font-weight: 1000;
@@ -56,7 +57,7 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
                 animation: titleAppear 500ms 100ms cubic-bezier(.22,.61,.36,1) backwards;
             }
             &:nth-child(2) {
-                font-size: 4.5em;
+                font-size: 3em;
                 line-height: 1.2;
                 font-family: serif;
                 font-weight: 350;
@@ -64,7 +65,7 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
                 animation: titleAppear 500ms 650ms cubic-bezier(.22,.61,.36,1) backwards;
             }
             &:nth-child(3) {
-                font-size: 3em;
+                font-size: 2em;
                 line-height: 2.5;
                 font-family: Arial, Helvetica, sans-serif;
                 color: rgba(240, 248, 255, 0.27);
@@ -77,7 +78,7 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
             display: inline-block;
             margin: 40px 0;
             width: 40vw;
-            font-size: 1.2rem;
+            font-size: 1.2eem;
             font-family: Arial, Helvetica, sans-serif;
         }
     }
@@ -90,5 +91,26 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
     } to {
         transform: scale(1);
         opacity: 1;
+    }
+}
+
+@media (max-width: 1000px) {
+    .welcome-wrapper {
+        flex-direction: column;
+
+        .background#shadow {
+            background: linear-gradient(to bottom, #00c0fa 10%, transparent 80%);
+        }
+
+        .title-box {
+            position: relative;
+            margin-top: 80px;
+            right: 0;
+            align-items: center;
+            font-size: 2.6vw;
+
+            h1.main-title:nth-child(2) {font-size: 5em;}
+            h1.main-title:nth-child(3) {font-size: 2.65em;}
+        }
     }
 }

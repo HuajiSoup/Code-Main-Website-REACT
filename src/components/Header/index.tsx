@@ -1,19 +1,12 @@
 import React, { memo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-
-import { randElem } from "../../utils/math";
-
-import logo from "../../assets/logo_text_header.png";
-import svgHome from "../../assets/menu/icon-home.svg";
-import svgPaper from "../../assets/menu/icon-newspaper.svg";
-
 import "./index.scss";
 
-type PortalContent = {
-    title: string;
-    icon: string;
-    href: string;
-}
+import PortalBtn from "../PortalBtn";
+import { randElem } from "../../utils/math";
+
+import { mainPages } from "src/constants/pages";
+
+import logo from "../../assets/logo_text_header.png";
 
 const texts = [
     "滑稽，是一种态度。",
@@ -22,19 +15,6 @@ const texts = [
     "稽你太美。",
     "滑稽是人类进步的阶梯。",
     "我要成为大稽霸！"
-];
-
-const portals: PortalContent[] = [
-    {
-        title: "主站",
-        icon: svgHome,
-        href: "/",
-    },
-    {
-        title: "博客",
-        icon: svgPaper,
-        href: "/blog"
-    }
 ];
 
 const Huajireka: React.FC = memo(() => {
@@ -48,17 +28,6 @@ const Huajireka: React.FC = memo(() => {
         </div>
     </>);
 });
-
-const Portal: React.FC<PortalContent> = (props) => {
-    return (
-        <Link to={props.href}>
-            <div className="portal">
-                <img src={props.icon} alt="" className="portal-icon" />
-                <p><b>{props.title}</b></p>
-            </div>
-        </Link>
-    );
-};
 
 const Header: React.FC = memo(() => {
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -83,8 +52,8 @@ const Header: React.FC = memo(() => {
                     <Huajireka />
 
                     <div className="portals-wrapper">
-                        {portals.map((portal, index) => (
-                            <Portal key={index} {...portal} />
+                        {mainPages.map((page, index) => (
+                            <PortalBtn key={index} {...page} />
                         ))}
                     </div>
                 </div>

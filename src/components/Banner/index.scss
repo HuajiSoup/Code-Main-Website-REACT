@@ -17,7 +17,7 @@ main .banner {
             height: 570px;
             background:
                 url("../../assets/huaji.png") center / 70% 70% no-repeat,
-                radial-gradient(#ffcc66 30%, transparent 70.7%);
+                radial-gradient(closest-side,#ffcc66 42%, transparent 100%);
             right: -50px;
             top: 0;
             transition: scale 2s ease-out;

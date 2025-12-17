@@ -1,152 +1,18 @@
 import React, { useEffect, useRef } from "react";
 import { MotionValue, useInView, useMotionValueEvent, useSpring, useTime, useTransform } from "motion/react";
 
-import { canvasCtxScaledAsDPR } from "../../../../utils/canvas";
-import { clamp, rand } from "../../../../utils/math";
-import { throttle } from "../../../../utils/timer";
+import { canvasCtxScaledAsDPR } from "src/utils/canvas";
+import { clamp, rand } from "src/utils/math";
+import { throttle } from "src/utils/timer";
 
 import { useScrollValues } from "../SectionList";
 import { SectionContent } from "../..";
+import { DetroitDrawer, DIRECTION, spawnTriangles } from "./triangles";
 
 import "./index.scss";
 
 type Ctx2D = CanvasRenderingContext2D;
 type Canva = HTMLCanvasElement;
-
-class DetroitTriangle {
-    public size: number;
-    public up: boolean;
-    public x: number;
-    public y: number;
-    public timeFactorK: number;
-    public timeFactorB: number;
-
-    private path: Path2D | null;
-
-    constructor(
-        size: number,
-        isUp: boolean,
-        x: number,
-        y: number,
-    ) {
-        this.size = size;
-        this.up = isUp;
-        this.x = x;
-        this.y = y;
-        this.timeFactorK = rand(0.2, 1.2);
-        this.timeFactorB = rand(0, 1000);
-
-        // baking path to minimize calc
-        try {
-            const p = new Path2D();
-            if (isUp) {
-                p.moveTo(x, y - 0.433 * size);
-                p.lineTo(x - 0.5 * size, y + 0.433 * size);
-                p.lineTo(x + 0.5 * size, y + 0.433 * size);
-            } else {
-                p.moveTo(x, y + 0.433 * size);
-                p.lineTo(x + 0.5 * size, y - 0.433 * size);
-                p.lineTo(x - 0.5 * size, y - 0.433 * size);
-            }
-            p.closePath();
-            this.path = p;
-        } catch (err) {
-            console.log("Failed to initializing component <DetroitShadow>, error info:");
-            console.error(err);
-            this.path = null;
-        }
-    }
-    draw(ctx: Ctx2D) {
-        if (this.path) ctx.fill(this.path);
-    }
-}
-
-function spawnTriangles(
-    canvas: Canva,
-    horizonal = true,
-    coverage = 0.5,
-    size = 100,
-) {
-    // use clientWidth/clientHeight (CSS pixels) so precomputed paths align with scaled context
-    const width = canvas.clientWidth;
-    const height = canvas.clientHeight;
-    const triangleList: DetroitTriangle[] = [];
-
-    if (horizonal) {
-        const limit = width * coverage;
-
-        let xpos, ypos;
-        for (let y = 0; ; y++) {
-            ypos = y * size * 0.866;
-            if (ypos - size * 0.866 > height) break;
-
-            for (let x = 0; ; x++) {
-                xpos = x * size * 0.5;
-                if ((xpos > limit && Math.random() > 0.25) || xpos > width) break;
-
-                // 25% chance to expand out of limit
-                const isUp = !((x + y) % 2);
-                triangleList.push(new DetroitTriangle(size, isUp, xpos, ypos));
-            }
-        }
-    } else {
-        const limit = height * coverage;
-
-        let xpos, ypos;
-        for (let x = 0; ; x++) {
-            xpos = x * size;
-            if (xpos + size > width) break;
-
-            for (let y = 0; ; y++) {
-                ypos = y * size * 1.732;
-                if ((ypos > limit && Math.random() > 0.25) || ypos > height) break;
-
-                // 25% chance to expand out of limit
-                const isUp = !((x + y) % 2);
-                triangleList.push(new DetroitTriangle(size, isUp, xpos, ypos));
-            }
-        }
-    }
-    return triangleList;
-}
-
-class DetroitDrawer {
-    public ctx: Ctx2D;
-    public triangleList: DetroitTriangle[];
-    public width: number;
-    public height: number;
-
-    constructor(
-        ctx: Ctx2D,
-        triangleList: DetroitTriangle[],
-        canvas: Canva,
-    ) {
-        this.ctx = ctx;
-        this.triangleList = triangleList;
-        this.width = canvas.clientWidth;
-        this.height = canvas.clientHeight;
-    }
-    clearCanvas() {
-        this.ctx.clearRect(0, 0, this.width, this.height);
-    }
-    drawHorizonal(progress: number, time: number) {
-        this.clearCanvas();
-        const stableLimit = progress * this.width;
-        for (const triangle of this.triangleList) {
-            if (triangle.x < stableLimit) {
-                const thisTime = (time * triangle.timeFactorK + triangle.timeFactorB) / 1000 % 1;
-                const timeFactor = thisTime * (1 - thisTime); // <= 0.25
-                const alphaBase = 1 - triangle.x * triangle.x / stableLimit / stableLimit;
-                this.ctx.globalAlpha = clamp(0, alphaBase - timeFactor, 0.63);
-                triangle.draw(this.ctx);
-            } else if (Math.random() < 0.5 - (triangle.x - stableLimit) / 400) {
-                // random blinking when strentch
-                this.ctx.globalAlpha = 0.63;
-                triangle.draw(this.ctx);
-            }
-        }
-    }
-}
 
 function useColorTransform(scrollYProgress: MotionValue<number>, colorIDMap: SectionContent[]) {
     const rangeY     = colorIDMap.map((content, index) => (index+1) / colorIDMap.length);
@@ -190,10 +56,16 @@ const DetroitShadow: React.FC<{content: SectionContent[]}> = ({content: colorIDM
             if (!canvas) return;
             const ctx = ctxRef.current ?? canvas.getContext("2d");
             if (!ctx) return;
-
             canvasCtxScaledAsDPR(canvas, ctx, window);
-            const triangles = spawnTriangles(canvas, true, 0.6, 200);
-            drawerRef.current = new DetroitDrawer(ctx, triangles, canvas);
+
+            const direction = window.innerWidth > 900 ? DIRECTION.HORIZONAL : DIRECTION.VERTICAL;
+            const triangles = spawnTriangles(
+                canvas, 
+                direction, 
+                direction === DIRECTION.HORIZONAL ? 0.6 : 0.9, 
+                200
+            );
+            drawerRef.current = new DetroitDrawer(ctx, triangles, canvas, direction);
             ctx.fillStyle = colorMV.get();
         }
         initCanvas();
@@ -205,7 +77,7 @@ const DetroitShadow: React.FC<{content: SectionContent[]}> = ({content: colorIDM
 
         function animateLoop() {
             if (shadowProgressRef.current > 0.05) {
-                drawerRef.current?.drawHorizonal(shadowProgressRef.current, timeRef.current);
+                drawerRef.current?.draw(shadowProgressRef.current, timeRef.current);
             }
             rafIDRef.current = requestAnimationFrame(animateLoop);
         }

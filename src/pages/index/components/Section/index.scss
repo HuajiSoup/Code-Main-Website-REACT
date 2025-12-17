@@ -41,7 +41,7 @@
         }
         p {
             margin: 20px 0;
-            max-width: 45%;
+            max-width: 60%;
             font-size: 1.3rem;
             font-family: Arial, Helvetica, sans-serif;
             position: relative;
@@ -59,6 +59,35 @@
             &:hover::before {
                 top: 0%;
                 bottom: 0%;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .section-wrapper {
+        flex-direction: column;
+        box-sizing: border-box;
+        padding: 80px 10px;
+
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .section-content-wrapper {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 90%;
+            }
+
+            h2.section-index {
+                text-align: center;
+            }
+            p {
+                width: unset;
+                max-width: unset;
             }
         }
     }

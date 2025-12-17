@@ -1,4 +1,5 @@
 import React, { memo, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./index.scss";
 
 import ReactMarkdown from "react-markdown";
@@ -42,7 +43,14 @@ const ArticleViewer: React.FC<ArticleViewerProps> = memo(({ blogID }) => {
         fetchArticle();
     }, [blogID]);
 
+    const navigate = useNavigate();
+    const backToList = () => {
+        window.scrollTo({top: 0, behavior: "smooth"});
+        navigate("/blog");
+    }
+
     return (<>
+        <div className="blog-article-exit" onClick={backToList}>返回</div>
         <div className="blog-article-card">
             { loading && <p>▶️文章绝赞加载中...</p> }
             { loading && error && <p>🚫文章加载失败！</p> }

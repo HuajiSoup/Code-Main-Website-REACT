@@ -136,17 +136,19 @@ const Blogger: React.FC<BloggerProps> = memo((props) => {
             <AnimatePresence mode="wait">
                 { props.blogID
                 ? <AnimatedPanel className="blog-article-wrapper" key="article">
-                    { props.blogID && <ArticleViewer blogID={props.blogID} />}
+                    <ArticleViewer blogID={props.blogID} />
                 </AnimatedPanel>
 
                 : <AnimatedPanel className="blogs-list" key="list">
                     { loading && <div className="blog-status-card loading">▶️博客绝赞加载中...</div> }
                     { !loading && error && <div className="blog-status-card error">🚫文章列表加载失败！{error}</div> }
-                    { !loading && !error && showBlogs.length
-                        ? showBlogs.map((blog, index) => (
-                            <BlogCard key={index} blog={blog} />
-                        ))
-                        : <div className="blog-status-card">🔍未搜索到匹配“{search}”的结果！</div>
+                    { !loading && !error && (
+                        showBlogs.length
+                            ? showBlogs.map((blog, index) => (
+                                <BlogCard key={index} blog={blog} />
+                            ))
+                            : <div className="blog-status-card error">🔍未搜索到匹配“{search}”的结果！</div>
+                        )
                     }
                 </AnimatedPanel>
                 }
