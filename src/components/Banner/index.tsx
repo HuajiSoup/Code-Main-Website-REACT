@@ -6,7 +6,7 @@ import { rand, randElem } from "../../utils/math";
 import "./index.scss";
 
 type PageTitleProps = {
-    title: string;
+    children: React.ReactNode;
 }
 
 const TREE_TEXTURES = ["🌲", "🌳", "🌴"];
@@ -47,7 +47,7 @@ type Scene = {
     sky: Sky;
 }
 
-const Banner: React.FC<PageTitleProps> = ({ title }) => {
+const Banner: React.FC<PageTitleProps> = ({ children }) => {
     function spawnScene(): Scene {
         let clouds: Cloud[] = [];
         let trees: Tree[] = [];
@@ -162,7 +162,7 @@ const Banner: React.FC<PageTitleProps> = ({ title }) => {
                 ></div>
             </div>
             <div className="banner-text">
-                <h1>{title}</h1>
+                <h1>{children}</h1>
             </div>
         </div>
     </>);

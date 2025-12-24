@@ -15,7 +15,7 @@ const PageBlog: React.FC = () => {
     return (<>
         <Header />
         <main>
-            <Banner title="稽之博客" />
+            <Banner><b>稽之博客</b></Banner>
             <div className="content-wrapper">
                 <Blogger blogID={blogID} />
             </div>
