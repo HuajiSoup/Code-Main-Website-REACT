@@ -13,6 +13,7 @@
         width: 100vw;
         height: 100vh;
         overflow: hidden;
+        
         .canvas-star {
             position: absolute;
             left: -5vw;
@@ -22,6 +23,7 @@
             transition: 
                 left 200ms ease-out,
                 top 200ms ease-out;
+            animation: canvas-appear 2s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
         }
     }
 
@@ -46,9 +48,15 @@
             align-items: center;
             &.left {
                 flex-direction: row;
+                .planet-ball {
+                    animation: planet-appear-left 1.5s 0.3s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
+                }
             }
             &.right {
                 flex-direction: row-reverse;
+                .planet-ball {
+                    animation: planet-appear-right 1.5s 0.3s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
+                }
             }
 
             .planet-ball {
@@ -161,6 +169,51 @@
             at 50% calc(100vh + 50vw),
             #fcf0b3 0%, #f6bc6a 95%, #eca555 95%, #eca555 100%, 
             rgba(#ffcc66, 0.3) 100%, transparent 120%
-        );
+        ); // visible content height: 22vw
+        transform-origin: center 0px;
+        animation: sun-appear 1.75s 1s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
+    }
+
+    @keyframes planet-appear-left {
+        0% {
+            translate: -30vw;
+            scale: 2.5;
+            opacity: 0;
+        }
+        100% {
+            translate: 0;
+            scale: 1;
+            opacity: 1;
+        }
+    }
+    @keyframes planet-appear-right {
+        0% {
+            translate: 30vw;
+            scale: 2.5;
+            opacity: 0;
+        }
+        100% {
+            translate: 0;
+            scale: 1;
+            opacity: 1;
+        }
+    }
+    @keyframes sun-appear {
+        0% {
+            transform: translateY(25vw);
+        }
+        100% {
+            transform: none;
+        }
+    }
+    @keyframes canvas-appear {
+        0% {
+            scale: 3.6;
+            opacity: 0;
+        }
+        100% {
+            scale: 1;
+            opacity: 1;
+        }
     }
 }

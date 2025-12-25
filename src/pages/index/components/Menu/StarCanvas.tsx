@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { motion } from "motion/react";
 
 import { canvasCtxScaledAsDPR } from "src/utils/canvas";
 import { rand, randint } from "src/utils/math";
@@ -40,20 +39,8 @@ const StarCanvas: React.FC<{ref: CanvasRef}> = ({ ref }) => {
 
     return (<>
         <div className="canvas-wrapper">
-            <motion.canvas className="canvas-star" ref={ref}
-                initial={{
-                    opacity: 0.1,
-                    scale: 3.6,
-                }}
-                animate={{
-                    opacity: 1,
-                    scale: 1,
-                    transition: {
-                        ease: [0.0, 0.0, 0.0, 1.0],
-                        duration: 2,
-                    }
-                }}
-            ></motion.canvas>
+            <canvas className="canvas-star" ref={ref}
+            ></canvas>
         </div>
     </>)
 }

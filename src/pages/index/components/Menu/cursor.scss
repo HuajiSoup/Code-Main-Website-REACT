@@ -11,6 +11,8 @@
         transform-origin: center center -2vw;
         transform-style: preserve-3d;
         pointer-events: none;
+
+        animation: cursor-appear 0.3s 2.5s cubic-bezier(0.0, 0.5, 0.0, 1.0) backwards;
         
         .cube {
             transform-origin: center center -2vw;
@@ -60,13 +62,24 @@
             }
         }
     }
-}
 
-@keyframes cursor-rotate {
-    0% {
-        transform: rotateY(0deg);
+    @keyframes cursor-appear {
+        0% {
+            opacity: 0;
+            scale: 3;
+        }
+        100% {
+            opacity: 1;
+            scale: 1;
+        }
     }
-    100% {
-        transform: rotateY(360deg);
+
+    @keyframes cursor-rotate {
+        0% {
+            transform: rotateY(0deg);
+        }
+        100% {
+            transform: rotateY(360deg);
+        }
     }
 }

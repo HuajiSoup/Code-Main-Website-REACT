@@ -127,7 +127,7 @@ const Menu: React.FC = () => {
             
             {inView && <>
                 <StarCanvas ref={refCanvas} />
-                <SunBox />
+                <div className="huaji-sun"></div>
                 <PlanetBox planets={planets} />
                 <CubeCursor ref={refCursor} />
             </>}
