@@ -1,10 +1,11 @@
 import React from 'react';
+import './App.scss';
+
 import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 
 import PageIndex from './pages/index';
 import PageBlog from './pages/blog';
-
-import './App.scss';
+import PageToy from './pages/toy';
 
 const pages = [
   {
@@ -18,10 +19,14 @@ const pages = [
   {
     path: '/blog/:blogID',
     element: <PageBlog />
-  }
+  },
+  {
+    path: '/toy',
+    element: <PageToy />
+  },
 ];
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <Routes>

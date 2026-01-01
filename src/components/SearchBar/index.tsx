@@ -1,4 +1,4 @@
-import React, { forwardRef, SetStateAction, useImperativeHandle, useRef } from "react";
+import React, { SetStateAction, useImperativeHandle, useRef } from "react";
 import "./index.scss";
 
 import { debounce } from "src/utils/timer";
@@ -7,13 +7,14 @@ type SearchBarProps = {
     setTermCallback?: React.Dispatch<SetStateAction<string>>;
     changeInterval?: number;
     placeholder?: string;
+    ref?: React.RefObject<SearchBarHandle | null>;
 }
 
 type SearchBarHandle = {
     setInput: (v: string) => void;
 }
 
-const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>((props, ref) => {
+const SearchBar: React.FC<SearchBarProps> = (props) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
 
     // prop back search term
@@ -23,7 +24,7 @@ const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>((props, ref) => {
     }, props.changeInterval ?? 500) : () => {};
 
     // edit search term
-    useImperativeHandle(ref ?? null, () => ({
+    useImperativeHandle(props.ref ?? null, () => ({
         setInput: (v: string) => {
             if (inputRef.current) inputRef.current.value = v;
             setTerm?.(v);
@@ -39,7 +40,7 @@ const SearchBar = forwardRef<SearchBarHandle, SearchBarProps>((props, ref) => {
             />
         </form>
     </>);
-});
+};
 
 export type { SearchBarHandle };
 export default SearchBar;

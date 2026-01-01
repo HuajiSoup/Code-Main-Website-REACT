@@ -1,0 +1,99 @@
+{
+    "default": {
+        "point": "#000000",
+        "splitter": ["#00FF00", "#FFA500", "#BB00AA"],
+        "tetris": "#FFCC11",
+        "tetrisClear": "#0000FF",
+        "passer": "#FFBB22",
+        "remover": "#98FB98"
+    },
+    "yard1": {
+        "bg": "#FEC30B",
+        "lnBg": "#664B11",
+        "ln": "#FEE857",
+        "splitter": ["#00FF00", "#FFFF99", "#BB00AA"],
+        "passer": "#FFFF00",
+        "tetris": "#EE88EE"
+    },
+    "yard2": {
+        "bg": "#01E14B",
+        "lnBg": "#005B1F",
+        "ln": "#B4FF17"
+    },
+    "yard3": {
+        "bg": "#504DFE",
+        "lnBg": "#2107B2",
+        "ln": "#5D96F0",
+        "tetrisClear": "#EE88EE"
+    },
+    "apple": {
+        "bg": "#B4EE0B",
+        "lnBg": "#111B0E",
+        "ln": "#FF88BB",
+        "point": "#FFFF00",
+        "remover": "#FFFFFF"
+    },
+    "swampland": {
+        "bg": "#818708",
+        "bgInner": "#B1C30B",
+        "lnBg": "#D5D16F",
+        "ln": "#FEEF25"
+    },
+    "maple": {
+        "bg": "#DDDDDD",
+        "lnBg": "#FFD848",
+        "ln": "#C2Fd55",
+        "point": "#AAFF00"
+    },
+    "factory": {
+        "bg": "#383838",
+        "bgInner": "#282828",
+        "lnBg": "#689183",
+        "ln": "#FFFFFF",
+        "splitter": ["#00FF00", "#FF0000", "#FF9000"],
+        "remover": "#FFFFFF"
+    },
+    "jungle1": {
+        "bg": "#394541",
+        "bgInner": "#677075",
+        "lnBg": "#272D2D",
+        "ln": "#FFA500",
+        "point": "#FFA500"
+    },
+    "jungle2": {
+        "bg": "#394541",
+        "bgInner": "#677075",
+        "lnBg": "#272D2D",
+        "ln": "#AA00AA",
+        "point": "#AA00AA"
+    },
+    "lab": {
+        "bg": "#29352B",
+        "bgInner": "#4B6F53",
+        "lnBg": "#383E4A",
+        "ln": "#3FD16C"
+    },
+    "colorful1": {
+        "bg": "#00E8B6",
+        "bgInner": "#139384",
+        "lnBg": "#344444",
+        "ln": "#FFFFFF"
+    },
+    "colorful2": {
+        "bg": "#06301A",
+        "bgInner": "#0DCD4C",
+        "lnBg": "#4B5451",
+        "ln": "#33EA80"
+    },
+    "colorful3": {
+        "bg": "#220828",
+        "bgInner": "#741B93",
+        "lnBg": "#343839",
+        "ln": "#A444A6"
+    },
+    "colorful4": {
+        "bg": "#B21E02",
+        "lnBg": "#D64D45",
+        "ln": "#FFE04A"
+    }
+}

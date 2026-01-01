@@ -36,8 +36,6 @@ const Blogger: React.FC<BloggerProps> = memo((props) => {
             setLoading(true);
             try {
                 const res = await fetch("/api/notion");
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                
                 const data = await res.json();
                 const blogs: BlogInfo[] = data.results.map(postToBlogInfo);
                 setBlogs(blogs);
@@ -95,7 +93,8 @@ const Blogger: React.FC<BloggerProps> = memo((props) => {
                 if (blog.title?.indexOf(term) !== -1
                     || blog.desc?.indexOf(term) !== -1
                     || blog.section === term
-                    || blog.tags.includes(term)) return true;
+                    || blog.tags.includes(term)
+                ) return true;
             }
             return false;
         }));

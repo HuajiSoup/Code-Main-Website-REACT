@@ -35,7 +35,6 @@
     }
 
     .blogs-list {
-        top: 30px;
         width: min(1000px, 90%);
         height: max-content;
         margin: 0px 10px;
@@ -46,9 +45,12 @@
         .blog-status-card {
             @include blog-card;
             height: max-content;
-            min-height: 50px;
             font-weight: bold;
 
+            &.loading {
+                background-color: #93cbff;
+                color: #005ba1;
+            }
             &.error {
                 background-color: #4b2f36;
                 color: #eeb3d2;
@@ -117,6 +119,7 @@
     
                     p.blog-desc {
                         margin: 8px 0;
+                        font-size: 1em;
         
                         span.blog-section {
                             display: inline-block;

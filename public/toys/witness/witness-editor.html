@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Witness 关卡编辑器</title>
+    <link rel="stylesheet" href="./css/witness-editor.css">
+    <link rel="shortcut icon" href="./witness.png" type="image/x-icon">
+</head>
+
+<body>
+<main>
+    <div class="box" id="panel-box">
+        <div class="canvas-layers">
+            <div class="layer-bg"></div>
+            <canvas id="layer-panel">
+                <p style="color: white; font-size: larger; margin: 40px;">
+                    您的浏览器当前版本不支持<b>canvas标签</b>，导致该页面不能正常运行，请升级您的浏览器。<br>
+                </p>
+            </canvas>
+            <canvas id="layer-cursor"></canvas>
+            <div class="canvas-cover"></div>
+        </div>
+    </div>
+    <div class="box" id="settings-box">
+        <div class="wrapper" id="settings-wr">
+            <p>
+                <h1><b>The Witness EDITOR</b></h1>
+                <i>v0.1</i>
+            </p>
+            <br>
+            <p>
+                请按照如下步骤创建您的独家谜题! <br>
+                <a href="./witness.html">回到模拟器</a>
+            </p>
+            <hr>
+
+            <div class="maker" id="step1" style="display: initial;">
+                <p>
+                    <b>第 1 步: 确定尺寸</b><br>
+                    为<input type="number" name="size-w" value="6" />x<input type="number" name="size-h" value="6" /><br>
+                    注意:重设尺寸将清空所有元素。<br>
+                    <input type="button" name="submit-step1" value="确认" /><input type="button" name="reset-step1" value="重设" disabled />
+                </p>
+            </div>
+            <hr>
+            <div class="maker" id="step2">
+                <p>
+                    <b>第 2 步: 确定路径起点和终点</b><br>
+                    当前的起点和终点位置为默认位置，<br>
+                    在面板上想要的位置单击两次，重新确定起点和终点位置。<br>
+                    <input type="button" name="submit-step2" value="确认" /><input type="button" name="reset-step2" value="重设" disabled />
+                </p>
+            </div>
+            <hr>
+            <div class="maker" id="step3">
+                <p>
+                    <b>第 3 步: 编辑并放置解谜元素</b><br>
+                    当前放置元素:
+                    <select name="elem-selector">
+                        <option value="splitter" selected>分颜色</option>
+                        <option value="teamer">分组</option>
+                        <option value="passer">路过</option>
+                        <option value="tetris">俄罗斯方块</option>
+                        <option value="remover">纠错</option>
+                        <option value="point">经过点</option>
+                        <option value="cut">切断道路</option>
+                    </select>
+                    <br>
+                </p>
+                
+                <div class="elem-editor" id="public">
+                    颜色组:
+                    <select name="public-color">
+                        <option value="-1" disabled selected>不分配</option>
+                        <option value="0">1</option>
+                        <option value="1">2</option>
+                        <option value="2">3</option>
+                    </select>
+                </div>
+
+                <div class="elem-editor" id="splitter"></div>
+
+                <div class="elem-editor" id="teamer"></div>
+
+                <div class="elem-editor" id="passer">
+                    经过次数:
+                    <select name="passer-times">
+                        <option value="1" selected>1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <div class="elem-editor" id="tetris">
+                    形状: <input type="number" name="tetris-shape-w" value="3" /> x <input type="number" name="tetris-shape-h" value="2" /><br>
+                    <div id="tetris-shape" data-tetris-width="3" data-tetris-height="2">
+                        <span> <span></span> <span></span> <span selected></span> </span>
+                        <span> <span selected></span> <span selected></span> <span selected></span> </span>
+                    </div>
+                    <input type="checkbox" name="tetris-rotate" />可旋转
+                    <input type="checkbox" name="tetris-clear" />消除形状
+                </div>
+
+                <div class="elem-editor" id="remover"></div>
+
+                <div class="elem-editor" id="point"></div>
+
+                <div class="elem-editor" id="cut"></div>
+
+                <br>
+
+                <p>
+                    当前元素:<canvas id="elem-view" width="40" height="40"></canvas><br>
+                    <i>左键 → 放置元素</i><br>
+                    <i>右键 → 删除元素</i><br>
+                </p>
+            </div>
+            <hr>
+            <div class="maker" id="coder">
+                <p>
+                    <b>已生成本谜题的代码如下(自动更新):</b>
+                    <textarea class="puzzle-coder" placeholder="NONE" readonly></textarea>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script type="module" src="./js/witness_editor.js"></script>
+</body>
+</html>

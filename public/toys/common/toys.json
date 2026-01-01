@@ -1,0 +1,22 @@
+{
+    "toys": [
+        {
+            "title": "The Witness 模拟器",
+            "desc": "致敬传奇解谜游戏The Witness！一款在线运行的见证者模拟器。",
+            "slug": "witness",
+            "icon": "witness.png"
+        },
+        {
+            "title": "烟花",
+            "desc": "新年快乐！我们用迫真电子烟花迎接新的一年和每一个快乐时刻！！",
+            "slug": "fireworks",
+            "icon": "fireworks.png"
+        },
+        {
+            "title": "重力球",
+            "desc": "由屎山代码堆起来的、基于小球的、世界上最烂的物理引擎。",
+            "slug": "g-balls",
+            "icon": "g-balls.png"
+        }
+    ]
+}

@@ -1,0 +1,70 @@
+* {
+    margin: 0;
+}
+body {
+    background-color: rgb(0, 0, 0);
+    overflow: hidden;
+}
+.gamelogo {
+    position: static;
+}
+.settings {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+}
+.settings #set-box {
+    width: 0; /* 20em; */
+    border-radius: 0 15px 15px 0;
+    background-color: rgba(17, 17, 17, 0.8);
+    color: white;
+    font-family: sans-serif;
+    font-size: 1rem;
+    overflow: hidden;
+    z-index: +1;
+    transition: width 150ms ease-out;
+}
+#set-box input {
+    margin: 0.4em;
+}
+#set-box input[type="number"], #set-box input[type="text"] {
+    width: 8em;
+}
+#set-box input.edited {
+    color: #19f;
+    border-color: #19f;
+}
+#set-box p:has(input.edited) {
+    color: #19f;
+}
+#set-box .wrapper {
+    box-sizing: border-box;
+    width: 20em;
+    padding: 10px 20px;
+}
+.wrapper .wrapper-il {
+    padding: 5px 10px;
+}
+#switch-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    margin: 5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#switch-box:hover {
+    background-color: rgba(128, 128, 128, 0.5);
+}
+#switch-box .switch {
+    width: 0;
+    height: 0;
+    border: 15px solid transparent;
+    border-left-color: white;
+    border-right-width: 0;
+    z-index: +2;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>引力球</title>
+    <link rel="stylesheet" href="./g-balls.css">
+    <link rel="shortcut icon" href="./g-balls.png" type="image/x-icon">
+</head>
+<body>
+    <div class="settings">
+        <div class="box" id="set-box">
+            <div class="wrapper">
+                <b>世界</b>
+                <div class="wrapper-il">
+                    <p>引力常数<input type="number" name="env-g" id="env-g" placeholder="G" value="2" /></p>
+                    <p>碰撞能量损失<input type="number" name="env-hit" id="env-hit" placeholder="能量损失" value="0" />%</p>
+                    <p><input type="checkbox" name="env-balls-hit" id="env-balls-hit" checked />小球互相碰撞</p>
+                    <p><input type="checkbox" name="env-border-hit" id="env-border-hit" />边界碰撞</p>
+                </div>
+                <b>生成</b>
+                <div class="wrapper-il">
+                    <p>半径<input type="number" name="ball-rad" id="ball-rad" placeholder="半径" value="50" /></p>
+                    <p>质量<input type="number" name="ball-mass" id="ball-mass" placeholder="质量" value="1000" /></p>
+                    <p>颜色<input type="text" name="ball-color-text" id="ball-color-text" value="#FFA500" placeholder="颜色" /><input type="color" name="ball-color" id="ball-color" value="#FFA500" /></p>
+                    <p><input type="checkbox" name="ball-active" id="ball-active" checked />活动</p>
+                </div>
+                <b>操作</b>
+                <div class="wrapper-il">
+                    <p>
+                        <input type="radio" name="click-type" value="0" checked />单击添加球<br>
+                        <input type="radio" name="click-type" value="1" />拖拽添加有初速度的球<br>
+                        <input type="radio" name="click-type" value="2" />单击删除球<br>
+                    </p>
+                </div>
+                <input type="button" id="btn-confirm" value="确认" />
+            </div>
+        </div>
+        <div class="box" id="switch-box">
+            <div class="switch"></div>
+        </div>
+    </div>
+    <canvas id="balls-canvas">
+        <p style="color: white; font-size: large; margin: 10vh;">
+            您的浏览器当前版本不支持<b>canvas标签</b>，导致该页面不能正常运行，请升级您的浏览器。<br>
+        </p>
+    </canvas>
+
+    <script src="./g-balls.js"></script>
+</body>
+</html>

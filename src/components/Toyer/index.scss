@@ -1,0 +1,158 @@
+.toyer-root {
+    width: 100%;
+    padding: 30px 0;
+    color: aliceblue;
+    background-color: #22252a;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
+
+    @mixin toy-card {
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 5px;
+        background-color: #343841;
+        border-radius: 8px;
+        box-shadow: 0px 2px 6px #1b1b1b;
+    }
+
+    .toyer-wrapper {
+        width: min(1200px, 85%);
+        height: max-content;
+        margin: 0px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .toys-search-wrapper {
+            width: 33%;
+            height: 30px;
+            align-self: flex-start;
+            margin: 5px;
+            & form {
+                background-color: #343841;
+            }
+        }
+
+        .toy-status-card {
+            @include toy-card;
+            height: max-content;
+            margin: 10px 0;
+            padding: 20px;
+            font-weight: bold;
+
+            &.loading {
+                background-color: #93cbff;
+                color: #005ba1;
+            }
+            &.error {
+                background-color: #4b2f36;
+                color: #eeb3d2;
+            }
+        }
+
+        .toys-list {
+            width: 100%;
+            margin: 10px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            .toy-card-wrapper {
+                box-sizing: border-box;
+                padding: 3px;
+                flex: 0 1 33.3%;
+                height: 180px;
+                
+                .toy-card {
+                    @include toy-card;
+
+                    .toy-card-title-wrapper {
+                        width: 100%;
+                        height: 90px;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        cursor: pointer;
+
+                        .toy-card-cover {
+                            width: 80px;
+                            height: 80px;
+                            margin: 5px;
+                            flex-shrink: 0;
+                            background: url("../../assets/tieba/bubble.png") center / cover no-repeat;
+                        }
+
+                        h2.toy-card-title {
+                            font-size: 1.75em;
+                            word-break: break-all;
+                            color: aliceblue;
+                            background: linear-gradient(to right, aliceblue) right bottom / 0% 2px no-repeat;
+                            transition: background-size 200ms ease-out;
+                        }
+                        &::after {
+                            content: "";
+                            display: inline-block;
+                            width: 30px;
+                            height: 30px;
+                            opacity: 0;
+                            background: url("../../assets/icon/arrow-right.svg") center / cover no-repeat;
+                            translate: -20px;
+                            transition: opacity 100ms ease-out, translate 100ms ease-out;
+                        }
+
+                        &:hover {
+                            & h2.toy-card-title {
+                                background-position: left bottom;
+                                background-size: 100% 2px;
+                            }
+                            &::after {
+                                opacity: 1;
+                                translate: 0px;
+                            }
+                        }
+                    }
+
+                    .toy-card-desc {
+                        margin: 5px;
+                        p {
+                            font-size: 1em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1000px) {
+    .toyer-root {
+        .toyer-wrapper {
+            .toys-search-wrapper {
+                width: 50%;
+            }
+            .toys-list {
+                .toy-card-wrapper {
+                    flex-basis: 50%;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .toyer-root {
+        .toyer-wrapper {
+            .toys-search-wrapper {
+                width: 100%;
+            }
+            .toys-list {
+                .toy-card-wrapper {
+                    flex-basis: 100%;
+                }
+            }
+        }
+    }
+}

@@ -58,6 +58,7 @@
                     animation: planet-appear-right 1.5s 0.3s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
                 }
             }
+            animation: planet-hoverable 3s both;
 
             .planet-ball {
                 width: 8vw;
@@ -171,7 +172,16 @@
             rgba(#ffcc66, 0.3) 100%, transparent 120%
         ); // visible content height: 22vw
         transform-origin: center 0px;
-        animation: sun-appear 1.75s 1s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
+        animation: sun-appear 1.75s 1.25s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
+    }
+
+    @keyframes planet-hoverable {
+        0% {
+            pointer-events: none;
+        }
+        100% {
+            pointer-events: auto;
+        }
     }
 
     @keyframes planet-appear-left {
