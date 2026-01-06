@@ -5,7 +5,7 @@ import "./index.scss";
 
 import PlanetBox from "./PlanetBox";
 import StarCanvas from "./StarCanvas";
-import { pageInfo } from "src/constants/pages";
+import { PageInfo } from "src/constants/pages";
 
 import svgHome from "src/assets/menu/icon-home.svg";
 import svgPaper from "src/assets/menu/icon-newspaper.svg";
@@ -13,7 +13,7 @@ import svgHammer from "src/assets/menu/icon-hammer.svg";
 
 import CubeCursor from "./Cursor";
 
-type PlanetInfo = pageInfo & {
+type PlanetInfo = PageInfo & {
     desc: React.ReactNode;
     color: string;
     pos: { 
@@ -122,7 +122,7 @@ const Menu: React.FC = () => {
                 amount: 0.3,
             }}
         >
-            <h2 className="menu-title">欢迎来到稽之宇宙</h2>
+            <h2 className="menu-title">欢迎造访<br />稽之宇宙</h2>
             
             {inView && <>
                 <StarCanvas ref={refCanvas} />

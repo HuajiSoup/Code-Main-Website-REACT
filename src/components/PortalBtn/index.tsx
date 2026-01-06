@@ -1,14 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { pageInfo } from "src/constants/pages";
+import { PageInfo } from "src/constants/pages";
 
-const PortalBtn: React.FC<pageInfo> = (props) => {
+type PortalBtnProps = PageInfo & React.ComponentPropsWithoutRef<"div">;
+
+const PortalBtn: React.FC<PortalBtnProps> = (props) => {
+    const {
+        title,
+        icon,
+        href,
+        ...divProps
+    } = props;
+
     return (
-        <Link to={props.href}>
-            <div className="portal">
-                <img src={props.icon} alt="" className="portal-icon" />
-                <p><b>{props.title}</b></p>
+        <Link to={href}>
+            <div className="portal" {...divProps}>
+                <img src={icon} alt="" className="portal-icon" />
+                <p><b>{title}</b></p>
             </div>
         </Link>
     );

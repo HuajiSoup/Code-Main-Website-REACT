@@ -21,7 +21,7 @@ const StarCanvas: React.FC<{ref: CanvasRef}> = ({ ref }) => {
             canvas.style.height = `${height}px`;
             ctx.fillStyle = "#ffffff";
 
-            const total = randint(400, 700);
+            const total = window.innerWidth > 1000 ? randint(400, 700) : randint(250, 500);
             for (let _ = 0; _ < total; _++) {
                 ctx.globalAlpha = rand(0.2, 1);
                 ctx.fillRect(randint(0, width), randint(0, height), 3.5, 3.5);

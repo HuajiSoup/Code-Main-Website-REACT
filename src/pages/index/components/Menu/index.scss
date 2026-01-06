@@ -4,7 +4,12 @@
     position: relative;
     scroll-snap-align: start;
     background-color: #111122;
+    z-index: 1;
     overflow: hidden;
+
+    a:link, a:visited, a:hover, a:active {
+        text-decoration: none;
+    }
 
     .canvas-wrapper {
         position: absolute;
@@ -33,6 +38,8 @@
         font-size: 4rem;
         letter-spacing: 2vw;
         color: aliceblue;
+
+        br { display: none; }
     }
 
     .menu-planets-wrapper {
@@ -69,6 +76,7 @@
                 background-color: #ffaa00;
                 box-shadow: 0px 0px 15px #ffaa00;
                 transform: translateZ(10vw);
+                z-index: +2;
                 cursor: pointer;
             }
 
@@ -88,6 +96,7 @@
                     justify-content: center;
                     color: #ffffff;
                     overflow: hidden;
+                    z-index: +1;
 
                     transition: width 150ms ease-out;
     
@@ -140,18 +149,20 @@
                 }
             }
 
-            &:hover {
-                .planet-text-wrapper-outer {
-                    margin: 0px 30px;
-                    .planet-text-wrapper {
-                        width: 18vw;
-                        .planet-title {
-                            background-position: 0vw 0vw, 0vw 0vw;
-                            outline-width: 1px;
-                            outline-offset: -1px;
-                        }
-                        .planet-desc {
-                            max-height: 20vh;
+            @media (min-width: 1000px) {
+                &:hover {
+                    .planet-text-wrapper-outer {
+                        margin: 0px 30px;
+                        .planet-text-wrapper {
+                            width: 18vw;
+                            .planet-title {
+                                background-position: 0vw 0vw, 0vw 0vw;
+                                outline-width: 1px;
+                                outline-offset: -1px;
+                            }
+                            .planet-desc {
+                                max-height: 20vh;
+                            }
                         }
                     }
                 }
@@ -224,6 +235,90 @@
         100% {
             scale: 1;
             opacity: 1;
+        }
+    }
+}
+
+// phone
+@media (max-width: 1000px) or (max-height: 450px) {
+    .index-menu-wrapper {
+        width: 100%;
+        height: unset;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .menu-title {
+            font-size: 3.5rem;
+            br { display: inline-block; }
+        }
+
+        .menu-planets-wrapper {
+            box-sizing: border-box;
+            width: 90%;
+            height: max-content;
+            position: relative;
+            left: 0;
+            top: 0;
+            margin: 20px;
+            padding: 40px 10px;
+            background-color: rgba(#0c0c0c, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .planet {
+                position: relative;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100%;
+                height: max-content;
+                margin: 20px 0;
+                align-items: start;
+                &.left, &.right { flex-direction: row; }
+
+                .planet-ball {
+                    width: 100px;
+                    height: 100px;
+                }
+                .planet-text-wrapper-outer {
+                    flex-grow: 1;
+                    height: max-content;
+                    .planet-text-wrapper {
+                        width: 100%;
+                        overflow: visible;
+                        animation: none;
+
+                        .planet-title {
+                            position: relative;
+                            left: -50px;
+                            box-sizing: border-box;
+                            width: 100%;
+                            padding-left: 50px;
+                            height: unset;
+                            border: none;
+                            outline: none;
+                            animation: none;
+                            background: linear-gradient(+60deg, #2985ff calc(10rem + 50px), transparent 0) no-repeat;
+                            h3 {
+                                text-align: start;
+                                font-weight: bold;
+                                line-height: 1.3;
+                            }
+                        }
+                        .planet-desc {
+                            height: unset;
+                            max-height: unset;
+                            width: 100%;
+                            margin: 0;
+                            animation: none;
+                        }
+                    }
+                }
+            }
         }
     }
 }

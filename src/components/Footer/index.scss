@@ -37,3 +37,7 @@ footer {
         }
     }
 }
+
+main#main-index + footer {
+    scroll-snap-align: start;
+}

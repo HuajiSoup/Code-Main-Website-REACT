@@ -30,10 +30,14 @@ const Huajireka: React.FC = memo(() => {
 });
 
 const Header: React.FC = memo(() => {
+    const [firstOpen, setFirstOpen] = useState<boolean>(false);
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const menuRef = useRef<HTMLDivElement | null>(null);
 
-    const toggle = () => { setMenuOpen(!menuOpen) };
+    const toggle = () => {
+        if (!menuOpen && !firstOpen) setFirstOpen(true);
+        setMenuOpen(!menuOpen);
+    }
 
     return (
         <header>
@@ -51,11 +55,13 @@ const Header: React.FC = memo(() => {
 
                     <Huajireka />
 
-                    <div className="portals-wrapper">
+                    {firstOpen && <div className="portals-wrapper">
                         {mainPages.map((page, index) => (
-                            <PortalBtn key={index} {...page} />
+                            <PortalBtn key={index} {...page} style={{
+                                animationDelay: `${index * 40}ms`,
+                            }} />
                         ))}
-                    </div>
+                    </div>}
                 </div>
             </div>
         </header>

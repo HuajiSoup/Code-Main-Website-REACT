@@ -6,6 +6,10 @@
     margin: 0;
 }
 
+::selection {
+    background-color: rgba(128, 128, 128, 0.60);
+}
+
 html {
     scroll-snap-type: y mandatory;
     

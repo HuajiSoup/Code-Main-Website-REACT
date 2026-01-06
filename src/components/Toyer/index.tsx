@@ -67,12 +67,17 @@ const Toyer: React.FC = () => {
                     <SearchBar setTermCallback={setSearch} changeInterval={250} />
                 </div>
                 { loading && <div className="toy-status-card loading">▶️玩具绝赞加载中...</div> }
-                { !loading && error && <div className="toy-status-card error">🚫玩具列表加载失败！{error}</div> }
-                { !loading && !error && <div className="toys-list">
-                    { showToys.map((toy, index) => (
-                        <ToyCard toy={toy} key={index} />
-                    )) }
-                </div> }
+                { (!loading && error) && <div className="toy-status-card error">🚫玩具列表加载失败！{error}</div> }
+                { (!loading && !error && showToys.length !== 0) &&
+                    <div className="toys-list">
+                        { showToys.map((toy, index) => (
+                            <ToyCard toy={toy} key={index} />
+                        )) }
+                    </div>
+                }
+                { (!loading && !error && showToys.length === 0) && 
+                    <div className="toy-status-card error">🔍未搜索到匹配“{search}”的结果！</div>
+                }
             </div>
         </div>
     </>);

@@ -15,7 +15,5 @@ export function canvasCtxScaledAsDPR(
     const dpr = window.devicePixelRatio || 1;
     canvas.width = Math.floor(cssWidth * dpr);
     canvas.height = Math.floor(cssHeight * dpr);
-    canvas.style.width = cssWidth + "px";
-    canvas.style.height = cssHeight + "px";
     ctx.scale(dpr, dpr);
 }

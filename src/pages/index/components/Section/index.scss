@@ -1,18 +1,23 @@
 .section-wrapper {
+    box-sizing: border-box;
     width: 100%;
     height: 100vh;
+    padding: 100px 15%;
     z-index: 1;
 
     display: flex;
     flex-direction: row;
     align-items: center;
-    box-sizing: border-box;
-    padding: 0 15%;
+    overflow: hidden;
     
     scroll-snap-align: start;
     
     section {
         color: aliceblue;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
 
         h2 {
             text-shadow: black 0px 0px 10px;

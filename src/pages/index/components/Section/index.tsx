@@ -63,7 +63,7 @@ const Section: React.FC<SectionProps> = (props) => {
                     <h2 className="section-title">{props.title}</h2>
                 </motion.div>
 
-                <SpaceHolder height={"8vh"} />
+                {/* <SpaceHolder height={"8vh"} /> */}
 
                 <SectionTextWrapper contents={props.content} />
             </section>

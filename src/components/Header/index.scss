@@ -59,6 +59,10 @@ header {
             width: 0px;
         }
 
+        a:link, a:visited, a:hover, a:active {
+            text-decoration: none;
+        }
+
         .navi-menu-wrapper {
             width: 200px;
             box-sizing: border-box;
@@ -108,6 +112,7 @@ header {
                     flex-direction: row;
                     align-items: center;
                     transition: background-color 100ms ease-out;
+                    animation: portal-appear 350ms cubic-bezier(.22,.61,.36,1) 100ms backwards;
 
                     img.portal-icon {
                         width: 25px;
@@ -117,11 +122,21 @@ header {
                     p b {
                         font-size: 1.2rem;
                         color: aliceblue;
-                        text-decoration: none;
                     }
 
                     &:hover {
                         background-color: rgba($color: #505050, $alpha: 0.6);
+                    }
+                }
+
+                @keyframes portal-appear {
+                    0% {
+                        translate: -30%;
+                        opacity: 0;
+                    }
+                    100% {
+                        translate: 0;
+                        opacity: 1;
                     }
                 }
             }

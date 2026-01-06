@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
 import PageIndex from './pages/index';
 import PageBlog from './pages/blog';
 import PageToy from './pages/toy';
+import PageError from './pages/error';
 
 const pages = [
   {
@@ -33,6 +34,7 @@ const App: React.FC = () => {
         {pages.map(obj => 
           <Route path={obj.path} element={obj.element} />
         )}
+        <Route path='*' element={<PageError />} />
       </Routes>
     </Router>
   );
