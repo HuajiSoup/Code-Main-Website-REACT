@@ -1,6 +1,6 @@
 export type BlogInfo = {
     title: string | null;
-    pageID: string;
+    blogID: string | null;
     emoji: string | null;
     cover: string | null;
     desc: string | null;
@@ -14,7 +14,7 @@ export function postToBlogInfo(post: any): BlogInfo {
 
     return {
         title: post.properties?.title?.title[0]?.plain_text,
-        pageID: post.id ?? "/404",
+        blogID: String(post.properties?.id?.number) ?? "",
         emoji: post.icon?.emoji,
         cover: post.cover?.file?.url,
         desc: post.properties?.desc?.rich_text[0]?.plain_text,

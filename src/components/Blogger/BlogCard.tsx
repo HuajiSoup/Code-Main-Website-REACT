@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { BlogInfo } from "src/utils/notion";
 
+import { storageBlogsUrl } from "src/constants/storage";
+
 const sectionColor: {[key : string] : string} = {
     "学术": "#ffaa00",
     "技术": "#0083d0",
@@ -13,7 +15,7 @@ const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
     const navigate = useNavigate();
     const nav = () => {
         window.scrollTo({top: 0, behavior: "smooth"});
-        navigate(`/blog/${blog.pageID}`);
+        navigate(`/blog/${blog.blogID}`);
     }
 
     return (<>
@@ -47,7 +49,7 @@ const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
             <div className="blog-card-cover-image"
                 onClick={nav}
                 style={ blog.cover ? { backgroundImage: 
-                    `url('/api/notionImageProxy?url=${encodeURIComponent(blog.cover)}')`
+                    `url('${storageBlogsUrl}/blog-${blog.blogID}/cover.png')`
                 } : {} }
             ></div>
         </div>

@@ -1,19 +1,17 @@
 import React, { memo, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import "./index.scss";
+import { useNavigate } from "react-router-dom";
 
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { BlogInfo } from "src/utils/notion";
 import { postToBlogInfo } from "src/utils/notion";
-import { replaceAllWith } from "src/utils/string";
+import { BlogInfo } from "src/utils/notion";
 
 type ArticleViewerProps = {
     blogID: string;
 }
 
-const imgUrl = /https:\/\/prod-files-secure\.s3\.us-west-2\.amazonaws\.com\/\S+?x-id=GetObject/;
 const strUrlToProxy = (str: string) => `/api/notionImageProxy?url=${encodeURIComponent(str)}`;
 
 const ArticleViewer: React.FC<ArticleViewerProps> = memo(({ blogID }) => {
@@ -25,13 +23,16 @@ const ArticleViewer: React.FC<ArticleViewerProps> = memo(({ blogID }) => {
     useEffect(() => {
         const fetchArticle = async () => {
             setLoading(true);
-
+            
             try {
                 const res = await fetch(`/api/notionArticle?id=${blogID}`);
                 const data = await res.json();
-                data.markdown = replaceAllWith(data.markdown, imgUrl, strUrlToProxy);
-                setMd(data.markdown);
-                setBlog(postToBlogInfo(data.raw));
+                if (!(data.metadata && data.content)) {
+                    throw new Error("Article does not exist!");
+                }
+
+                setMd(data.content);
+                setBlog(postToBlogInfo(data.metadata));
             } catch (err) {
                 console.error(err);
                 setError(err instanceof Error ? err.message : String(err));
@@ -39,7 +40,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = memo(({ blogID }) => {
                 setLoading(false);
             }
         }
-        
+
         fetchArticle();
     }, [blogID]);
 
@@ -53,7 +54,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = memo(({ blogID }) => {
         <div className="blog-article-exit" onClick={backToList}>返回</div>
         <div className="blog-article-card">
             { loading && <p>▶️文章绝赞加载中...</p> }
-            { loading && error && <p>🚫文章加载失败！</p> }
+            { !loading && error && <p>🚫文章加载失败！{error}</p> }
             { !loading && !error && blog &&
             <>
                 <div className="blog-article-header">

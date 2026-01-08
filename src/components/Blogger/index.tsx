@@ -11,6 +11,8 @@ import { BlogInfo, postToBlogInfo } from "src/utils/notion";
 import { sectionColor } from "./BlogCard";
 import SearchBar, { SearchBarHandle } from "../SearchBar";
 
+import { storageBlogsUrl } from "src/constants/storage";
+
 type BloggerProps = {
     blogID?: string;
 }
@@ -31,8 +33,6 @@ const Blogger: React.FC<BloggerProps> = memo((props) => {
     // internet
     useEffect(() => {
         const fetchBlogs = async () => {
-            if (blogs.length) return;
-
             setLoading(true);
             try {
                 const res = await fetch("/api/notion");
@@ -77,7 +77,7 @@ const Blogger: React.FC<BloggerProps> = memo((props) => {
         // ];
         // setBlogs(testBlogs);
         // setLoading(false);
-    }, [blogs]);
+    }, []);
 
     // search
     useEffect(() => {
