@@ -5,14 +5,12 @@ import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { postToBlogInfo } from "src/utils/notion";
-import { BlogInfo } from "src/utils/notion";
+import { postToBlogInfo } from "src/utils/blog";
+import { BlogInfo } from "src/utils/blog";
 
 type ArticleViewerProps = {
     blogID: string;
 }
-
-const strUrlToProxy = (str: string) => `/api/notionImageProxy?url=${encodeURIComponent(str)}`;
 
 const ArticleViewer: React.FC<ArticleViewerProps> = memo(({ blogID }) => {
     const [loading, setLoading] = useState(false);
@@ -25,12 +23,8 @@ const ArticleViewer: React.FC<ArticleViewerProps> = memo(({ blogID }) => {
             setLoading(true);
             
             try {
-                const res = await fetch(`/api/notionArticle?id=${blogID}`);
-                const data = await res.json();
-                if (!(data.metadata && data.content)) {
-                    throw new Error("Article does not exist!");
-                }
-
+                const response = await fetch(`/api/blog?id=${blogID}`);
+                const data = await response.json();
                 setMd(data.content);
                 setBlog(postToBlogInfo(data.metadata));
             } catch (err) {

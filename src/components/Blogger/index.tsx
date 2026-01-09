@@ -7,7 +7,7 @@ import ArticleViewer from "../ArticleViewer";
 import AnimatedPanel from "./AnimatedPanel";
 import BlogCard from "./BlogCard";
 
-import { BlogInfo, postToBlogInfo } from "src/utils/notion";
+import { BlogInfo, postToBlogInfo } from "src/utils/blog";
 import { sectionColor } from "./BlogCard";
 import SearchBar, { SearchBarHandle } from "../SearchBar";
 
@@ -35,9 +35,9 @@ const Blogger: React.FC<BloggerProps> = memo((props) => {
         const fetchBlogs = async () => {
             setLoading(true);
             try {
-                const res = await fetch("/api/notion");
-                const data = await res.json();
-                const blogs: BlogInfo[] = data.results.map(postToBlogInfo);
+                const res = await fetch("/api/bloglist");
+                const metadatas: any[] = await res.json();
+                const blogs = metadatas.map(postToBlogInfo);
                 setBlogs(blogs);
                 setShowBlogs(blogs);
             } catch (err) {

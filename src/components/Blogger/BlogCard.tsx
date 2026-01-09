@@ -1,9 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { BlogInfo } from "src/utils/notion";
-
-import { storageBlogsUrl } from "src/constants/storage";
+import { BlogInfo } from "src/utils/blog";
 
 const sectionColor: {[key : string] : string} = {
     "学术": "#ffaa00",
@@ -49,7 +47,7 @@ const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
             <div className="blog-card-cover-image"
                 onClick={nav}
                 style={ blog.cover ? { backgroundImage: 
-                    `url('${storageBlogsUrl}/blog-${blog.blogID}/cover.png')`
+                    `url('${blog.cover}')`
                 } : {} }
             ></div>
         </div>
