@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     const blogList = await listRes.json();
 
     // metadatas
-    const metadatas = await Promise.all(blogList.map(id =>
+    const metadatas = await Promise.all(blogList.blogs.map(id =>
       fetch(`https://storage.huaji-universe.top/blogs/${id}/metadata.json`)
         .then(metadataRes => {
           if (!metadataRes.ok) {

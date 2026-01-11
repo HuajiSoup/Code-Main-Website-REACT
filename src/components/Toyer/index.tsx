@@ -4,11 +4,22 @@ import "./index.scss";
 import SearchBar from "../SearchBar";
 import ToyCard from "./ToyCard";
 
+import { storageToysUrl } from "src/constants/storage";
+
 type ToyInfo = {
     title: string;
     desc: string;
-    slug: string;
+    url: string;
     icon?: string;
+}
+
+const metaToToyInfo = (meta: any): ToyInfo => {
+    return ({
+        title: meta.title,
+        desc: meta.desc,
+        url: `${storageToysUrl}/${meta.slug}`,
+        icon: `${storageToysUrl}/${meta.slug}/${meta.icon}`,
+    });
 }
 
 const Toyer: React.FC = () => {
@@ -23,14 +34,13 @@ const Toyer: React.FC = () => {
     // fetch
     useEffect(() => {
         const fetchToys = async () => {
-            if (toys.length) return;
-
             setLoading(true);
             try {
-                const res = await fetch("/toys/common/toys.json");
-                const data = await res.json();
-                setToys(data.toys);
-                setShowToys(data.toys);
+                const res = await fetch("/api/toylist");
+                const metadatas: any[] = await res.json();
+                const toys = metadatas.map(metaToToyInfo);
+                setToys(toys);
+                setShowToys(toys);
             } catch (err) {
                 console.error(err);
                 setError(err instanceof Error ? err.message : String(err));
@@ -39,7 +49,7 @@ const Toyer: React.FC = () => {
             }
         }
         fetchToys();
-    }, [toys]);
+    }, []);
 
     // search
     useEffect(() => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-import { BlogInfo } from "src/utils/blog";
+import { BlogInfo } from "./BlogLister";
 
 const sectionColor: {[key : string] : string} = {
     "学术": "#ffaa00",

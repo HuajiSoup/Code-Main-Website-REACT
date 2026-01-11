@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { postToBlogInfo } from "src/utils/blog";
-import { BlogInfo } from "src/utils/blog";
+import { BlogInfo, metaToBlogInfo } from "../Blogger/BlogLister";
 
 type ArticleViewerProps = {
     blogID: string;
@@ -26,7 +25,7 @@ const ArticleViewer: React.FC<ArticleViewerProps> = memo(({ blogID }) => {
                 const response = await fetch(`/api/blog?id=${blogID}`);
                 const data = await response.json();
                 setMd(data.content);
-                setBlog(postToBlogInfo(data.metadata));
+                setBlog(metaToBlogInfo(data.metadata));
             } catch (err) {
                 console.error(err);
                 setError(err instanceof Error ? err.message : String(err));

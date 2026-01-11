@@ -6,10 +6,10 @@ const ToyCard: React.FC<{toy: ToyInfo}> = ({ toy }) => {
     return (<>
         <div className="toy-card-wrapper">
             <div className="toy-card">
-                <a href={`/toys/${toy.slug}/`}>
+                <a href={toy.url} target="_blank" rel="noreferrer">
                     <div className="toy-card-title-wrapper">
                         <div className="toy-card-cover" style={{
-                            backgroundImage: `url(/toys/${toy.slug}/${toy.icon})`
+                            backgroundImage: `url(${toy.icon})`
                         }}></div>
                         <h2 className="toy-card-title">{toy.title}</h2>
                     </div>

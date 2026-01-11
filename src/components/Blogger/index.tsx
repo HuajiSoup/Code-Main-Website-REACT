@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo } from "react";
 import "./index.scss";
 
 import { AnimatePresence } from "motion/react";

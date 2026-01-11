@@ -2,7 +2,35 @@ import React, { memo, useEffect, useRef, useState } from "react";
 
 import SearchBar, { SearchBarHandle } from "../SearchBar";
 import BlogCard, { sectionColor } from "./BlogCard";
-import { BlogInfo, postToBlogInfo } from "src/utils/blog";
+
+import { storageBlogsUrl } from "src/constants/storage";
+
+type BlogInfo = {
+    title: string | null;
+    blogID: string | null;
+    emoji: string | null;
+    cover: string | null;
+    desc: string | null;
+    section: string;
+    tags: string[];
+    lastEdit: string | null;
+}
+
+// AliyunOSS
+const metaToBlogInfo = (meta: any): BlogInfo => {
+    const date = new Date(Number(meta.lastEdit ?? 0));
+
+    return {
+        title: meta.title,
+        blogID: meta.blogID,
+        emoji: meta.emoji,
+        cover: `${storageBlogsUrl}/blog-${meta.blogID}/${meta.cover}`,
+        desc: meta.desc,
+        section: meta.section,
+        tags: meta.tags,
+        lastEdit: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`,
+    }
+}
 
 const BlogLister: React.FC = memo(() => {
     const [blogs, setBlogs] = useState<BlogInfo[]>([]);
@@ -24,7 +52,7 @@ const BlogLister: React.FC = memo(() => {
             try {
                 const res = await fetch("/api/bloglist");
                 const metadatas: any[] = await res.json();
-                const blogs = metadatas.map(postToBlogInfo);
+                const blogs = metadatas.map(metaToBlogInfo);
                 setBlogs(blogs);
                 setShowBlogs(blogs);
             } catch (err) {
@@ -140,4 +168,6 @@ const BlogLister: React.FC = memo(() => {
     </>);
 })
 
+export type { BlogInfo };
+export { metaToBlogInfo };
 export default BlogLister;
