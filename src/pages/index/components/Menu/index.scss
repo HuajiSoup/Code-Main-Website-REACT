@@ -179,10 +179,13 @@
         left: 0;
         bottom: 0;
         background: radial-gradient(
-            ellipse 120vw 60vw
-            at 50% calc(100vh + 50vw),
-            #fcf0b3 0%, #f6bc6a 95%, #eca555 95%, #eca555 100%, 
-            rgba(#ffcc66, 0.3) 100%, transparent 120%
+            ellipse 120vw 60vw at 50% calc(100vh + 50vw),
+            #fcf0b3 0%,
+            #f6bc6a 95%,
+            #eca555 95%,
+            #eca555 100%, 
+            rgba(#ffcc66, 0.3) 100%,
+            transparent 120%
         ); // visible content height: 22vw
         transform-origin: center 0px;
         animation: sun-appear 1.75s 1.25s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
