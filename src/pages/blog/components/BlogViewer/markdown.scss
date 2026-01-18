@@ -1,0 +1,92 @@
+@mixin markdown {
+    line-height: 1.5;
+
+    h1, h2, h3 {
+        line-height: 2;
+    }
+
+    a {
+        color: cyan;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    hr {
+        margin: 10px 0;
+    }
+
+    img {
+        display: block;
+        margin: 8px auto;
+        max-height: 50vh;
+        object-fit: scale-down;
+    }
+
+    code {
+        background-color: #22252a;
+        padding: 0 5px;
+        border-radius: 5px;
+        margin: 0 2px;
+    }
+
+    pre {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 15px 10px;
+        margin: 5px 0;
+        background-color: #22252a;
+        border-radius: 5px;
+        overflow: auto;
+
+        p.code-lang-tag {
+            width: max-content;
+            line-height: 1.15;
+            padding: 5px;
+            border-radius: 3px;
+            color: #fa0;
+            border: 1px #fa0 solid;
+
+            &::before {
+                content: "";
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                margin: 0 5px;
+                background-color: #fa0;
+                vertical-align: baseline;
+                mask: url("../../../../assets/icon/code-tag.svg") center / cover no-repeat;
+            }
+        }
+
+        code {
+            margin: 0;
+            padding: 0;
+            font-size: 0.9em;
+            line-height: 0.7;
+            border-radius: 0;
+            width: 100%;
+        }
+    }
+
+    table {
+        margin: 5px 0;
+        border-collapse: collapse;
+        tbody tr:nth-child(odd) {
+            background-color: rgba(#ffffff, 0.2);
+        }
+        td, th {
+            padding: 5px;
+        }
+    }
+    table, td, th {
+        border: 1px aliceblue solid;
+    }
+
+    blockquote {
+        margin: 5px 0;
+        padding: 15px;
+        background-color: rgba(#fa0, 0.2);
+        border-left: 5px #fa0 solid;
+    }
+}

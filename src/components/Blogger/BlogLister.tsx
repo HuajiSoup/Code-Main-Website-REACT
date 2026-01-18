@@ -14,21 +14,25 @@ type BlogInfo = {
     section: string;
     tags: string[];
     lastEdit: string | null;
+    completed: boolean;
 }
 
 // AliyunOSS
 const metaToBlogInfo = (meta: any): BlogInfo => {
-    const date = new Date(Number(meta.lastEdit ?? 0));
+    
+    const date = new Date(Number(meta?.lastEdit ?? 0));
+    console.log(date);
 
     return {
-        title: meta.title,
-        blogID: meta.blogID,
-        emoji: meta.emoji,
-        cover: `${storageBlogsUrl}/blog-${meta.blogID}/${meta.cover}`,
-        desc: meta.desc,
-        section: meta.section,
-        tags: meta.tags,
-        lastEdit: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDay()}`,
+        title: meta?.title,
+        blogID: meta?.blogID,
+        emoji: meta?.emoji,
+        cover: meta?.cover ? `${storageBlogsUrl}/blog-${meta.blogID}/${meta.cover}` : null,
+        desc: meta?.desc,
+        section: meta?.section,
+        tags: meta?.tags,
+        lastEdit: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
+        completed: meta?.completed ?? true,
     }
 }
 

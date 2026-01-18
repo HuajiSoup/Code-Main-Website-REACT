@@ -3,7 +3,7 @@ import "./index.scss";
 
 import { AnimatePresence } from "motion/react";
 
-import ArticleViewer from "../ArticleViewer";
+import BlogViewer from "../../pages/blog/components/BlogViewer";
 import AnimatedPanel from "./AnimatedPanel";
 import BlogLister from "./BlogLister";
 
@@ -19,7 +19,7 @@ const Blogger: React.FC<BloggerProps> = memo(({ blogID }) => {
                     <BlogLister />
                 </AnimatedPanel> }
                 { blogID && <AnimatedPanel className="blogger-article-root" key="article">
-                    <ArticleViewer blogID={blogID} />
+                    <BlogViewer blogID={blogID} />
                 </AnimatedPanel> }
             </AnimatePresence>
         </div>

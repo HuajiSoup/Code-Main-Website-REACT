@@ -19,8 +19,8 @@ const PageError: React.FC = () => {
                 这也许不是您的问题，此站点刚刚进行了一次较大的改动，具体为：
             </p>
             <ul>
-                <li><code>/download</code> 和 <code>/lab</code> 页面已经被移除或仍在重建中</li>
-                <li><code>/pages/things/[name].html</code> 已经被移动至 <code>/toys/[name]</code></li>
+                <li><code>/pages/download</code> 和 <code>/pages/lab</code> 页面已经被移除或仍在重建中</li>
+                <li><code>/pages/things/[name].html</code> 已经被移动至 <code>/toy/[name]</code></li>
             </ul>
         </main>
         <Footer />

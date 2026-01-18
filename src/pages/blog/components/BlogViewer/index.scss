@@ -1,3 +1,5 @@
+@import "markdown";
+
 .blogger-article-root {
     width: min(1100px, 95%);
     margin: 0px 10px;
@@ -17,26 +19,45 @@
         align-self: flex-start;
 
         cursor: pointer;
+
+        color: aliceblue;
+        text-decoration: none;
     }
 
     .blog-article-card {
         box-sizing: border-box;
         width: 100%;
         height: fit-content;
-        padding: 20px;
+        // padding: 20px;
         border-radius: 10px;
         background-color: #343841;
         box-shadow: 0px 0px 8px #1b1b1b;
+
+        .blog-article-status {
+            padding: 20px;
+            line-height: 1.5;
+        }
     
+        .blog-article-cover {
+            box-sizing: border-box;
+            width: 100%;
+            height: 200px;
+            border-radius: 10px 10px 0 0;
+            background: {
+                position: center;
+                size: cover;
+            }
+        }
         .blog-article-header {
+            padding: 5px 20px;
             h2.blog-article-title {
-                margin: 15px 0;
+                margin: 50px 0 15px 0;
                 font-size: 3em;
                 font-weight: 700;
                 text-align: center;
             }
             p.blog-article-desc {
-                margin: 10px 0;
+                margin: 15px 0 50px 0;
                 font-size: 1.5em;
                 text-align: center;
             }
@@ -46,20 +67,17 @@
                 font-style: italic;
             }
         }
-        hr {
-            margin: 10px 0;
+        & > hr {
+            margin: 10px 0px;
         }
         .blog-article-body {
-            line-height: 1.5;
+            @include markdown;
+            font-size: 1.1em;
+            padding: 20px;
 
             & > p:first-child::first-letter {
                 font-weight: bold;
                 font-size: 2.2em;
-            }
-    
-            img {
-                margin: 8px 0;
-                transition: height 200ms ease-in-out;
             }
         }
     }

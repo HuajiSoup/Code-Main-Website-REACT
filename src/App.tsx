@@ -7,6 +7,7 @@ import PageIndex from './pages/index';
 import PageBlog from './pages/blog';
 import PageToy from './pages/toy';
 import PageError from './pages/error';
+import ToyRedirect from './pages/toy/ToyRedirect';
 
 const pages = [
   {
@@ -25,6 +26,10 @@ const pages = [
     path: '/toy',
     element: <PageToy />
   },
+  {
+    path: '/toy/:slug',
+    element: <ToyRedirect />
+  }
 ];
 
 const App: React.FC = () => {

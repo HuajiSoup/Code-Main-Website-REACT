@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { BlogInfo } from "./BlogLister";
 
@@ -10,20 +10,20 @@ const sectionColor: {[key : string] : string} = {
 }
 
 const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
-    const navigate = useNavigate();
-    const nav = () => {
+    const scrollToTop = () => {
         window.scrollTo({top: 0, behavior: "smooth"});
-        navigate(`/blog/${blog.blogID}`);
     }
 
     return (<>
         <div className="blog-content-card">
             <div className="blog-card-text-wrapper">
                 <div className="blog-title-wrapper">
-                    <h2 className="blog-title" onClick={nav}>
-                        {blog.emoji ?? "🍟"}{blog.title ?? "无题"}
-                    </h2>
-                    <p className="blog-time">{blog.lastEdit}</p>
+                    <Link to={`/blog/${blog.blogID}`}>
+                        <h2 className="blog-title" onClick={scrollToTop}>
+                            {blog.emoji ?? "🍟"}{blog.title ?? "无题"}
+                        </h2>
+                    </Link>
+                    <p className="blog-time">{!blog.completed && <b>【连载中】</b>}{blog.lastEdit}</p>
                 </div>
 
                 <hr />
@@ -44,12 +44,13 @@ const BlogCard: React.FC<{blog: BlogInfo}> = ({ blog }) => {
                 </div>
             </div>
 
-            <div className="blog-card-cover-image"
-                onClick={nav}
+            <Link className="blog-card-cover-image"
+                to={`/blog/${blog.blogID}`}
+                onClick={scrollToTop}
                 style={ blog.cover ? { backgroundImage: 
                     `url('${blog.cover}')`
                 } : {} }
-            ></div>
+            ></Link>
         </div>
     </>);
 };

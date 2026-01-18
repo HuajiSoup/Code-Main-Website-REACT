@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import "./index.scss";
 
 import SearchBar from "../SearchBar";
@@ -22,7 +22,7 @@ const metaToToyInfo = (meta: any): ToyInfo => {
     });
 }
 
-const Toyer: React.FC = () => {
+const Toyer: React.FC = memo(() => {
     const [toys, setToys] = useState<ToyInfo[]>([]);
     const [showToys, setShowToys] = useState<ToyInfo[]>([]);
 
@@ -91,7 +91,7 @@ const Toyer: React.FC = () => {
             </div>
         </div>
     </>);
-}
+})
 
 export default Toyer;
 export type { ToyInfo };
