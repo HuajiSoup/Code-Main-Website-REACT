@@ -21,6 +21,22 @@
         margin: 8px auto;
         max-height: 50vh;
         object-fit: scale-down;
+        cursor: pointer;
+    }
+    .image-viewer {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(black, 0.2);
+
+        img {
+            max-height: 100vh;
+            max-width: 100vw;
+            object-fit: contain;
+            cursor: pointer;
+        }
     }
 
     code {
@@ -33,19 +49,22 @@
     pre {
         box-sizing: border-box;
         width: 100%;
-        padding: 15px 10px;
+        line-height: 1.4;
         margin: 5px 0;
-        background-color: #22252a;
+        color: #b8bfcd;
+        background-color: #282c34;
         border-radius: 5px;
-        overflow: auto;
 
         p.code-lang-tag {
+            box-sizing: border-box;
             width: max-content;
             line-height: 1.15;
-            padding: 5px;
-            border-radius: 3px;
-            color: #fa0;
-            border: 1px #fa0 solid;
+            width: 100%;
+            padding: 10px 15px;
+            color: aliceblue;
+            background: black;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
 
             &::before {
                 content: "";
@@ -55,18 +74,34 @@
                 margin: 0 5px;
                 background-color: #fa0;
                 vertical-align: baseline;
-                mask: url("../../../../assets/icon/code-tag.svg") center / cover no-repeat;
+                mask: url("../../assets/icon/code-tag.svg") center / cover no-repeat;
             }
         }
 
-        code {
-            margin: 0;
-            padding: 0;
+        .code-body {
+            display: flex;
+            flex-direction: row;
+            padding: 10px 15px;
             font-size: 0.9em;
-            line-height: 0.7;
-            border-radius: 0;
-            width: 100%;
+            line-height: 1.4;
+            .code-body-line {
+                width: max-content;
+                padding: 0 20px 0 10px;
+                text-align: end;
+                color: #4b5060;
+            }
+            code {
+                display: inline-block;
+                box-sizing: border-box;
+                height: max-content;
+                margin: 0;
+                padding: 0;
+                border-radius: 0;
+                background-color: transparent;
+                overflow: auto;
+            }
         }
+
     }
 
     table {

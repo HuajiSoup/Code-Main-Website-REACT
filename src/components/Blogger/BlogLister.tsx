@@ -19,9 +19,7 @@ type BlogInfo = {
 
 // AliyunOSS
 const metaToBlogInfo = (meta: any): BlogInfo => {
-    
     const date = new Date(Number(meta?.lastEdit ?? 0));
-    console.log(date);
 
     return {
         title: meta?.title,

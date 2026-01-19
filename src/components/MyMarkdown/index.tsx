@@ -1,9 +1,11 @@
 import React, { memo } from "react";
+import "katex/dist/katex.min.css";
+
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
-import "katex/dist/katex.min.css";
+import CodeShower from "./CodeShower";
 
 type MyMarkdownProps = {
     children: string;
@@ -18,10 +20,7 @@ const MyMarkdown: React.FC<MyMarkdownProps> = memo(({ children }) => {
                 const isBlock = !!className;
                 if (isBlock) {
                     const lang = className.split("-")[1];
-                    return (<>
-                        <p className="code-lang-tag">{lang}</p>
-                        <code>{props.children}</code>
-                    </>);
+                    return <CodeShower lang={lang}>{props.children}</CodeShower>
                 }
 
                 return (<code>{props.children}</code>);
