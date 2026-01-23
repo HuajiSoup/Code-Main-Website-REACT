@@ -49,20 +49,23 @@ const Header: React.FC = memo(() => {
                 ></div>
             </div>
             
-            <div className={menuOpen ? "navi-menu open" : "navi-menu closed"} ref={menuRef}>
-                <div className="navi-menu-wrapper">
-                    <div className="navi-menu-exit" onClick={toggle}>← 返回</div>
+            <div className={menuOpen ? "navi-menu open" : "navi-menu closed"}>
+                <div className="navi-menu-sidebar" ref={menuRef}>
+                    <div className="navi-menu-sidebar-wrapper">
+                        <div className="navi-menu-sidebar-exit" onClick={toggle}>← 返回</div>
 
-                    <Huajireka />
+                        <Huajireka />
 
-                    {firstOpen && <div className="portals-wrapper">
-                        {mainPages.map((page, index) => (
-                            <PortalBtn key={index} {...page} style={{
-                                animationDelay: `${index * 40}ms`,
-                            }} />
-                        ))}
-                    </div>}
+                        {firstOpen && <div className="portals-wrapper">
+                            {mainPages.map((page, index) => (
+                                <PortalBtn key={index} {...page} style={{
+                                    animationDelay: `${index * 40}ms`,
+                                }} />
+                            ))}
+                        </div>}
+                    </div>
                 </div>
+                <div className="navi-menu-backdrop" onClick={toggle}></div>
             </div>
         </header>
     );

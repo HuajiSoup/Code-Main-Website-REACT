@@ -34,6 +34,14 @@ const metaToBlogInfo = (meta: any): BlogInfo => {
     }
 }
 
+const extractTags = (blogs: BlogInfo[]): string[] => {
+    let tags: Set<string> = new Set();
+    for (const blog of blogs) {
+        for (const tag of blog.tags) tags.add(tag);
+    }
+    return Array.from(tags);
+}
+
 const BlogLister: React.FC = memo(() => {
     const [blogs, setBlogs] = useState<BlogInfo[]>([]);
     const [showBlogs, setShowBlogs] = useState<BlogInfo[]>([]);
@@ -145,7 +153,7 @@ const BlogLister: React.FC = memo(() => {
                     <p className="menu-title">🏷️标签</p>
                     <hr />
                     <div className="menu-tags-list">
-                        { ([] as string[]).concat( ...blogs.map(blog => blog.tags) ).map((tag, index) => (
+                        { extractTags(showBlogs).map((tag, index) => (
                             <div className="menu-tag-btn" key={index}
                                 onClick={() => searchAdd(tag)}
                             ># {tag}</div>

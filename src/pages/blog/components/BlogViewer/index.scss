@@ -9,6 +9,8 @@
     color: aliceblue;
 
     .blog-article-exit {
+        position: sticky;
+        top: 70px;
         width: max-content;
         margin-bottom: 10px;
         font-size: 1em;

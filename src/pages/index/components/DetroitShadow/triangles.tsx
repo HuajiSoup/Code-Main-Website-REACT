@@ -1,5 +1,4 @@
-import { clamp } from "motion";
-import { rand } from "src/utils/math";
+import { rand, clamp } from "src/utils/math";
 
 type Ctx2D = CanvasRenderingContext2D;
 type Canva = HTMLCanvasElement;
