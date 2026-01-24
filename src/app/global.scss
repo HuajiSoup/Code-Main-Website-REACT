@@ -1,0 +1,22 @@
+:root {
+    font-size: min(16.5px, 4vw, 4vh);
+}
+
+* {
+    margin: 0;
+}
+
+::selection {
+    background-color: rgba(128, 128, 128, 0.60);
+}
+
+html {
+    scroll-snap-type: y mandatory;
+    
+    body {
+        width: 100vw;
+        background-color: #0a0a0a;
+        overflow: hidden auto;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+}

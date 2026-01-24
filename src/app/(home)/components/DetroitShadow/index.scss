@@ -1,0 +1,17 @@
+.detroit-wrapper {
+    position: sticky;
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+
+    canvas.detroit {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: +2;
+    }
+}
