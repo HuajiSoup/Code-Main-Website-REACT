@@ -1,5 +1,6 @@
 import React from "react";
-import { motion, Variants } from "motion/react";
+import { Variants } from "motion/react";
+import * as motion from "motion/react-m";
 
 export type AnimatedPanelProps = {
     className?: string;

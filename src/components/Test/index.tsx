@@ -1,6 +1,7 @@
 "use client"
 
-import { motion, useScroll } from "motion/react"
+import { useScroll } from "motion/react";
+import * as motion from "motion/react-m";
 
 export default function ScrollLinked() {
     const { scrollYProgress } = useScroll();

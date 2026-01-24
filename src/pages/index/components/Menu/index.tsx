@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { motion } from "motion/react";
+import * as motion from "motion/react-m";
 
 import "./index.scss";
 

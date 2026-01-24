@@ -1,5 +1,6 @@
 import React, { JSX } from "react";
-import { motion, useTransform } from "motion/react";
+import * as motion from "motion/react-m";
+import { useTransform } from "motion/react";
 
 import { useScrollValues } from "../SectionList";
 

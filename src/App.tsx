@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.scss';
 
-import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { domAnimation, LazyMotion } from 'motion/react';
 
 import PageIndex from './pages/index';
 import PageBlog from './pages/blog';
@@ -34,14 +35,16 @@ const pages = [
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Routes>
-        {pages.map(obj => 
-          <Route path={obj.path} element={obj.element} />
-        )}
-        <Route path='*' element={<PageError />} />
-      </Routes>
-    </Router>
+    <LazyMotion features={domAnimation}>
+      <Router>
+        <Routes>
+          {pages.map(obj =>
+            <Route path={obj.path} element={obj.element} />
+          )}
+          <Route path='*' element={<PageError />} />
+        </Routes>
+      </Router>
+    </LazyMotion>
   );
 }
 
