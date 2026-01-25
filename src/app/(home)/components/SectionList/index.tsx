@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { createContext, useContext, useRef } from "react";
 import { MotionValue, useScroll } from "motion/react";

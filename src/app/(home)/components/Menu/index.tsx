@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useRef, useState } from "react";
 import * as motion from "motion/react-m";
@@ -46,11 +46,13 @@ const planets: PlanetInfo[] = [
     },
     {
         title: "博客",
-        desc: (<p>
-            <b>稽之宇宙总图书馆！</b><br />
-            阅读散落的滑稽先辈的文字，触摸古老的智慧。<br />
-            经历████个春秋，这些文字虽古老，在今天细细品味却仍饶有价值。
-        </p>),
+        desc: (
+            <p>
+                <b>稽之宇宙总图书馆！</b><br />
+                阅读散落的滑稽先辈的文字，触摸古老的智慧。<br />
+                经历████个春秋，这些文字虽古老，在今天细细品味却仍饶有价值。
+            </p>
+        ),
         color: "#ffaa00",
         icon: svgPaper,
         href: "/blog",
@@ -62,11 +64,13 @@ const planets: PlanetInfo[] = [
     },
     {
         title: "文物",
-        desc: (<p>
-            <b>稽之宇宙出土文物陈列馆！</b><br />
-            这里陈列着从滑稽文明的遗址中出土的文物，经过悉心修复现已向公众开放。<br />
-            这些遗物记录着一个文明的辉煌时刻，触摸它们、感受他们，也是一种别样的美感。
-        </p>),
+        desc: (
+            <p>
+                <b>稽之宇宙出土文物陈列馆！</b><br />
+                这里陈列着从滑稽文明的遗址中出土的文物，经过悉心修复现已向公众开放。<br />
+                这些遗物记录着一个文明的辉煌时刻，触摸它们、感受他们，也是一种别样的美感。
+            </p>
+        ),
         color: "#ee82ee",
         icon: svgHammer,
         href: "/toy",
