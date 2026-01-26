@@ -1,8 +1,6 @@
 import React from "react";
-import "./index.scss";
 
 import { Metadata } from "next";
-import Banner from "../../../components/Banner";
 import BlogViewer from "./components/BlogViewer";
 import fetchBlogData from "./components/fetcher";
 import { BlogMeta, metaToBlogMeta } from "../(list)/page";
@@ -29,14 +27,7 @@ const PageBlog: React.FC<PageBlogProps> = async ({ params }) => {
     const { id } = await params;
     const data: BlogData = await getBlogData(id);
 
-    return (<>
-        <main id="blog-main">
-            <Banner><b>稽之博客</b></Banner>
-            <div className="content-wrapper">
-                <BlogViewer data={data} />
-            </div>
-        </main>
-    </>);
+    return <BlogViewer data={data} />;
 };
 
 export type { BlogData };

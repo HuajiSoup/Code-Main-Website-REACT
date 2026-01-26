@@ -1,3 +1,21 @@
+@use "../../../layout.scss" as layout;
+
+@mixin blog-tag {
+    display: inline-block;
+    margin: 5px 3px;
+    padding: 6px 8px;
+    border-radius: 8px;
+    background-color: transparent;
+    font-size: 0.8em;
+    border: 1px gray solid;
+    cursor: pointer;
+    transition: background-color 75ms linear;
+
+    &:hover {
+        background-color: rgba($color: #ffffff, $alpha: 0.2);
+    }
+}
+
 .blogger-lister-root {
     width: 100%;
     height: 100%;
@@ -6,38 +24,6 @@
     flex-direction: row;
     justify-content: center;
     position: relative;
-
-    @mixin blog-card {
-        width: 100%;
-        height: 180px;
-        padding: 15px 20px;
-        margin: 10px 0;
-        box-sizing: border-box;
-        background-color: #343841;
-        border-radius: 15px;
-        box-shadow: 0px 2px 6px #1b1b1b;
-
-        a {
-            color: aliceblue;
-            text-decoration: none;
-        }
-    }
-
-    @mixin blog-tag {
-        display: inline-block;
-        margin: 5px 3px;
-        padding: 6px 8px;
-        border-radius: 8px;
-        background-color: transparent;
-        font-size: 0.8em;
-        border: 1px gray solid;
-        cursor: pointer;
-        transition: background-color 75ms linear;
-
-        &:hover {
-            background-color: rgba($color: #ffffff, $alpha: 0.2);
-        }
-    }
 
     .blogs-list {
         width: min(1000px, 90%);
@@ -48,7 +34,7 @@
         align-items: center;
 
         .blog-status-card {
-            @include blog-card;
+            @include layout.blog-card;
             height: max-content;
             font-weight: bold;
 
@@ -63,7 +49,7 @@
         }
 
         .blog-content-card {
-            @include blog-card;
+            @include layout.blog-card;
             padding: 0;
             display: flex;
             flex-direction: row;
@@ -184,7 +170,7 @@
         }
 
         .menu-profile-wrapper {
-            @include blog-card;
+            @include layout.blog-card;
             padding: 15px;
             height: fit-content;
 
@@ -214,7 +200,7 @@
             }
     
             .menu-sections-wrapper {
-                @include blog-card;
+                @include layout.blog-card;
                 height: fit-content;
                 hr { margin: 10px 0; }
 
@@ -234,7 +220,7 @@
             }
 
             .menu-tags-wrapper {
-                @include blog-card;
+                @include layout.blog-card;
                 height: fit-content;
                 hr { margin: 10px 0; }
                 

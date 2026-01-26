@@ -1,7 +1,5 @@
 import React from "react";
-import "./index.scss";
 
-import Banner from "../../../components/Banner";
 import { Metadata } from "next";
 import { storageBlogsUrl } from "@/constants/storage";
 import fetchMetadatas from "./components/fetcher";
@@ -62,14 +60,7 @@ const getBlogList = async () => {
 const PageBlogList: React.FC = async () => {
     const blogs = await getBlogList();
 
-    return (<>
-        <main id="blog-main">
-            <Banner><b>稽之博客</b></Banner>
-            <div className="content-wrapper">
-                <BlogLister blogs={blogs} />
-            </div>
-        </main>
-    </>);
+    return <BlogLister blogs={blogs} />;
 };
 
 export { metaToBlogMeta };

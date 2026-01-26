@@ -2,45 +2,42 @@ import React from "react";
 import { Variants } from "motion/react";
 import * as motion from "motion/react-m";
 
-export type AnimatedPanelProps = {
-    className?: string;
-    children?: React.ReactNode;
-};
+export type AnimatedPanelProps = React.ComponentProps<typeof motion.div>;
 
 const defaultAnimation: Variants = {
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            ease: "easeOut",
+            ease: "circOut",
             duration: 0.25,
         }
     },
     hidden: {
         opacity: 0,
-        y: 150,
+        y: 300,
         transition: {
-            ease: "easeOut",
+            ease: "circOut",
             duration: 0.25,
         }
     },
 };
 
-const AnimatedPanel: React.FC<AnimatedPanelProps> = ({
-    className = "",
-    children = <></>,
+const AnimatedDiv: React.FC<AnimatedPanelProps> = ({
+    children,
+    ...props
 }) => {
     return (
         <motion.div
-            className={className}
             variants={defaultAnimation}
             initial="hidden"
             animate="visible"
             exit="hidden"
+            {...props}
         >
             {children}
         </motion.div>
     );
 };
 
-export default AnimatedPanel;
+export default AnimatedDiv;

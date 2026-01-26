@@ -70,12 +70,14 @@
             animation: planet-hoverable 3s both;
 
             .planet-ball-wrapper {
+                position: relative;
                 width: 8vw;
                 height: 8vw;
                 flex-shrink: 0;
                 border-radius: 100%;
                 background-color: #ffaa00;
                 box-shadow: 0px 0px 15px #ffaa00;
+                z-index: +2;
                 cursor: pointer;
 
                 .planet-ball {
@@ -84,7 +86,6 @@
                     margin: 10%;
                     object-fit: contain;
                     transform: translateZ(10vw);
-                    z-index: +2;
                 }
             }
 
@@ -302,7 +303,7 @@
                 align-items: start;
                 &.left, &.right { flex-direction: row; }
 
-                .planet-ball {
+                .planet-ball-wrapper {
                     width: 100px;
                     height: 100px;
                 }

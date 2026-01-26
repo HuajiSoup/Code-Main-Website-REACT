@@ -1,7 +1,7 @@
 "use client";
 
-import Banner from "@/components/Banner";
-import Error from "next/error";
+import "./layout.scss";
+
 import { useEffect } from "react";
 
 const ErrorBlogList = ({
@@ -16,16 +16,16 @@ const ErrorBlogList = ({
     }, [error]);
 
     return (<>
-        <main id="blog-main">
-            <Banner><b>稽之博客</b></Banner>
-            <div className="content-wrapper">
-                <div className="blogger-lister-root">
-                    <div className="blogs-list">
-                        <div className="blog-status-card error">🚫文章列表加载失败！{error.digest}</div>
-                    </div>
-                </div>
+        <div className="blogger-error-root">
+            <div className="blog-status-card error">
+                <p>
+                    🚫博客系统加载失败！<br />
+                    🚫Error.message: {error.message} <br />
+                    🚫Error.digest: {error.digest} <br />
+                </p>
+                <button onClick={reset}>点击重试</button>
             </div>
-        </main>
+        </div>
     </>);
 }
 

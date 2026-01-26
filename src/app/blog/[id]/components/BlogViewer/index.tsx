@@ -5,6 +5,7 @@ import "./index.scss";
 
 import Link from "next/link";
 import MyMarkdown from "@/components/MyMarkdown";
+import AnimatedDiv from "@/components/AnimatedDiv";
 import { BlogData } from "../../page";
 
 import { storageBlogsUrl } from "@/constants/storage";
@@ -25,7 +26,7 @@ const BlogViewer: React.FC<ArticleViewerProps> = memo(({ data }) => {
     }
 
     return (<>
-        <div className="blogger-article-root">
+        <AnimatedDiv className="blogger-article-root">
             <Link href="/blog" className="blog-article-exit" onClick={ScrollToTop}>返回</Link>
             <div className="blog-article-card">
                 { meta.cover && <div className="blog-article-cover" style={{
@@ -45,7 +46,7 @@ const BlogViewer: React.FC<ArticleViewerProps> = memo(({ data }) => {
                 </div>
                 <hr />
             </div>
-        </div>
+        </AnimatedDiv>
     </>);
 });
 BlogViewer.displayName = "BlogViewer";

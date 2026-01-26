@@ -5,6 +5,7 @@ import "./index.scss";
 
 import SearchBar, { SearchBarHandle } from "@/components/SearchBar";
 import BlogCard, { sectionColor } from "./BlogCard";
+import AnimatedDiv from "@/components/AnimatedDiv";
 
 import { BlogMeta } from "../../page";
 
@@ -51,7 +52,7 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
     }, [search, blogs]);
 
     return (<>
-    <div className="blogger-lister-root">        
+    <AnimatedDiv className="blogger-lister-root">
         <div className="blog-menu-wrapper">
             <div className="menu-profile-wrapper">
                 <div className="menu-profile-photo"></div>
@@ -92,7 +93,7 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
         <div className="blogs-list">
             { showBlogs.map((blog, index) => <BlogCard key={index} blog={blog} />) }
         </div>
-    </div>
+    </AnimatedDiv>
     </>);
 });
 BlogLister.displayName = "BlogLister";

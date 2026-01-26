@@ -1,4 +1,4 @@
-@import "@/components/MyMarkdown/markdown.scss";
+@use "@/components/MyMarkdown/markdown" as *;
 
 .blogger-article-root {
     width: min(1100px, 95%);
