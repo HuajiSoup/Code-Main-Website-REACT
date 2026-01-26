@@ -3,7 +3,7 @@ import React from "react";
 import { Metadata } from "next";
 import BlogViewer from "./components/BlogViewer";
 import fetchBlogData from "./components/fetcher";
-import { BlogMeta, metaToBlogMeta } from "../(list)/page";
+import { BlogMeta, rawToBlogMeta } from "../(list)/page";
 
 type PageBlogProps = {
     params: Promise<{
@@ -18,7 +18,7 @@ type BlogData = {
 
 const getBlogData = async (id: string) => {
     const data = await fetchBlogData(id);
-    const metadata = metaToBlogMeta(data.metadata);
+    const metadata = rawToBlogMeta(data.metadata);
     const content = data.content;
     return { metadata, content };
 }

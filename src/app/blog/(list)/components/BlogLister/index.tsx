@@ -37,10 +37,9 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
             return;
         }
         
-        const terms = search.split(" ");
+        const terms = search.split(" ").filter(term => term);
         setShowBlogs(blogs.filter(blog => {
             for (const term of terms) {
-                if (!term) continue;
                 if (blog.title?.indexOf(term) !== -1
                     || blog.desc?.indexOf(term) !== -1
                     || blog.section === term
@@ -69,7 +68,8 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
                     <hr />
                     <div className="menu-sections-list">
                         { Object.keys(sectionColor).map((section, index) => (
-                            <div className="menu-section-btn" key={index}
+                            <div className="menu-section-btn"
+                                key={index}
                                 onClick={() => searchAdd(section)}
                             >{section}</div>
                         )) }
@@ -80,8 +80,9 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
                     <p className="menu-title">🏷️标签</p>
                     <hr />
                     <div className="menu-tags-list">
-                        { extractTags(showBlogs).map((tag, index) => (
-                            <div className="menu-tag-btn" key={index}
+                        { extractTags(blogs).map((tag, index) => (
+                            <div className="menu-tag-btn"
+                                key={index}
                                 onClick={() => searchAdd(tag)}
                             ># {tag}</div>
                         )) }
