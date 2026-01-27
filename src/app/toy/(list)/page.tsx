@@ -8,6 +8,7 @@ import { storageToysUrl } from "@/constants/storage";
 type ToyData = {
     title: string;
     desc: string;
+    slug: string;
     url: string;
     icon?: string;
 }
@@ -23,6 +24,7 @@ const rawToToyData = (meta: rawToyData): ToyData => {
     return {
         title: meta.title ?? "[无题]",
         desc: meta.desc ?? "",
+        slug: meta.slug,
         url: `${storageToysUrl}/${meta.slug}`,
         icon: meta.icon ? `${storageToysUrl}/${meta.slug}/${meta.icon}` : undefined,
     }

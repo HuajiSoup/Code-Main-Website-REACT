@@ -2,7 +2,9 @@ import React from "react";
 import { Variants } from "motion/react";
 import * as motion from "motion/react-m";
 
-export type AnimatedPanelProps = React.ComponentProps<typeof motion.div>;
+export type AnimatedPanelProps = {
+    animateVariants?: Variants;
+} & React.ComponentProps<typeof motion.div>;
 
 const defaultAnimation: Variants = {
     visible: {
@@ -24,12 +26,13 @@ const defaultAnimation: Variants = {
 };
 
 const AnimatedDiv: React.FC<AnimatedPanelProps> = ({
+    variants = defaultAnimation,
     children,
     ...props
 }) => {
     return (
         <motion.div
-            variants={defaultAnimation}
+            variants={variants}
             initial="hidden"
             animate="visible"
             exit="hidden"

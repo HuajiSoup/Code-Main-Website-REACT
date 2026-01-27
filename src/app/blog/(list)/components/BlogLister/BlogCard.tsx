@@ -2,6 +2,8 @@ import React from "react";
 
 import { BlogMeta } from "../../page";
 import Link from "next/link";
+import { Variants } from "motion";
+import AnimatedDiv from "@/components/AnimatedDiv";
 
 const sectionColor: {[key : string] : string} = {
     "学术": "#ffaa00",
@@ -9,13 +11,32 @@ const sectionColor: {[key : string] : string} = {
     "生活": "#0c9300",
 }
 
+const animationBlogCard: Variants = {
+    visible: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            ease: "circOut",
+            duration: 0.25,
+        }
+    },
+    hidden: {
+        opacity: 0,
+        x: 150,
+        transition: {
+            ease: "circOut",
+            duration: 0.25,
+        }
+    },
+};
+
 const BlogCard: React.FC<{blog: BlogMeta}> = ({ blog }) => {
     const scrollToTop = () => {
         window.scrollTo({top: 0, behavior: "smooth"});
     }
 
     return (<>
-        <div className="blog-content-card">
+        <AnimatedDiv className="blog-content-card" variants={animationBlogCard}>
             <div className="blog-card-text-wrapper">
                 <div className="blog-title-wrapper">
                     <Link href={`/blog/${blog.blogID}`}>
@@ -51,7 +72,7 @@ const BlogCard: React.FC<{blog: BlogMeta}> = ({ blog }) => {
                     `url('${blog.cover}')`
                 } : {} }
             ></Link>
-        </div>
+        </AnimatedDiv>
     </>);
 };
 

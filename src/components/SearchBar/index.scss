@@ -8,6 +8,13 @@ form.search-bar {
     padding: 0 10px;
     border-radius: 15px;
     border: 1px #ffffff solid;
+    cursor: pointer;
+
+    transition: border-color 150ms;
+
+    &:hover, &:focus {
+        border-color: #fa0;
+    }
 
     &::before {
         content: "";
@@ -26,6 +33,7 @@ form.search-bar {
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
+        cursor: pointer;
 
         flex-grow: 1;
         font-size: 1em;

@@ -2,11 +2,33 @@ import React from "react";
 
 import Link from "next/link";
 import { ToyData } from "../../page";
+import AnimatedDiv from "@/components/AnimatedDiv";
+
+import { Variants } from "motion/react";
+
+const animationToyCard: Variants = {
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            ease: "circOut",
+            duration: 0.25,
+        }
+    },
+    hidden: {
+        opacity: 0,
+        y: 100,
+        transition: {
+            ease: "circOut",
+            duration: 0.25,
+        }
+    },
+};
 
 const ToyCard: React.FC<{toy: ToyData}> = ({ toy }) => {
     return (<>
         <div className="toy-card-wrapper">
-            <div className="toy-card">
+            <AnimatedDiv className="toy-card" variants={animationToyCard}>
                 <Link href={toy.url} target="_blank" rel="noreferrer">
                     <div className="toy-card-title-wrapper">
                         <div className="toy-card-cover" style={{
@@ -21,7 +43,7 @@ const ToyCard: React.FC<{toy: ToyData}> = ({ toy }) => {
                 <div className="toy-card-desc">
                     <p>{toy.desc}</p>
                 </div>
-            </div>
+            </AnimatedDiv>
         </div>
     </>);
 }
