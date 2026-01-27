@@ -19,7 +19,7 @@ const ErrorBlogList = ({
         <div className="toyer-error-root">
             <div className="toy-status-card error">
                 <p>
-                    🚫玩具列表加载失败！<br />
+                    🚫玩具系统出现错误！<br />
                     🚫Error.message: {error.message} <br />
                     🚫Error.digest: {error.digest} <br />
                 </p>

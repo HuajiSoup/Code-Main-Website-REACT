@@ -19,7 +19,7 @@ const ErrorBlogList = ({
         <div className="blogger-error-root">
             <div className="blog-status-card error">
                 <p>
-                    🚫博客系统加载失败！<br />
+                    🚫博客系统出现错误！<br />
                     🚫Error.message: {error.message} <br />
                     🚫Error.digest: {error.digest} <br />
                 </p>
