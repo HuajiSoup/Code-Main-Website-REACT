@@ -7,7 +7,10 @@ export default async function fetchToyData(slug: string) {
         { next: { revalidate: 86400 } }
     );
 
-    if (!metaRes.ok) throw new Error(`Failed to fetch toy "${slug}"! Status: ${metaRes.status}`);
+    if (!metaRes.ok) {
+        return null;
+        // throw new Error(`Failed to fetch toy "${slug}"! Status: ${metaRes.status}`);
+    };
     const metadata: rawToyData = await metaRes.json();
     return metadata;
 }

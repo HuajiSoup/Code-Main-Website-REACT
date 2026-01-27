@@ -8,7 +8,10 @@ export default async function fetchBlogData(id: string) {
             { next: { revalidate: 86400 } }
         )
         .then(res => {
-            if (!res.ok) { throw new Error(`Failed to fetch metadata of blog "${id}"!\n Status: ${res.status}`); }
+            if (!res.ok) {
+                return null;
+                // throw new Error(`Failed to fetch metadata of blog "${id}"!\n Status: ${res.status}`);
+            }
             return res.json();
         }),
 
@@ -17,10 +20,13 @@ export default async function fetchBlogData(id: string) {
             { next: { revalidate: 86400 } }
         )
         .then(res => {
-            if (!res.ok) { throw new Error(`Failed to fetch content of blog "${id}"!\n Status: ${res.status}`); }
+            if (!res.ok) {
+                return null;
+                // throw new Error(`Failed to fetch content of blog "${id}"!\n Status: ${res.status}`);
+            }
             return res.text();
         })
     ]);
 
-    return { metadata, content };
+    return metadata && content ? { metadata, content } : null;
 }
