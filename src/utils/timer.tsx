@@ -6,8 +6,8 @@
  * @param wait interval time (ms)
  * @returns a debounced function
  */
-export function debounce(
-    callback: Function,
+export function debounce<F extends (...args: unknown[]) => unknown>(
+    callback: F,
     wait: number = 250,
 ) {
     let timeoutID: number | null = null;
@@ -25,8 +25,8 @@ export function debounce(
  * @param wait interval time (ms)
  * @returns a throttle function
  */
-export function throttle(
-    callback: Function,
+export function throttle<F extends (...args: unknown[]) => unknown>(
+    callback: F,
     wait: number = 250,
 ) {
     let timeoutID: number | null = null;

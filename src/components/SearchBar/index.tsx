@@ -1,7 +1,9 @@
-import React, { SetStateAction, useImperativeHandle, useRef } from "react";
+"use client";
+
+import React, { memo, SetStateAction, useEffect, useImperativeHandle, useRef } from "react";
 import "./index.scss";
 
-import { debounce } from "src/utils/timer";
+import { debounce } from "@/utils/timer";
 
 type SearchBarProps = {
     setTermCallback?: React.Dispatch<SetStateAction<string>>;
@@ -14,20 +16,31 @@ type SearchBarHandle = {
     setInput: (v: string) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = (props) => {
+const SearchBar: React.FC<SearchBarProps> = memo((props) => {
+    const {
+        setTermCallback,
+        changeInterval,
+        placeholder,
+        ref
+    } = props;
+
     const inputRef = useRef<HTMLInputElement | null>(null);
+    const updateTerm = useRef<() => void | null>(null);
 
     // prop back search term
-    const setTerm = props.setTermCallback;
-    const setTermDb = setTerm ? debounce(() => {
-        setTerm(inputRef.current?.value ?? "");
-    }, props.changeInterval ?? 500) : () => {};
+    useEffect(() => {
+        updateTerm.current = setTermCallback
+         ? debounce(() => {
+            setTermCallback(inputRef.current?.value ?? "");
+         }, changeInterval ?? 500)
+         : () => {};
+    }, [setTermCallback, changeInterval]);
 
     // edit search term
-    useImperativeHandle(props.ref ?? null, () => ({
+    useImperativeHandle(ref, () => ({
         setInput: (v: string) => {
             if (inputRef.current) inputRef.current.value = v;
-            setTerm?.(v);
+            setTermCallback?.(v);
         },
     }));
 
@@ -35,12 +48,13 @@ const SearchBar: React.FC<SearchBarProps> = (props) => {
         <form className="search-bar">
             <input type="text" name="search-bar"
                 ref={inputRef}
-                placeholder={props.placeholder ?? "搜索..."}
-                onInput={setTermDb}
+                onInput={() => {updateTerm.current?.()}}
+                placeholder={placeholder ?? "搜索..."}
             />
         </form>
     </>);
-};
+});
+SearchBar.displayName = "SearchBar";
 
 export type { SearchBarHandle };
 export default SearchBar;

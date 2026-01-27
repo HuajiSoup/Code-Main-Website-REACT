@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useLayoutEffect, useState } from "react";
 import { transform } from "motion";
 
 import { rand, randElem } from "../../utils/math";
@@ -47,11 +49,21 @@ type Scene = {
     sky: Sky;
 }
 
+const defaultScene: Scene = {
+    clouds: [],
+    trees: [],
+    plants: [],
+    sky: {
+        sunrise: -100,
+        color: "#87cefa",
+    }
+}
+
 const Banner: React.FC<PageTitleProps> = ({ children }) => {
     function spawnScene(): Scene {
-        let clouds: Cloud[] = [];
-        let trees: Tree[] = [];
-        let plants: Plant[] = [];
+        const clouds: Cloud[] = [];
+        const trees: Tree[] = [];
+        const plants: Plant[] = [];
     
         while (clouds.length < 5 || Math.random() < 0.3) {
             clouds.push({
@@ -83,7 +95,7 @@ const Banner: React.FC<PageTitleProps> = ({ children }) => {
         const progress = date.getHours() / 24 + date.getMinutes() / 1440;
         // const progress = Math.random();
         
-        let sky: Sky = {
+        const sky: Sky = {
             sunrise: transform(progress, 
                 [0, 0.5, 1],
                 [0, -100, 0],
@@ -97,7 +109,8 @@ const Banner: React.FC<PageTitleProps> = ({ children }) => {
         return { clouds, trees, plants, sky };
     }
 
-    const [scene, setScene] = useState<Scene>(spawnScene());
+    const [scene, setScene] = useState<Scene>(defaultScene);
+    useLayoutEffect(() => { setScene(spawnScene()) }, []);
 
     return (<>
         <div className="banner"

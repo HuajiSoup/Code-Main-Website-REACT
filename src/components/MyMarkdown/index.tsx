@@ -18,7 +18,7 @@ const MyMarkdown: React.FC<MyMarkdownProps> = memo(({ children }) => {
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeKatex, rehypePrism]}
         components={{
-            code: ({node, className, ...props}) => {
+            code: ({className, ...props}) => {
                 const isBlock = !!className;
                 if (isBlock) {
                     const hasLang = className.indexOf("language-");
@@ -33,6 +33,7 @@ const MyMarkdown: React.FC<MyMarkdownProps> = memo(({ children }) => {
             }
         }}
     >{children}</ReactMarkdown>
-})
+});
+MyMarkdown.displayName = "MyMarkdown";
 
 export default MyMarkdown;

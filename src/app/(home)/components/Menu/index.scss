@@ -1,0 +1,347 @@
+.index-menu-wrapper {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    scroll-snap-align: start;
+    background-color: #111122;
+    z-index: 1;
+    overflow: hidden;
+
+    a:link, a:visited, a:hover, a:active {
+        text-decoration: none;
+    }
+
+    .canvas-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+        
+        .canvas-star {
+            position: absolute;
+            left: -5vw;
+            top: -5vh;
+            width: 110vw;
+            height: 110vh;
+            transition: 
+                left 200ms ease-out,
+                top 200ms ease-out;
+            animation: canvas-appear 2s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
+        }
+    }
+
+    .menu-title {
+        margin-top: 70px;
+        text-align: center;
+        font-size: 4rem;
+        letter-spacing: 2vw;
+        color: aliceblue;
+
+        br { display: none; }
+    }
+
+    .menu-planets-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+
+        .planet {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            &.left {
+                flex-direction: row;
+                .planet-ball-wrapper {
+                    animation: planet-appear-left 1.5s 0.3s cubic-bezier(0.0, 0.0, 0.0, 1.0) both,
+                        ball-flash 2s ease-in-out infinite;
+                }
+            }
+            &.right {
+                flex-direction: row-reverse;
+                .planet-ball-wrapper {
+                    animation: planet-appear-right 1.5s 0.3s cubic-bezier(0.0, 0.0, 0.0, 1.0) both,
+                        ball-flash 2s ease-in-out infinite;
+                }
+            }
+            animation: planet-hoverable 3s both;
+
+            .planet-ball-wrapper {
+                position: relative;
+                width: 8vw;
+                height: 8vw;
+                flex-shrink: 0;
+                border-radius: 100%;
+                background-color: #ffaa00;
+                box-shadow: 0px 0px 15px #ffaa00;
+                z-index: +2;
+                cursor: pointer;
+
+                .planet-ball {
+                    width: 80%;
+                    height: 80%;
+                    margin: 10%;
+                    object-fit: contain;
+                    transform: translateZ(10vw);
+                }
+            }
+
+            .planet-text-wrapper-outer {
+                width: max-content;
+                height: 8vw;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                .planet-text-wrapper {
+                    width: 0vw; // 18vw
+                    height: max-content;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    color: #ffffff;
+                    overflow: hidden;
+                    z-index: +1;
+
+                    transition: width 150ms ease-out;
+    
+                    .planet-title {
+                        width: 18vw;
+                        height: 3.5vw;
+                        background:
+                            linear-gradient(+60deg,  rgba(#2985ff, 0.56) 85%, transparent 85%) no-repeat,
+                            linear-gradient(-120deg, rgba(#2985ff, 0.56) 85%, transparent 85%) no-repeat;
+                        background-position: -18vw 0vw, 18vw 0vw;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        outline: solid 10px aliceblue;
+                        outline-offset: -50px;
+
+                        transition: 
+                            background-position 250ms 300ms cubic-bezier(0.0, 0.5, 0.0, 1.0),
+                            outline-offset 300ms cubic-bezier(0.0, 0.0, 0.0, 1.0),
+                            outline-width 300ms cubic-bezier(0.0, 0.0, 0.0, 1.0);
+        
+                        h3 {
+                            width: 100%;
+                            line-height: 100%;
+                            font-size: 2rem;
+                            font-weight: lighter;
+                            text-align: center;
+                            letter-spacing: 20px;
+                            text-indent: 20px;
+                        }
+                    }
+                    .planet-desc {
+                        box-sizing: border-box;
+                        height: max-content;
+                        width: 18vw;
+                        max-height: 0; // 20vh
+                        padding: 0px 15px;
+                        margin: 5px 0px;
+                        font-size: 1.25rem;
+                        border-left: 5px solid #2985ff;
+                        background-color: rgba(#505050, 0.5);
+                        overflow: hidden auto;
+
+                        transition: max-height 750ms 400ms cubic-bezier(1.0, 0.0, 0.45, 1.0);
+
+                        p {
+                            margin: 15px 0px;
+                        }
+                    }
+                }
+            }
+
+            @media (min-width: 1000px) {
+                &:hover {
+                    .planet-text-wrapper-outer {
+                        margin: 0px 30px;
+                        .planet-text-wrapper {
+                            width: 18vw;
+                            .planet-title {
+                                background-position: 0vw 0vw, 0vw 0vw;
+                                outline-width: 1px;
+                                outline-offset: -1px;
+                            }
+                            .planet-desc {
+                                max-height: 20vh;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .huaji-sun {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        bottom: 0;
+        background: radial-gradient(
+            ellipse 120vw 60vw at 50% calc(100vh + 50vw),
+            #fcf0b3 0%,
+            #f6bc6a 95%,
+            #eca555 95%,
+            #eca555 100%, 
+            rgba(#ffcc66, 0.3) 100%,
+            transparent 120%
+        ); // visible content height: 22vw
+        transform-origin: center 0px;
+        animation: sun-appear 1.75s 1.25s cubic-bezier(0.0, 0.0, 0.0, 1.0) both;
+    }
+
+    @keyframes planet-hoverable {
+        0% {
+            pointer-events: none;
+        }
+        100% {
+            pointer-events: auto;
+        }
+    }
+
+    @keyframes planet-appear-left {
+        0% {
+            translate: -30vw;
+            scale: 2.5;
+            opacity: 0;
+        }
+        100% {
+            translate: 0;
+            scale: 1;
+            opacity: 1;
+        }
+    }
+    @keyframes planet-appear-right {
+        0% {
+            translate: 30vw;
+            scale: 2.5;
+            opacity: 0;
+        }
+        100% {
+            translate: 0;
+            scale: 1;
+            opacity: 1;
+        }
+    }
+    @keyframes sun-appear {
+        0% {
+            transform: translateY(25vw);
+        }
+        100% {
+            transform: none;
+        }
+    }
+    @keyframes canvas-appear {
+        0% {
+            scale: 3.6;
+            opacity: 0;
+        }
+        100% {
+            scale: 1;
+            opacity: 1;
+        }
+    }
+    @keyframes ball-flash {
+        0% {
+            filter: brightness(90%);
+        }
+        50% {
+            filter: brightness(120%);
+        }
+        100% {
+            filter: brightness(90%);
+        }
+    }
+}
+
+// phone
+@media (max-width: 1000px) or (max-height: 450px) {
+    .index-menu-wrapper {
+        width: 100%;
+        height: unset;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .menu-title {
+            font-size: 3.5rem;
+            br { display: inline-block; }
+        }
+
+        .menu-planets-wrapper {
+            box-sizing: border-box;
+            width: 90%;
+            height: max-content;
+            position: relative;
+            left: 0;
+            top: 0;
+            margin: 20px;
+            padding: 40px 10px;
+            background-color: rgba(#0c0c0c, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .planet {
+                position: relative;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100%;
+                height: max-content;
+                margin: 20px 0;
+                align-items: start;
+                &.left, &.right { flex-direction: row; }
+
+                .planet-ball-wrapper {
+                    width: 100px;
+                    height: 100px;
+                }
+                .planet-text-wrapper-outer {
+                    flex-grow: 1;
+                    height: max-content;
+                    .planet-text-wrapper {
+                        width: 100%;
+                        overflow: visible;
+                        animation: none;
+
+                        .planet-title {
+                            position: relative;
+                            left: -50px;
+                            box-sizing: border-box;
+                            width: 100%;
+                            padding-left: 50px;
+                            height: unset;
+                            border: none;
+                            outline: none;
+                            animation: none;
+                            background: linear-gradient(+60deg, #2985ff calc(10rem + 50px), transparent 0) no-repeat;
+                            h3 {
+                                text-align: start;
+                                font-weight: bold;
+                                line-height: 1.3;
+                            }
+                        }
+                        .planet-desc {
+                            height: unset;
+                            max-height: unset;
+                            width: 100%;
+                            margin: 0;
+                            animation: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

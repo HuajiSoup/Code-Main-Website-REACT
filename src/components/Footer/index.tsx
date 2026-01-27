@@ -4,17 +4,18 @@ import iconGithub from "../../assets/links/link-github.png";
 import iconBili   from "../../assets/links/link-bilibili.png";
 
 import "./index.scss";
+import { StaticImageData } from "next/image";
 
 type ContactLinkProps = {
     url: string;
-    icon: string;
+    icon: StaticImageData;
 }
 
 const ContactLink: React.FC<ContactLinkProps> = (props) => {
     return (
         <a href={props.url} target="_blank" rel="noopener noreferrer">
             <div className="contact-icon"
-                style={{background: `url(${props.icon}) center / cover no-repeat`}}></div>
+                style={{background: `url(${props.icon.src}) center / cover no-repeat`}}></div>
         </a>
     )
 };
