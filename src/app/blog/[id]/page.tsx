@@ -12,15 +12,15 @@ type PageBlogProps = {
 }
 
 type BlogData = {
-    metadata: BlogMeta;
+    meta: BlogMeta;
     content: string;
 }
 
 const getBlogData = async (id: string) => {
     const data = await fetchBlogData(id);
-    const metadata = rawToBlogMeta(data.metadata);
+    const meta = rawToBlogMeta(data.metadata);
     const content = data.content;
-    return { metadata, content };
+    return { meta, content };
 }
 
 const PageBlog: React.FC<PageBlogProps> = async ({ params }) => {
@@ -30,9 +30,19 @@ const PageBlog: React.FC<PageBlogProps> = async ({ params }) => {
     return <BlogViewer data={data} />;
 };
 
+export async function generateMetadata({ params }: PageBlogProps): Promise<Metadata> {
+    const { id } = await params;
+    const { meta }: BlogData = await getBlogData(id);
+
+    return {
+        title: `${meta.title} | 稽之博客`,
+        description: meta.desc,
+        openGraph: {
+            title: `${meta.title} | 稽之博客`,
+            description: meta.desc,
+        }
+    }
+}
+
 export type { BlogData };
 export default PageBlog;
-export const metadata: Metadata = {
-    title: "稽之博客 | Huaji Blogs",
-    description: "阅读散落的滑稽先辈的文字，触摸古老的智慧。经历████个春秋，这些文字虽古老，在今天细细品味却仍饶有价值。",
-}

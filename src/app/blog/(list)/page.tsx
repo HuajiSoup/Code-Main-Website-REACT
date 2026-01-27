@@ -70,4 +70,10 @@ export const metadata: Metadata = {
     title: "稽之博客 | Huaji Blogs",
     description: "阅读散落的滑稽先辈的文字，触摸古老的智慧。\
         经历████个春秋，这些文字虽古老，在今天细细品味却仍饶有价值。",
+    openGraph: {
+        title: "稽之博客 | Huaji Blogs",
+        description: "稽之宇宙博客站：\n\
+            阅读散落的滑稽先辈的文字，触摸古老的智慧。\
+            经历████个春秋，这些文字虽古老，在今天细细品味却仍饶有价值。",
+    }
 }

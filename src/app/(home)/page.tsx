@@ -121,5 +121,13 @@ export default PageIndex;
 
 export const metadata: Metadata = {
     title: "稽之宇宙 | Huaji Universe",
-    description: "这是一个由滑稽构建的宇宙！",
+    description: "Huaji Universe, RECREATED. \
+        滑稽，我们是专业的。\
+        伸颈，侧目，微笑，默叹，以为妙绝。稽之宇宙与您携手共创。",
+    openGraph: {
+        title: "之宇宙 | Huaji Universe",
+        description: "稽之宇宙官方网站：\
+            Huaji Universe, RECREATED. \
+            滑稽，我们是专业的。"
+    }
 }

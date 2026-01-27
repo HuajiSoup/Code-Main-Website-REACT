@@ -15,7 +15,7 @@ type ArticleViewerProps = {
 }
 
 const BlogViewer: React.FC<ArticleViewerProps> = memo(({ data }) => {
-    const meta = data.metadata;
+    const meta = data.meta;
     const md = data.content.replaceAll(
         /(!\[.*?\]\()(\.\/)(.*?\))/g,
         `$1${storageBlogsUrl}/blog-${meta.blogID}/$3`

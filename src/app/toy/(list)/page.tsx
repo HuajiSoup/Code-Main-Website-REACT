@@ -47,5 +47,11 @@ export default PageToyList;
 export const metadata: Metadata = {
     title: "稽之玩具 | Huaji Toys",
     description: "这里陈列着从滑稽文明的遗址中出土的文物，经过悉心修复现已向公众开放。\
-        这些遗物记录着一个文明的辉煌时刻，触摸它们、感受他们，也是一种别样的美感。"
+        这些遗物记录着一个文明的辉煌时刻，触摸它们、感受他们，也是一种别样的美感。",
+    openGraph: {
+        title: "稽之玩具 | Huaji Toys",
+        description: "稽之宇宙玩具页：\n\
+            这里陈列着从滑稽文明的遗址中出土的文物，经过悉心修复现已向公众开放。\
+            这些遗物记录着一个文明的辉煌时刻，触摸它们、感受他们，也是一种别样的美感。",
+    }
 }
