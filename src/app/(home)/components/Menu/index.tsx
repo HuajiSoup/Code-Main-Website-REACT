@@ -8,12 +8,10 @@ import "./index.scss";
 import PlanetBox from "./PlanetBox";
 import StarCanvas from "./StarCanvas";
 import { PageInfo } from "@/constants/pages";
-
-import svgHome from "@/assets/menu/icon-home.svg";
-import svgPaper from "@/assets/menu/icon-newspaper.svg";
-import svgHammer from "@/assets/menu/icon-hammer.svg";
-
 import CubeCursor from "./Cursor";
+
+import { Home, Newspaper, Hammer } from "lucide-react";
+
 
 type PlanetInfo = PageInfo & {
     desc: React.ReactNode;
@@ -34,9 +32,10 @@ const planets: PlanetInfo[] = [
                 原地tp——<br />
                 欢迎回来！这里是<b>稽之宇宙的中心</b>，<b>滑稽能量导航区</b>。<br />
                 祝您今天依旧保持滑稽，一览众稽小！
-            </p>),
+            </p>
+        ),
         color: "lime",
-        icon: svgHome,
+        icon: Home,
         href: "/",
         pos: {
             x: 0.2,
@@ -54,7 +53,7 @@ const planets: PlanetInfo[] = [
             </p>
         ),
         color: "#ffaa00",
-        icon: svgPaper,
+        icon: Newspaper,
         href: "/blog",
         pos: {
             x: 0.8,
@@ -72,7 +71,7 @@ const planets: PlanetInfo[] = [
             </p>
         ),
         color: "#ee82ee",
-        icon: svgHammer,
+        icon: Hammer,
         href: "/toy",
         pos: {
             x: 0.4,

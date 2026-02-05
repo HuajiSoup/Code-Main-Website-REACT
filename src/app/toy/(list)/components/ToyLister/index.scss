@@ -3,8 +3,8 @@
 .toyer-root {
     width: 100%;
     padding: 30px 0;
-    color: aliceblue;
-    background-color: #22252a;
+    color: $color-text-primary;
+    background-color: $color-bg-panel;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -24,7 +24,7 @@
             align-self: flex-start;
             margin: 5px;
             & form {
-                background-color: #343841;
+                background-color: $color-bg-card;
             }
         }
 
@@ -36,12 +36,12 @@
             font-weight: bold;
 
             &.loading {
-                background-color: #93cbff;
-                color: #005ba1;
+                background-color: $color-bg-info;
+                color: $color-text-info;
             }
             &.error {
-                background-color: #4b2f36;
-                color: #eeb3d2;
+                background-color: $color-bg-error;
+                color: $color-text-error;
             }
         }
 
@@ -80,8 +80,8 @@
                         h2.toy-card-title {
                             font-size: 1.75em;
                             word-break: break-all;
-                            color: aliceblue;
-                            background: linear-gradient(to right, aliceblue) right bottom / 0% 2px no-repeat;
+                            color: $color-text-primary;
+                            background: linear-gradient(to right, $color-text-primary) right bottom / 0% 2px no-repeat;
                             transition: background-size 200ms ease-out;
                         }
                         &::after {

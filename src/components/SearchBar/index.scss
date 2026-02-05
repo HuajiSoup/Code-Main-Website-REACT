@@ -7,13 +7,13 @@ form.search-bar {
     align-items: center;
     padding: 0 10px;
     border-radius: 15px;
-    border: 1px #ffffff solid;
+    border: 1px $color-white solid;
     cursor: pointer;
 
     transition: border-color 150ms;
 
     &:hover, &:focus {
-        border-color: #fa0;
+        border-color: $color-text-accent;
     }
 
     &::before {
@@ -38,7 +38,7 @@ form.search-bar {
         flex-grow: 1;
         font-size: 1em;
         line-height: 2;
-        color: aliceblue;
+        color: $color-text-primary;
 
         &:focus::placeholder {
             color: transparent;

@@ -1,3 +1,5 @@
+@use "@/styles/variables" as *;
+
 @mixin markdown {
     line-height: 1.5;
 
@@ -6,7 +8,7 @@
     }
 
     a {
-        color: cyan;
+        color: $color-text-link;
         &:hover {
             text-decoration: none;
         }
@@ -41,7 +43,7 @@
     }
 
     code {
-        background-color: #22252a;
+        background-color: $color-bg-panel;
         padding: 0 5px;
         border-radius: 5px;
         margin: 0 2px;
@@ -54,32 +56,30 @@
         width: 100%;
         line-height: 1.4;
         margin: 5px 0;
-        color: #ccc;
+        color: $color-text-code;
         background-color: #282c34;
         border-radius: 5px;
         padding: 0;
         counter-reset: code-line;
 
-        p.code-lang-tag {
+        .code-lang-tag {
+            display: flex;
+            align-items: center;
             box-sizing: border-box;
-            width: max-content;
             line-height: 1.15;
             width: 100%;
             padding: 10px 15px;
-            color: aliceblue;
-            background: black;
+            color: $color-text-primary;
+            background: $color-black;
             border-radius: 5px 5px 0 0;
             cursor: pointer;
 
-            &::before {
-                content: "";
+            .code-lang-icon {
                 display: inline-block;
                 width: 1em;
                 height: 1em;
                 margin: 0 5px;
-                background-color: #fa0;
-                vertical-align: baseline;
-                mask: url("../../assets/icon/code-tag.svg") center / cover no-repeat;
+                color: $color-text-accent;
             }
         }
         code {
@@ -97,7 +97,7 @@
 
                 &::before {
                     content: counter(code-line);
-                    color: #ffffff;
+                    color: $color-text-primary;
                     display: inline-block;
                     text-align: end;
                     min-width: 20px;
@@ -112,21 +112,21 @@
         margin: 5px 0;
         border-collapse: collapse;
         tbody tr:nth-child(odd) {
-            background-color: rgba(#ffffff, 0.2);
+            background-color: rgba($color-white, 0.2);
         }
         td, th {
             padding: 5px;
         }
     }
     table, td, th {
-        border: 1px aliceblue solid;
+        border: 1px $color-text-primary solid;
     }
 
     blockquote {
         margin: 5px 0;
         padding: 15px;
-        background-color: rgba(#fa0, 0.2);
-        border-left: 5px #fa0 solid;
-        color: #fa0;
+        background-color: rgba($color-text-accent, 0.2);
+        border-left: 5px $color-text-accent solid;
+        color: $color-text-accent;
     }
 }

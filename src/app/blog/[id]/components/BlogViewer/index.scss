@@ -6,23 +6,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: aliceblue;
+    color: $color-text-primary;
 
     .blog-article-exit {
+        display: flex;
+        align-items: center;
         position: sticky;
         top: 70px;
         width: max-content;
         margin-bottom: 10px;
-        font-size: 1em;
         padding: 10px 20px;
         border-radius: 20px;
-        background-color: #343841;
-        box-shadow: 0px 0px 8px #1b1b1b;
+        background-color: $color-bg-card;
+        box-shadow: 0px 0px 8px $color-bg-shadow;
         align-self: flex-start;
 
         cursor: pointer;
 
-        color: aliceblue;
+        color: $color-text-primary;
         text-decoration: none;
     }
 
@@ -32,8 +33,8 @@
         height: fit-content;
         // padding: 20px;
         border-radius: 10px;
-        background-color: #343841;
-        box-shadow: 0px 0px 8px #1b1b1b;
+        background-color: $color-bg-card;
+        box-shadow: 0px 0px 8px $color-bg-shadow;
 
         .blog-article-status {
             padding: 20px;
@@ -64,7 +65,7 @@
                 text-align: center;
             }
             p.blog-article-time {
-                color: gray;
+                color: $color-text-dim;
                 font-size: 1em;
                 font-style: italic;
             }

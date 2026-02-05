@@ -15,7 +15,7 @@ export default function RootLayout({
     return (<>
         <html>
             <body>
-                <LazyMotion features={domAnimation}>
+                <LazyMotion features={domAnimation} strict>
                     <Header />
                     {children}
                     <Footer />

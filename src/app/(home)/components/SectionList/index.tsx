@@ -27,7 +27,7 @@ type SectionListProps = {
     content: SectionContent[],
 };
 
-const SectionList: React.FC<SectionListProps> = ({content}) => {
+const SectionList: React.FC<SectionListProps> = ({ content }) => {
     const sectionListRef = useRef(null);
     const { scrollY, scrollYProgress } = useScroll({
         target: sectionListRef,
@@ -40,7 +40,7 @@ const SectionList: React.FC<SectionListProps> = ({content}) => {
                 <DetroitShadow content={content} />
                 <div className="sections-wrapper">
                     {content.map(section => 
-                        <Section key={section.id} listlength={content.length} {...section}></Section>
+                        <Section key={section.id} content={section} listlength={content.length}></Section>
                     )}
                 </div>
             </div>

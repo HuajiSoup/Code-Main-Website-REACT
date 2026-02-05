@@ -9,6 +9,7 @@ import AnimatedDiv from "@/components/AnimatedDiv";
 import { BlogData } from "../../page";
 
 import { storageBlogsUrl } from "@/constants/storage";
+import { LogOut } from "lucide-react";
 
 type ArticleViewerProps = {
     data: BlogData;
@@ -27,7 +28,10 @@ const BlogViewer: React.FC<ArticleViewerProps> = memo(({ data }) => {
 
     return (<>
         <AnimatedDiv className="blogger-article-root">
-            <Link href="/blog" className="blog-article-exit" onClick={ScrollToTop}>返回</Link>
+            <Link href="/blog" className="blog-article-exit" onClick={ScrollToTop}>
+                <LogOut />
+                返回
+            </Link>
             <div className="blog-article-card">
                 { meta.cover && <div className="blog-article-cover" style={{
                     backgroundImage: `url(${meta.cover})`

@@ -35,7 +35,7 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
         justify-content: center;
         align-items: flex-end;
 
-        color: aliceblue;
+        color: $color-text-primary;
 
         h1.main-title {
             display: inline;
@@ -46,7 +46,7 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
 
             &:hover {
                 transform: scale(1.05);
-                text-shadow: #fa0 0 0 10px;
+                text-shadow: $color-text-accent 0 0 10px;
             }
             &:nth-child(1) {
                 font-size: 4.3em;
@@ -68,8 +68,8 @@ $cubic-ease-out: cubic-bezier(.22,.61,.36,1);
                 font-size: 2em;
                 line-height: 2.5;
                 font-family: Arial, Helvetica, sans-serif;
-                color: rgba(240, 248, 255, 0.27);
-                -webkit-text-stroke: aliceblue 2px;
+                color: rgba($color-text-primary, 0.27);
+                -webkit-text-stroke: $color-text-primary 2px;
                 animation: titleAppear 500ms 1200ms cubic-bezier(.22,.61,.36,1) backwards;
             }
         }

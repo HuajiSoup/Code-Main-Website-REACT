@@ -3,12 +3,6 @@ import React, { JSX } from "react";
 import Welcome from "./components/Welcome";
 import SectionList from "./components/SectionList";
 import Menu from "./components/Menu";
-import { StaticImageData } from "next/image";
-
-import img1 from "./assets/bg-newyear.jpg";
-import img2 from "./assets/bg-mc.jpg";
-import img3 from "./assets/bg-mountain.jpg";
-import img4 from "./assets/bg-aurora.jpg";
 
 import './index.scss';
 import { Metadata } from "next";
@@ -17,7 +11,7 @@ type SectionContent = {
     title: string,
     content: JSX.Element[],
     color: string,
-    img: StaticImageData,
+    img: string,
     id: number,
 }
 
@@ -40,7 +34,7 @@ const sections: SectionContent[] = [
             </p>),
         ],
         color: "#ffaa00",
-        img: img1,
+        img: "/home/bg-newyear.jpg",
     },
     {
         id: 1,
@@ -59,7 +53,7 @@ const sections: SectionContent[] = [
             </p>),
         ],
         color: "#008800",
-        img: img2,
+        img: "/home/bg-mc.jpg",
     },
     {
         id: 2,
@@ -79,7 +73,7 @@ const sections: SectionContent[] = [
             </p>)
         ],
         color: "#555555",
-        img: img3,
+        img: "/home/bg-mountain.jpg",
     },
     {
         id: 3,
@@ -99,7 +93,7 @@ const sections: SectionContent[] = [
             </p>)
         ],
         color: "#413399",
-        img: img4,
+        img: "/home/bg-aurora.jpg",
     }
 ]
 

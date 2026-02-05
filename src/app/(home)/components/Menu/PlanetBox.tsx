@@ -2,13 +2,14 @@ import React from "react";
 
 import { PlanetInfo } from ".";
 import Link from "next/link";
-import Image from "next/image";
 
 type PlanetProps = {
     planet: PlanetInfo;
 }
 
 const BallBox: React.FC<PlanetProps> = ({ planet }) => {
+    const Icon = planet.icon;
+
     return (<>
         <div className="planet-ball-wrapper"        
             style={{
@@ -17,11 +18,7 @@ const BallBox: React.FC<PlanetProps> = ({ planet }) => {
                 animationDelay: `${0.3 + 0.4 * planet.id}s`,
             }}
         >
-            <Image
-                src={planet.icon}
-                alt={planet.title}
-                className="planet-ball"
-            ></Image>
+            <Icon className="planet-ball" />
         </div>
     </>);
 }

@@ -7,6 +7,7 @@ import PortalBtn from "../PortalBtn";
 import Huajireka from "./Huajireka";
 
 import { mainPages } from "@/constants/pages";
+import { ArrowLeft } from "lucide-react";
 
 const Header: React.FC = () => {
     const [firstOpen, setFirstOpen] = useState<boolean>(false);
@@ -29,7 +30,10 @@ const Header: React.FC = () => {
             <div className={menuOpen ? "navi-menu open" : "navi-menu closed"}>
                 <div className="navi-menu-sidebar">
                     <div className="navi-menu-sidebar-wrapper">
-                        <div className="navi-menu-sidebar-exit" onClick={toggle}>← 返回</div>
+                        <div className="navi-menu-sidebar-exit" onClick={toggle}>
+                            <ArrowLeft className="lucide-icon" />
+                            返回
+                        </div>
 
                         <Huajireka />
 

@@ -13,14 +13,14 @@
     scroll-snap-align: start;
     
     section {
-        color: aliceblue;
+        color: $color-text-primary;
         height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
 
         h2 {
-            text-shadow: black 0px 0px 10px;
+            text-shadow: $color-black 0px 0px 10px;
 
             &.section-index {
                 font-size: 2em;
@@ -30,7 +30,6 @@
             &.section-title {
                 font-size: 5em;
                 font-weight: 800;
-                font-family: sans-serif;
                 position: relative;
 
                 &::before {
@@ -40,8 +39,8 @@
                     bottom: 2px;
                     left: -20px;
                     width: 12px;
-                    background-color: aliceblue;
-                    box-shadow: black 0px 0px 10px;
+                    background-color: $color-text-primary;
+                    box-shadow: $color-black 0px 0px 10px;
                 }
             }
         }

@@ -25,8 +25,8 @@
                 top: -2vw;
                 width: 4vw;
                 height: 4vw;
-                background-color: rgba(#ffffff, 0.1);
-                border-image-source: radial-gradient(60% 60% at center, transparent 100%, cyan 100%);
+                background-color: rgba($color-white, 0.1);
+                border-image-source: radial-gradient(60% 60% at center, transparent 100%, $color-text-link 100%);
                 border-image-slice: 1;
                 border-image-width: 2.4px;
                 transform-origin: center center -2vw;

@@ -8,8 +8,9 @@ import { SectionContent } from "../../page";
 
 import "./index.scss";
 
-type SectionProps = SectionContent & {
-    listlength: number,
+type SectionProps = {
+    listlength: number;
+    content: SectionContent;
 };
 
 type Paragraphs = {
@@ -40,17 +41,17 @@ const SectionTextWrapper: React.FC<Paragraphs> = ({ contents }) => {
     );
 };
 
-const Section: React.FC<SectionProps> = (props) => {
+const Section: React.FC<SectionProps> = ({ listlength, content }) => {
     const { scrollYProgress } = useScrollValues();
     const titleScroll = useTransform(scrollYProgress,
-        [props.id / props.listlength, (props.id + 2) / props.listlength],
+        [content.id / listlength, (content.id + 2) / listlength],
         [700, -700],
     );
 
     return (
         <div
             className="section-wrapper"
-            style={ {background: `url(${props.img.src}) center / cover no-repeat`, }}
+            style={ {background: `url(${content.img}) center / cover no-repeat`, }}
         >
             <section>
                 <motion.div
@@ -58,14 +59,14 @@ const Section: React.FC<SectionProps> = (props) => {
                     initial={{visibility: "hidden"}}
                     animate={{visibility: "visible"}}
                 >
-                    <h2 className="section-index">{`#00${props.id + 1}`}</h2>
-                    <h2 className="section-title">{props.title}</h2>
+                    <h2 className="section-index">{`#00${content.id + 1}`}</h2>
+                    <h2 className="section-title">{content.title}</h2>
                 </motion.div>
-                <SectionTextWrapper contents={props.content} />
+                <SectionTextWrapper contents={content.content} />
             </section>
         </div>
     );
 };
 
-export type {SectionProps};
+export type { SectionProps };
 export default Section;

@@ -37,7 +37,7 @@
         text-align: center;
         font-size: 4rem;
         letter-spacing: 2vw;
-        color: aliceblue;
+        color: $color-text-primary;
 
         br { display: none; }
     }
@@ -81,9 +81,10 @@
                 cursor: pointer;
 
                 .planet-ball {
-                    width: 80%;
-                    height: 80%;
-                    margin: 10%;
+                    color: $color-text-primary;
+                    width: 75%;
+                    height: 75%;
+                    margin: 12.5%;
                     object-fit: contain;
                     transform: translateZ(10vw);
                 }
@@ -103,7 +104,7 @@
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    color: #ffffff;
+                    color: $color-text-primary;
                     overflow: hidden;
                     z-index: +1;
 
@@ -119,7 +120,7 @@
                         display: flex;
                         flex-direction: row;
                         align-items: center;
-                        outline: solid 10px aliceblue;
+                        outline: solid 10px $color-text-primary;
                         outline-offset: -50px;
 
                         transition: 

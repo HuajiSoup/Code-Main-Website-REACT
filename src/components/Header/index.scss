@@ -6,7 +6,7 @@ header {
         width: 100%;
         height: 60px;
         z-index: +5;
-        background-color: rgba($color: #505050, $alpha: 0.6);
+        background-color: $color-bg-overlay;
         backdrop-filter: blur(5px);
     
         display: flex;
@@ -30,7 +30,7 @@ header {
                 height: 0;
                 border-width: 10px;
                 border-style: solid;
-                border-color: transparent transparent transparent #ffffff;
+                border-color: transparent transparent transparent $color-white;
                 transform: rotateZ(0deg);
                 transition: right 200ms ease-out, transform 200ms ease-out;
             }
@@ -50,8 +50,8 @@ header {
             z-index: +5;
             height: 100vh;
             overflow: hidden auto;
-            background-color: rgba($color: #232727, $alpha: 0.9);
-            box-shadow: 8px 0px 10px #1b1b1b;
+            background-color: $color-bg-sidebar;
+            box-shadow: 8px 0px 10px $color-bg-shadow;
             backdrop-filter: blur(5px);
     
             transition: width 300ms cubic-bezier(.22, .61, .36, 1);
@@ -65,10 +65,12 @@ header {
                 box-sizing: border-box;
                 display: flex;
                 flex-direction: column;
-                color: aliceblue;
+                color: $color-text-primary;
                 font-size: 1rem;
     
                 .navi-menu-sidebar-exit {
+                    display: flex;
+                    align-items: center;
                     width: max-content;
                     height: max-content;
                     margin: 10px;
@@ -76,11 +78,10 @@ header {
                     border-radius: 5px;
                     transition: background-color 100ms ease-out;
                     text-align: center;
-                    font-family: sans-serif;
                     cursor: pointer;
     
                     &:hover {
-                        background-color: rgba($color: #505050, $alpha: 0.6);
+                        background-color: $color-bg-overlay;
                     }
                 }
     
@@ -94,7 +95,7 @@ header {
                         width: 50px;
                         height: 50px;
                         margin: 7px;
-                        border: 2px aliceblue solid;
+                        border: 2px $color-text-primary solid;
                         border-radius: 100%;
                         background: url("../../assets/huajisoup.png") center / cover no-repeat;
                         flex-shrink: 0;
@@ -111,18 +112,19 @@ header {
                         transition: background-color 100ms ease-out;
                         animation: portal-appear 350ms cubic-bezier(.22,.61,.36,1) 100ms backwards;
     
-                        img.portal-icon {
+                        .portal-icon {
                             width: 25px;
                             height: 25px;
                             margin: 10px;
+                            color: $color-text-primary;
                         }
                         p b {
                             font-size: 1.2rem;
-                            color: aliceblue;
+                            color: $color-text-primary;
                         }
     
                         &:hover {
-                            background-color: rgba($color: #505050, $alpha: 0.6);
+                            background-color: $color-bg-overlay;
                         }
                     }
     
@@ -149,7 +151,7 @@ header {
             width: 100vw;
             height: 100vh;
             z-index: +4;
-            background-color: rgba(#000, 0.2);
+            background-color: rgba($color-black, 0.2);
         }
     }
 

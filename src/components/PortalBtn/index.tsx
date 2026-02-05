@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import Link from "next/link";
 
@@ -9,7 +8,7 @@ type PortalBtnProps = PageInfo & React.ComponentPropsWithoutRef<"div">;
 const PortalBtn: React.FC<PortalBtnProps> = (props) => {
     const {
         title,
-        icon,
+        icon: Icon,
         href,
         ...divProps
     } = props;
@@ -17,7 +16,7 @@ const PortalBtn: React.FC<PortalBtnProps> = (props) => {
     return (
         <Link href={href}>
             <div className="portal" {...divProps}>
-                <Image src={icon} alt={title} className="portal-icon" />
+                <Icon className="portal-icon" />
                 <p><b>{title}</b></p>
             </div>
         </Link>

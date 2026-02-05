@@ -1,5 +1,6 @@
 "use client";
 
+import { Code2 } from "lucide-react";
 import React, { useState } from "react";
 
 type CodeShowerProps = {
@@ -13,7 +14,10 @@ const CodeShower: React.FC<CodeShowerProps> = ({ lang, children }) => {
     const toggle = () => {setOpen(!open);}
 
     return (<>
-        <p className="code-lang-tag" onClick={toggle}>{lang ?? "代码"}</p>
+        <div className="code-lang-tag" onClick={toggle}>
+            <Code2 className="code-lang-icon" />
+            {lang ?? "代码"}
+        </div>
         {open && <code>{children}</code>}
     </>);
 };
