@@ -1,0 +1,13 @@
+.blogger-article-skeleton-root {
+    width: 100%;
+
+    @include animate-skeleton-blink;
+
+    .article-card-skeleton {
+        width: min(1100px, 95%);
+        height: 100vh;
+        margin: 20px auto;
+        border-radius: 15px;
+        background-color: $color-bg-overlay;
+    }
+}

@@ -32,18 +32,19 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
 
     // search
     useEffect(() => {
-        if (search === "") {
+        const query = search.trim().toUpperCase();
+        if (!query) {
             setShowBlogs(blogs);
             return;
         }
         
-        const terms = search.split(" ").filter(term => term);
+        const terms = query.split(" ").filter(term => term);
         setShowBlogs(blogs.filter(blog => {
             for (const term of terms) {
-                if (blog.title?.indexOf(term) !== -1
-                    || blog.desc?.indexOf(term) !== -1
+                if (blog.title?.toUpperCase().indexOf(term) !== -1
+                    || blog.desc?.toUpperCase().indexOf(term) !== -1
                     || blog.section === term
-                    || blog.tags.includes(term)
+                    || blog.tags.some(tag => tag.toUpperCase().indexOf(term) !== -1)
                 ) return true;
             }
             return false;
@@ -92,7 +93,7 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
         </div>
 
         <div className="blogs-list">
-            { showBlogs.map((blog, index) => <BlogCard key={index} blog={blog} />) }
+            { showBlogs.map((blog) => <BlogCard key={blog.blogID} blog={blog} />) }
         </div>
     </AnimatedDiv>
     </>);

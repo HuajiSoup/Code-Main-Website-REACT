@@ -16,8 +16,8 @@ const defaultAnimation: Variants = {
         }
     },
     hidden: {
-        opacity: 0.15,
-        y: 300,
+        opacity: 0,
+        y: 100,
         transition: {
             ease: "circOut",
             duration: 0.25,

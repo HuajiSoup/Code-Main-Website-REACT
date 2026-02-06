@@ -5,6 +5,7 @@ import { ToyData } from "../../page";
 import AnimatedDiv from "@/components/AnimatedDiv";
 
 import { Variants } from "motion/react";
+import { ArrowRight } from "lucide-react";
 
 const animationToyCard: Variants = {
     visible: {
@@ -35,6 +36,7 @@ const ToyCard: React.FC<{toy: ToyData}> = ({ toy }) => {
                             backgroundImage: `url(${toy.icon})`
                         }}></div>
                         <h2 className="toy-card-title">{toy.title}</h2>
+                        <ArrowRight className="toy-card-icon" />
                     </div>
                 </Link>
 

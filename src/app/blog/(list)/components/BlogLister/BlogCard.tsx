@@ -17,15 +17,15 @@ const animationBlogCard: Variants = {
         x: 0,
         transition: {
             ease: "circOut",
-            duration: 0.25,
+            duration: 0.3,
         }
     },
     hidden: {
         opacity: 0,
-        x: 150,
+        x: 50,
         transition: {
             ease: "circOut",
-            duration: 0.25,
+            duration: 0.3,
         }
     },
 };

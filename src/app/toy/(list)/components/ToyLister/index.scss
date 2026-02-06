@@ -84,13 +84,10 @@
                             background: linear-gradient(to right, $color-text-primary) right bottom / 0% 2px no-repeat;
                             transition: background-size 200ms ease-out;
                         }
-                        &::after {
-                            content: "";
-                            display: inline-block;
+                        .toy-card-icon {
                             width: 30px;
                             height: 30px;
                             opacity: 0;
-                            background: url("../../../../../assets/icon/arrow-right.svg") center / cover no-repeat;
                             translate: -20px;
                             transition: opacity 100ms ease-out, translate 100ms ease-out;
                         }
@@ -100,7 +97,7 @@
                                 background-position: left bottom;
                                 background-size: 100% 2px;
                             }
-                            &::after {
+                            .toy-card-icon {
                                 opacity: 1;
                                 translate: 0px;
                             }
