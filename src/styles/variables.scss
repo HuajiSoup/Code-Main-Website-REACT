@@ -2,18 +2,23 @@ $color-white: #ffffff;
 $color-grey: #808080;
 $color-black: #000000;
 
+$color-text-bubble: #73daff;
 $color-text-primary: aliceblue;
 $color-text-dim: #808080;
 $color-text-code: #ccc;
-$color-text-accent: #ffaa00;
-$color-text-link: #00ffff;
+$color-text-accent: #00c0fa;
+$color-text-link: #00c0fa;
 $color-text-info: #005ba1;
 $color-text-error: #eeb3d2;
 
+$color-bg-bubble: rgba(#00c0fa, 0.15);
+$color-bg-bubble-overlay: rgba(#00c0fa, 0.25);
 $color-bg-page: #0a0a0a;
 $color-bg-panel: #22252a;
 $color-bg-card: #343841;
 $color-bg-shadow: #1b1b1b;
+$color-bg-accent: #00c0fa;
+
 $color-bg-overlay: rgba(#505050, 0.6);
 $color-bg-sidebar: rgba(#232727, 0.9);
 $color-bg-info: #93cbff;

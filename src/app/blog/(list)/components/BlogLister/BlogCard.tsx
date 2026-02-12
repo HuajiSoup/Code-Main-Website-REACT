@@ -2,8 +2,9 @@ import React from "react";
 
 import { BlogMeta } from "../../page";
 import Link from "next/link";
+import * as motion from "motion/react-m";
 import { Variants } from "motion";
-import AnimatedDiv from "@/components/AnimatedDiv";
+import { ArrowRight } from "lucide-react";
 
 const sectionColor: {[key : string] : string} = {
     "学术": "#ffaa00",
@@ -22,7 +23,7 @@ const animationBlogCard: Variants = {
     },
     hidden: {
         opacity: 0,
-        x: 50,
+        x: 75,
         transition: {
             ease: "circOut",
             duration: 0.3,
@@ -36,13 +37,14 @@ const BlogCard: React.FC<{blog: BlogMeta}> = ({ blog }) => {
     }
 
     return (<>
-        <AnimatedDiv className="blog-content-card" variants={animationBlogCard}>
+        <motion.div className="blog-content-card" variants={animationBlogCard}>
             <div className="blog-card-text-wrapper">
                 <div className="blog-title-wrapper">
                     <Link href={`/blog/${blog.blogID}`}>
                         <h2 className="blog-title" onClick={scrollToTop}>
-                            {blog.emoji ?? "🍟"}{blog.title ?? "无题"}
+                            {blog.title}
                         </h2>
+                        <ArrowRight className="blog-title-arrow" />
                     </Link>
                     <p className="blog-time">{!blog.completed && <b>【连载中】</b>}{blog.lastEdit}</p>
                 </div>
@@ -54,7 +56,7 @@ const BlogCard: React.FC<{blog: BlogMeta}> = ({ blog }) => {
                         {blog.section && <span className="blog-section"
                             style={{backgroundColor: sectionColor[blog.section] ?? "#3d3d3d"}}
                         >{blog.section}</span>}
-                        {blog.desc ?? <i>没写简介喵</i>}
+                        {blog.emoji}{blog.desc}
                     </p>
 
                     <div className="blog-tags-list">
@@ -71,8 +73,8 @@ const BlogCard: React.FC<{blog: BlogMeta}> = ({ blog }) => {
                 style={ blog.cover ? { backgroundImage: 
                     `url('${blog.cover}')`
                 } : {} }
-            ></Link>
-        </AnimatedDiv>
+            />
+        </motion.div>
     </>);
 };
 

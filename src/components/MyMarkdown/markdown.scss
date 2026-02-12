@@ -9,8 +9,11 @@
 
     a {
         color: $color-text-link;
+        border-radius: 5px;
+        transition: background-color 100ms linear;
+
         &:hover {
-            text-decoration: none;
+            background-color: $color-bg-bubble;
         }
     }
 
@@ -54,11 +57,8 @@
     pre {
         box-sizing: border-box;
         width: 100%;
-        line-height: 1.4;
         margin: 5px 0;
-        color: $color-text-code;
-        background-color: #282c34;
-        border-radius: 5px;
+        border-radius: 10px;
         padding: 0;
         counter-reset: code-line;
 
@@ -66,12 +66,13 @@
             display: flex;
             align-items: center;
             box-sizing: border-box;
-            line-height: 1.15;
-            width: 100%;
-            padding: 10px 15px;
-            color: $color-text-primary;
-            background: $color-black;
-            border-radius: 5px 5px 0 0;
+            width: max-content;
+            color: $color-text-bubble;
+            background: $color-bg-bubble;
+            margin: 10px;
+            padding: 5px 10px;
+            border-radius: 10px;
+            transition: background-color 100ms linear;
             cursor: pointer;
 
             .code-lang-icon {
@@ -79,7 +80,10 @@
                 width: 1em;
                 height: 1em;
                 margin: 0 5px;
-                color: $color-text-accent;
+            }
+
+            &:hover {
+                background-color: $color-bg-bubble-overlay;
             }
         }
         code {
@@ -110,16 +114,28 @@
 
     table {
         margin: 5px 0;
-        border-collapse: collapse;
-        tbody tr:nth-child(odd) {
-            background-color: rgba($color-white, 0.2);
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 10px;
+        overflow: hidden;
+
+        thead {
+            color: $color-text-bubble;
+            background-color: $color-bg-bubble-overlay;
+            border-radius: 10px;
+        }
+
+        tbody tr {
+            &:nth-child(odd) {
+                // background-color: $color-bg-bubble;
+            }
+            &:nth-child(even) {
+                background-color: $color-bg-bubble;
+            }
         }
         td, th {
-            padding: 5px;
+            padding: 5px 15px;
         }
-    }
-    table, td, th {
-        border: 1px $color-text-primary solid;
     }
 
     blockquote {

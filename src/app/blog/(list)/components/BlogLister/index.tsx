@@ -1,6 +1,6 @@
 "use client";
 
-import React, { memo, useEffect, useRef, useState } from "react";
+import React, { memo, useMemo, useRef, useState } from "react";
 import "./index.scss";
 
 import SearchBar, { SearchBarHandle } from "@/components/SearchBar";
@@ -8,6 +8,7 @@ import BlogCard, { sectionColor } from "./BlogCard";
 import AnimatedDiv from "@/components/AnimatedDiv";
 
 import { BlogMeta } from "../../page";
+import { stagger, Variants } from "motion/react";
 
 const extractTags = (blogs: BlogMeta[]): string[] => {
     const tags: Set<string> = new Set();
@@ -21,8 +22,16 @@ type BlogListerProps = {
     blogs: BlogMeta[],
 }
 
+const animationBlogList: Variants = {
+    hidden: {},
+    visible: {
+        transition: {
+            delayChildren: stagger(0.1, { ease: "easeOut" }),
+        }
+    },
+};
+
 const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
-    const [showBlogs, setShowBlogs] = useState<BlogMeta[]>(blogs);
     const [search, setSearch] = useState<string>("");
 
     const inputRef = useRef<SearchBarHandle | null>(null);
@@ -30,25 +39,23 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
         inputRef.current?.setInput(search ? `${search} ${v}` : v);
     }
 
-    // search
-    useEffect(() => {
+    const showBlogs = useMemo(() => {
         const query = search.trim().toUpperCase();
         if (!query) {
-            setShowBlogs(blogs);
-            return;
+            return blogs;
         }
         
         const terms = query.split(" ").filter(term => term);
-        setShowBlogs(blogs.filter(blog => {
+        return blogs.filter(blog => {
             for (const term of terms) {
                 if (blog.title?.toUpperCase().indexOf(term) !== -1
                     || blog.desc?.toUpperCase().indexOf(term) !== -1
-                    || blog.section === term
+                    || blog.section?.toUpperCase() === term
                     || blog.tags.some(tag => tag.toUpperCase().indexOf(term) !== -1)
                 ) return true;
             }
             return false;
-        }));
+        });
     }, [search, blogs]);
 
     return (<>
@@ -65,7 +72,7 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
                 </div>
 
                 <div className="menu-sections-wrapper">
-                    <p className="menu-title">📚分类</p>
+                    <p className="menu-title"><b>分类</b></p>
                     <hr />
                     <div className="menu-sections-list">
                         { Object.keys(sectionColor).map((section, index) => (
@@ -78,7 +85,7 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
                 </div>
 
                 <div className="menu-tags-wrapper">
-                    <p className="menu-title">🏷️标签</p>
+                    <p className="menu-title"><b>标签</b></p>
                     <hr />
                     <div className="menu-tags-list">
                         { extractTags(blogs).map((tag, index) => (
@@ -92,9 +99,16 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
             </div>
         </div>
 
-        <div className="blogs-list">
-            { showBlogs.map((blog) => <BlogCard key={blog.blogID} blog={blog} />) }
-        </div>
+        <AnimatedDiv
+            className="blogs-list"
+            key={search || "all"}
+            variants={animationBlogList}
+        >
+            { showBlogs.length
+                ? showBlogs.map((blog) => <BlogCard key={blog.blogID} blog={blog} />) 
+                : <div className="blog-status-card loading">没有找到“{search}”相关的博客喵</div>
+            }
+        </AnimatedDiv>
     </AnimatedDiv>
     </>);
 });
