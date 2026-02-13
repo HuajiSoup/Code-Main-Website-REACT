@@ -53,8 +53,8 @@
             gap: 6px;
 
             .toy-card {
-                height: 180px;
                 @include layout.toy-card;
+                height: 180px;
 
                 .toy-card-title-wrapper {
                     width: 100%;
@@ -75,13 +75,13 @@
                     h2.toy-card-title {
                         font-size: 1.75em;
                         word-break: break-all;
-                        color: $color-text-primary;
-                        background: linear-gradient(to right, $color-text-primary) right bottom / 0% 2px no-repeat;
-                        transition: background-size 200ms ease-out;
+                        background: linear-gradient(to right, $color-bg-accent) right bottom / 0% 2px no-repeat;
+                        transition: background-size 200ms ease-out, color 100ms linear;
                     }
                     .toy-card-arrow {
                         width: 30px;
                         height: 30px;
+                        color: $color-bg-accent;
                         opacity: 0;
                         translate: -20px;
                         transition: opacity 100ms ease-out, translate 100ms ease-out;
@@ -91,6 +91,7 @@
                         & h2.toy-card-title {
                             background-position: left bottom;
                             background-size: 100% 2px;
+                            color: $color-text-accent;
                         }
                         .toy-card-arrow {
                             opacity: 1;

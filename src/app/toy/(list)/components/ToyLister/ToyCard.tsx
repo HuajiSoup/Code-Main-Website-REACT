@@ -1,10 +1,9 @@
 import React from "react";
+import * as motion from "motion/react-m";
+import { Variants } from "motion/react";
 
 import Link from "next/link";
 import { ToyData } from "../../page";
-import AnimatedDiv from "@/components/AnimatedDiv";
-
-import { Variants } from "motion/react";
 import { ArrowRight } from "lucide-react";
 
 const animationToyCard: Variants = {
@@ -28,7 +27,7 @@ const animationToyCard: Variants = {
 
 const ToyCard: React.FC<{toy: ToyData}> = ({ toy }) => {
     return (<>
-        <AnimatedDiv className="toy-card" variants={animationToyCard}>
+        <motion.div className="toy-card" variants={animationToyCard}>
             <Link href={toy.url} target="_blank" rel="noreferrer">
                 <div className="toy-card-title-wrapper">
                     <div className="toy-card-cover" style={{
@@ -44,7 +43,7 @@ const ToyCard: React.FC<{toy: ToyData}> = ({ toy }) => {
             <div className="toy-card-desc">
                 <p>{toy.desc}</p>
             </div>
-        </AnimatedDiv>
+        </motion.div>
     </>);
 }
 

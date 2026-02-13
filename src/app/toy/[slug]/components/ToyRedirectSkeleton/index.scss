@@ -1,0 +1,16 @@
+@use "../../../layout.scss" as layout;
+
+.toy-redirect-skeleton-root {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+        
+    .toy-redirect-skeleton-card {
+        @include layout.toy-card;
+        width: min(1200px, 85%);
+        color: $color-text-info;
+        background-color: $color-bg-info;
+    }
+}

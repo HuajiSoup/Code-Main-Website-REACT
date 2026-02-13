@@ -2,22 +2,25 @@ $color-white: #ffffff;
 $color-grey: #808080;
 $color-black: #000000;
 
+$color-theme: #00c0fa;
+
 $color-text-bubble: #73daff;
-$color-text-primary: aliceblue;
+$color-text-primary: #ffffff;
+$color-text-secondary: #d1d5dc;
 $color-text-dim: #808080;
 $color-text-code: #ccc;
-$color-text-accent: #00c0fa;
-$color-text-link: #00c0fa;
+$color-text-accent: $color-theme;
+$color-text-link: $color-theme;
 $color-text-info: #005ba1;
 $color-text-error: #eeb3d2;
 
-$color-bg-bubble: rgba(#00c0fa, 0.15);
-$color-bg-bubble-overlay: rgba(#00c0fa, 0.25);
 $color-bg-page: #0a0a0a;
 $color-bg-panel: #22252a;
 $color-bg-card: #343841;
 $color-bg-shadow: #1b1b1b;
-$color-bg-accent: #00c0fa;
+$color-bg-bubble: rgba($color-theme, 0.15);
+$color-bg-bubble-overlay: rgba($color-theme, 0.25);
+$color-bg-accent: $color-theme;
 
 $color-bg-overlay: rgba(#505050, 0.6);
 $color-bg-sidebar: rgba(#232727, 0.9);

@@ -26,7 +26,7 @@ const animationBlogList: Variants = {
     hidden: {},
     visible: {
         transition: {
-            delayChildren: stagger(0.1, { ease: "easeOut" }),
+            delayChildren: stagger(0.05, { ease: "easeOut" }),
         }
     },
 };

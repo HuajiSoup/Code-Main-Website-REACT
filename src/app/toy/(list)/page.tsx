@@ -30,7 +30,7 @@ const rawToToyData = (meta: rawToyData): ToyData => {
     }
 }
 
-const getToyList = async () => {
+const getToyList = async (): Promise<ToyData[]> => {
     const datas: rawToyData[] = await fetchMetadatas();
     const toys = datas.map(rawToToyData);
     

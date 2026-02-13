@@ -2,19 +2,26 @@
 
 @mixin markdown {
     line-height: 1.5;
+    color: $color-text-secondary;
 
-    h1, h2, h3 {
+    h1, h2, h3, h4, h5, h6 {
+        color: $color-text-primary;
         line-height: 2;
     }
 
     a {
         color: $color-text-link;
         border-radius: 5px;
-        transition: background-color 100ms linear;
+        transition: background-color 100ms linear, color 100ms linear;
 
         &:hover {
+            color: $color-text-bubble;
             background-color: $color-bg-bubble;
         }
+    }
+
+    li::marker {
+        color: $color-text-accent;
     }
 
     hr {
@@ -45,8 +52,9 @@
         }
     }
 
-    code {
-        background-color: $color-bg-panel;
+    & > code, p > code {
+        background-color: $color-bg-bubble;
+        color: $color-text-bubble;
         padding: 0 5px;
         border-radius: 5px;
         margin: 0 2px;
@@ -95,6 +103,8 @@
             border-radius: 0;
             background-color: transparent;
             overflow: auto;
+            font-family: 'Courier', monospace;
+            font-weight: bold;
 
             > span {
                 counter-increment: code-line;
@@ -121,14 +131,11 @@
 
         thead {
             color: $color-text-bubble;
-            background-color: $color-bg-bubble-overlay;
+            background-color: rgba($color-theme, 0.4);
             border-radius: 10px;
         }
 
         tbody tr {
-            &:nth-child(odd) {
-                // background-color: $color-bg-bubble;
-            }
             &:nth-child(even) {
                 background-color: $color-bg-bubble;
             }
@@ -142,7 +149,7 @@
         margin: 5px 0;
         padding: 15px;
         background-color: rgba($color-text-accent, 0.2);
-        border-left: 5px $color-text-accent solid;
+        border-left: 5px $color-bg-accent solid;
         color: $color-text-accent;
     }
 }
