@@ -34,6 +34,8 @@
 
         .blog-content-card {
             @include layout.blog-card;
+            height: fit-content;
+            min-height: 180px;
             padding: 0;
             display: flex;
             flex-direction: row;
@@ -44,13 +46,13 @@
                 display: flex;
                 flex-direction: column;
 
-                .blog-title-wrapper {
+                a {
                     display: flex;
                     flex-direction: row;
                     align-items: flex-end;
                     justify-content: space-between;
 
-                    a {
+                    .blog-title-wrapper {
                         display: flex;
                         flex-direction: row;
                         align-items: center;
@@ -97,7 +99,7 @@
                     }
 
                     &:hover {
-                        a {
+                        .blog-title-wrapper {
                             h2.blog-title {
                                 background-position: left bottom;
                                 background-size: 100% 2px;
@@ -141,9 +143,8 @@
                 }
             }
 
-            .blog-card-cover-image {
+            a.blog-card-cover-image {
                 width: min(200px, 30%);
-                height: 100%;
                 border-radius: 0px 15px 15px 0;
                 background-color: transparent;
                 background: linear-gradient(-30deg, cyan, lime) center / cover no-repeat;
@@ -264,7 +265,7 @@
                 flex-direction: column-reverse;
 
                 .blog-card-text-wrapper {
-                    .blog-title-wrapper {
+                    a {
                         align-items: start;
                         flex-direction: column;
                     }
@@ -272,7 +273,7 @@
                         margin-top: 10px;
                     }
                 }
-                .blog-card-cover-image {
+                a.blog-card-cover-image {
                     width: 100%;
                     height: 160px;
                     flex-shrink: 0;

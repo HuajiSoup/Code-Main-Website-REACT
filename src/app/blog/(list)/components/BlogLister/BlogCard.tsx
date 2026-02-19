@@ -39,15 +39,15 @@ const BlogCard: React.FC<{blog: BlogMeta}> = ({ blog }) => {
     return (<>
         <motion.div className="blog-content-card" variants={animationBlogCard}>
             <div className="blog-card-text-wrapper">
-                <div className="blog-title-wrapper">
-                    <Link href={`/blog/${blog.blogID}`}>
+                <Link href={`/blog/${blog.blogID}`}>
+                    <div className="blog-title-wrapper">
                         <h2 className="blog-title" onClick={scrollToTop}>
                             {blog.title}
                         </h2>
                         <ArrowRight className="blog-title-arrow" />
-                    </Link>
+                    </div>
                     <p className="blog-time">{!blog.completed && <b>【连载中】</b>}{blog.lastEdit}</p>
-                </div>
+                </Link>
 
                 <hr />
                 

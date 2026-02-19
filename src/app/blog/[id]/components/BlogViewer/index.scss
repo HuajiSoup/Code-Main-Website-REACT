@@ -83,3 +83,21 @@
         }
     }
 }
+
+@media (max-width: 800px) {
+    .blogger-article-root {
+        .blog-article-card {
+            .blog-article-header {
+                h2.blog-article-title {
+                    font-size: 2em;
+                }
+                p.blog-article-desc {
+                    font-size: 1em;
+                }
+            }
+            .blog-article-body {
+                font-size: 1em;
+            }
+        }
+    }
+}
