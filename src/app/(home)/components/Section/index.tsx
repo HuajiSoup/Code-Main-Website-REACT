@@ -9,7 +9,6 @@ import { SectionContent } from "../../page";
 import "./index.scss";
 
 type SectionProps = {
-    listlength: number;
     content: SectionContent;
 };
 
@@ -41,11 +40,12 @@ const SectionTextWrapper: React.FC<Paragraphs> = ({ contents }) => {
     );
 };
 
-const Section: React.FC<SectionProps> = ({ listlength, content }) => {
-    const { scrollYProgress } = useScrollValues();
-    const titleScroll = useTransform(scrollYProgress,
-        [content.id / listlength, (content.id + 2) / listlength],
-        [700, -700],
+const Section: React.FC<SectionProps> = ({ content }) => {
+    const { scrollAt } = useScrollValues();
+    const titleScroll = useTransform(scrollAt,
+        [content.id, content.id + 1],
+        [700, 0],
+        { clamp: false }
     );
 
     return (

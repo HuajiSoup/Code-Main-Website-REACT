@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as motion from "motion/react-m";
 
 import "./index.scss";
@@ -90,31 +90,75 @@ const Menu: React.FC = () => {
     const refCursor = useRef<HTMLDivElement | null>(null);
     const refCanvas = useRef<HTMLCanvasElement | null>(null);
 
-    const handleCursor: React.MouseEventHandler = (event) => {
-        if (!refCursor.current || !refCanvas.current) return;
+    // perf: cache viewport size + RAF scheduling + active state dedup
+    const refVw = useRef(0);
+    const refVh = useRef(0);
+    const refRafId = useRef<number | null>(null);
+    const refMouse = useRef({ x: 0, y: 0 });
+    const refActiveId = useRef(-1);
 
-        const mx = event.clientX / window.innerWidth;
-        const my = event.clientY / window.innerHeight;
-
-        // move backgrounds
-        refCanvas.current.style.left = `${-mx * 5}vw`;
-        refCanvas.current.style.top  = `${-my * 5}vh`;
-
-        // navigate planets
-        for (let i = 0; i < planetCount; i++) {
-            const pos = planets[i].pos;
-            if (mx > pos.x - 0.05 && mx < pos.x + 0.05
-                && my > pos.y - 0.1 && my < pos.y + 0.1)
-            {
-                refCursor.current.style.left = `${pos.x * 100}vw`;
-                refCursor.current.style.top  = `${pos.y * 100}vh`;
-                refCursor.current.classList.add("active");
-                return;
+    useEffect(() => {
+        const updateViewport = () => {
+            refVw.current = window.innerWidth;
+            refVh.current = window.innerHeight;
+        };
+        updateViewport();
+        window.addEventListener("resize", updateViewport);
+        return () => {
+            window.removeEventListener("resize", updateViewport);
+            if (refRafId.current !== null) {
+                cancelAnimationFrame(refRafId.current);
+                refRafId.current = null;
             }
-        }
-        refCursor.current.style.left = `${mx * 100}vw`;
-        refCursor.current.style.top  = `${my * 100}vh`;
-        refCursor.current.classList.remove("active");
+        };
+    }, []);
+
+    const handleCursor: React.MouseEventHandler = (event) => {
+        // store latest mouse pos, schedule DOM writes in next frame
+        refMouse.current.x = event.clientX;
+        refMouse.current.y = event.clientY;
+        if (refRafId.current !== null) return;
+        refRafId.current = requestAnimationFrame(() => {
+            refRafId.current = null;
+            const cursor = refCursor.current;
+            const canvas = refCanvas.current;
+            if (!cursor || !canvas) return;
+
+            const vw = refVw.current || window.innerWidth;
+            const vh = refVh.current || window.innerHeight;
+            const mx = refMouse.current.x / vw;
+            const my = refMouse.current.y / vh;
+
+            // move backgrounds (GPU-composited via transform)
+            canvas.style.setProperty("--x", `${-mx * 5}vw`);
+            canvas.style.setProperty("--y", `${-my * 5}vh`);
+
+            // navigate planets
+            let hitId = -1;
+            for (let i = 0; i < planetCount; i++) {
+                const pos = planets[i].pos;
+                if (mx > pos.x - 0.05 && mx < pos.x + 0.05
+                    && my > pos.y - 0.1 && my < pos.y + 0.1)
+                {
+                    hitId = i;
+                    cursor.style.setProperty("--x", `${pos.x * 100}vw`);
+                    cursor.style.setProperty("--y", `${pos.y * 100}vh`);
+                    break;
+                }
+            }
+            if (hitId === -1) {
+                cursor.style.setProperty("--x", `${mx * 100}vw`);
+                cursor.style.setProperty("--y", `${my * 100}vh`);
+            }
+            // dedup classList writes
+            if (hitId >= 0 && refActiveId.current !== hitId) {
+                cursor.classList.add("active");
+                refActiveId.current = hitId;
+            } else if (hitId === -1 && refActiveId.current !== -1) {
+                cursor.classList.remove("active");
+                refActiveId.current = -1;
+            }
+        });
     }
     
     return (<>

@@ -41,8 +41,7 @@ const StarCanvas: React.FC<{ref: CanvasRef}> = ({ ref }) => {
 
     return (<>
         <div className="canvas-wrapper">
-            <canvas className="canvas-star" ref={ref}
-            ></canvas>
+            <canvas className="canvas-star" ref={ref}></canvas>
         </div>
     </>)
 }

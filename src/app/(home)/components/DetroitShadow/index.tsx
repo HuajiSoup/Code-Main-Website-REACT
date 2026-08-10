@@ -49,16 +49,11 @@ const DetroitShadow: React.FC<{ content: SectionContent[] }> = ({ content: color
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        const ctxFromCanvas = canvas.getContext("2d");
-        if (!ctxFromCanvas) return;
-        ctxRef.current = ctxFromCanvas;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) return;
+        ctxRef.current = ctx;
 
         const initCanvas = () => {
-            const canvas = canvasRef.current;
-            if (!canvas) return;
-            const ctx = ctxRef.current ?? canvas.getContext("2d");
-            if (!ctx) return;
-
             canvasCtxScaledAsDPR(canvas, ctx, window);
 
             const direction = window.innerWidth > 900 ? DIRECTION.HORIZONAL : DIRECTION.VERTICAL;
