@@ -1,26 +1,14 @@
-import { storageBlogsUrl } from "@/constants/storage";
+import { apiBaseUrl } from "@/constants/storage";
+import { BlogMeta } from "../page";
 
-export default async function fetchMetadatas() {
-    // list
-    const listRes = await fetch(
-        `${storageBlogsUrl}/list.json`,
+export default async function fetchBlogList(query: string = "", tag: string = "") {
+    const listResp = await fetch(
+        `${apiBaseUrl}/blog?q=${query}&tag=${tag}`,
         { next: { revalidate: 86400 } }
     );
-    if (!listRes.ok) { throw new Error(`Failed to fetch blog list! Status: ${listRes.status}`); }
-    const idList = await listRes.json();
+    
+    if (!listResp.ok) { throw new Error(`Failed to fetch blog list! Status: ${listResp.status}`); }
+    const res: { blogs: BlogMeta[] } = (await listResp.json()).data;
 
-    // each
-    const blogs = await Promise.all(
-        idList.blogs.map((id: string) => 
-            fetch(
-                `${storageBlogsUrl}/${id}/metadata.json`, 
-                { next: { revalidate: 86400 } }
-            )
-            .then(metaRes => {
-                if (!metaRes.ok) { throw new Error(`Failed to fetch blog "${id}"! Status: ${metaRes.status}`); }
-                return metaRes.json();
-            })
-        )
-    );
-    return blogs;
+    return res.blogs;
 }

@@ -6,12 +6,6 @@ import * as motion from "motion/react-m";
 import { Variants } from "motion";
 import { ArrowRight } from "lucide-react";
 
-const sectionColor: {[key : string] : string} = {
-    "学术": "#ffaa00",
-    "技术": "#0083d0",
-    "生活": "#0c9300",
-}
-
 const animationBlogCard: Variants = {
     visible: {
         opacity: 1,
@@ -39,25 +33,20 @@ const BlogCard: React.FC<{blog: BlogMeta}> = ({ blog }) => {
     return (<>
         <motion.div className="blog-content-card" variants={animationBlogCard}>
             <div className="blog-card-text-wrapper">
-                <Link href={`/blog/${blog.blogID}`}>
+                <Link href={`/blog/${blog.slug}`}>
                     <div className="blog-title-wrapper">
                         <h2 className="blog-title" onClick={scrollToTop}>
                             {blog.title}
                         </h2>
                         <ArrowRight className="blog-title-arrow" />
                     </div>
-                    <p className="blog-time">{!blog.completed && <b>【连载中】</b>}{blog.lastEdit}</p>
+                    <p className="blog-time">{!blog.completed && <b>【连载中】</b>}{blog.updatedTime}</p>
                 </Link>
 
                 <hr />
                 
                 <div className="blog-detail-wrapper">
-                    <p className="blog-desc">
-                        {blog.section && <span className="blog-section"
-                            style={{backgroundColor: sectionColor[blog.section] ?? "#3d3d3d"}}
-                        >{blog.section}</span>}
-                        {blog.emoji}{blog.desc}
-                    </p>
+                    <p className="blog-desc">{blog.emoji} {blog.desc}</p>
 
                     <div className="blog-tags-list">
                         {blog.tags.map((tag, index) => (
@@ -68,7 +57,7 @@ const BlogCard: React.FC<{blog: BlogMeta}> = ({ blog }) => {
             </div>
 
             <Link className="blog-card-cover-image"
-                href={`/blog/${blog.blogID}`}
+                href={blog.cover ?? ""}
                 onClick={scrollToTop}
                 style={ blog.cover ? { backgroundImage: 
                     `url('${blog.cover}')`
@@ -78,5 +67,4 @@ const BlogCard: React.FC<{blog: BlogMeta}> = ({ blog }) => {
     </>);
 };
 
-export { sectionColor };
 export default BlogCard;

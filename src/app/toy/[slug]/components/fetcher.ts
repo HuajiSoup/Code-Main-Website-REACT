@@ -1,9 +1,8 @@
-import { storageToysUrl } from "@/constants/storage";
-import { rawToyData } from "../../(list)/page";
+import { apiBaseUrl } from "@/constants/storage";
 
 export default async function fetchToyData(slug: string) {
     const metaRes = await fetch(
-        `${storageToysUrl}/${slug}/metadata.json`,
+        `${apiBaseUrl}/toy/${slug}`,
         { next: { revalidate: 86400 } }
     );
 
@@ -11,6 +10,6 @@ export default async function fetchToyData(slug: string) {
         return null;
         // throw new Error(`Failed to fetch toy "${slug}"! Status: ${metaRes.status}`);
     };
-    const metadata: rawToyData = await metaRes.json();
-    return metadata;
+    const metadata = await metaRes.json();
+    return metadata.data.toy;
 }

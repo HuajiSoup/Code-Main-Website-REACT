@@ -8,6 +8,8 @@ import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
 import CodeShower from "./CodeShower";
 import rehypePrism from "rehype-prism-plus";
+import { PhotoView } from "react-photo-view";
+import Image from "next/image";
 
 type MyMarkdownProps = {
     children: string;
@@ -18,7 +20,20 @@ const MyMarkdown: React.FC<MyMarkdownProps> = memo(({ children }) => {
         remarkPlugins={[remarkGfm, remarkMath]}
         rehypePlugins={[rehypeKatex, rehypePrism]}
         components={{
-            code: ({className, ...props}) => {
+            img: ({ src, alt }) => {
+                if (!src) return null;
+                const srcUrl = src.toString();
+
+                return (
+                    <PhotoView src={srcUrl} key={srcUrl}>
+                        <span className="img-container">
+                            <Image className="img" src={srcUrl} alt={alt ?? srcUrl} fill />
+                            {/* <img src={srcUrl} alt={alt ?? srcUrl} /> */}
+                        </span>
+                    </PhotoView>
+                )
+            },
+            code: ({ className, ...props }) => {
                 const isBlock = !!className;
                 if (isBlock) {
                     const hasLang = className.indexOf("language-");

@@ -234,6 +234,10 @@
                 .menu-tags-list {
                     .menu-tag-btn {
                         @include layout.blog-tag;
+                        &.selected {
+                            background-color: rgba(#7fff00, 0.3);
+                            color: #7fff00;
+                        }
                     }
                 }
             }

@@ -1,22 +1,14 @@
-import { storageToysUrl } from "@/constants/storage";
-import { rawToyData } from "../page";
+import { apiBaseUrl } from "@/constants/storage";
+import { ToyData } from "../page";
 
-export default async function fetchMetadatas() {
-    const listRes = await fetch(`${storageToysUrl}/list.json`);
-    const slugList: {toys: string[]} = await listRes.json();
-
-    const toys: rawToyData[] = await Promise.all(
-        slugList.toys.map(slug => 
-            fetch(
-                `${storageToysUrl}/${slug}/metadata.json`,
-                { next: { revalidate: 86400 } }
-            )
-            .then(res => {
-                if (!res.ok) throw new Error(`Failed to fetch toy "${slug}"! Status: ${res.status}`);
-                return res.json();
-            })
-        )
+export default async function fetchToyList() {
+    const listResp = await fetch(
+        `${apiBaseUrl}/toy`,
+        { next: { revalidate: 86400 } }
     );
 
-    return toys;
+    if (!listResp.ok) { throw new Error(`Failed to fetch toy list! Status: ${listResp.status}`); }
+    const res: { toys: ToyData[] } = (await listResp.json()).data;
+
+    return res.toys;
 }

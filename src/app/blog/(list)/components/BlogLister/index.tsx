@@ -4,7 +4,7 @@ import React, { memo, useMemo, useRef, useState } from "react";
 import "./index.scss";
 
 import SearchBar, { SearchBarHandle } from "@/components/SearchBar";
-import BlogCard, { sectionColor } from "./BlogCard";
+import BlogCard from "./BlogCard";
 import AnimatedDiv from "@/components/AnimatedDiv";
 
 import { BlogMeta } from "../../page";
@@ -15,7 +15,7 @@ const extractTags = (blogs: BlogMeta[]): string[] => {
     for (const blog of blogs) {
         for (const tag of blog.tags) tags.add(tag);
     }
-    return Array.from(tags);
+    return Array.from(tags).sort((sa, sb) => sa < sb ? -1 : 1);
 }
 
 type BlogListerProps = {
@@ -33,30 +33,33 @@ const animationBlogList: Variants = {
 
 const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
     const [search, setSearch] = useState<string>("");
+    const [tagged, setTagged] = useState<string | null>(null);
 
     const inputRef = useRef<SearchBarHandle | null>(null);
-    const searchAdd = (v: string) => {
-        inputRef.current?.setInput(search ? `${search} ${v}` : v);
+
+    const tagToggle = (tag: string) => {
+        setTagged(tagged === tag ? null : tag);
     }
 
     const showBlogs = useMemo(() => {
         const query = search.trim().toUpperCase();
-        if (!query) {
-            return blogs;
-        }
+        const taggedBlogs = tagged
+            ? blogs.filter((blog) => 
+                blog.tags.some(tag => tag.toUpperCase() === tagged.toUpperCase())
+            ) : blogs;
+        if (!query) return taggedBlogs;
         
-        const terms = query.split(" ").filter(term => term);
-        return blogs.filter(blog => {
+        const terms = query.split(" ").filter(Boolean);
+        return taggedBlogs.filter(blog => {
             for (const term of terms) {
-                if (blog.title?.toUpperCase().indexOf(term) !== -1
-                    || blog.desc?.toUpperCase().indexOf(term) !== -1
-                    || blog.section?.toUpperCase() === term
-                    || blog.tags.some(tag => tag.toUpperCase().indexOf(term) !== -1)
+                if ((blog.title.toUpperCase().indexOf(term) !== -1
+                    || blog.desc.toUpperCase().indexOf(term) !== -1)
+                    && (!tagged || blog.tags.some(tag => tag.toUpperCase() === tagged.toUpperCase()))
                 ) return true;
             }
             return false;
         });
-    }, [search, blogs]);
+    }, [search, tagged, blogs]);
 
     return (<>
     <AnimatedDiv className="blogger-lister-root">
@@ -71,29 +74,16 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
                     <SearchBar setTermCallback={setSearch} changeInterval={250} ref={inputRef} />
                 </div>
 
-                <div className="menu-sections-wrapper">
-                    <p className="menu-title"><b>分类</b></p>
-                    <hr />
-                    <div className="menu-sections-list">
-                        { Object.keys(sectionColor).map((section, index) => (
-                            <div className="menu-section-btn"
-                                key={index}
-                                onClick={() => searchAdd(section)}
-                            >{section}</div>
-                        )) }
-                    </div>
-                </div>
-
                 <div className="menu-tags-wrapper">
                     <p className="menu-title"><b>标签</b></p>
                     <hr />
                     <div className="menu-tags-list">
-                        { extractTags(blogs).map((tag, index) => (
-                            <div className="menu-tag-btn"
+                        {extractTags(blogs).map((tag, index) => (
+                            <div className={`menu-tag-btn ${tagged === tag ? "selected" : ""}`}
                                 key={index}
-                                onClick={() => searchAdd(tag)}
+                                onClick={() => tagToggle(tag)}
                             ># {tag}</div>
-                        )) }
+                        ))}
                     </div>
                 </div>
             </div>
@@ -101,11 +91,11 @@ const BlogLister: React.FC<BlogListerProps> = memo(({ blogs }) => {
 
         <AnimatedDiv
             className="blogs-list"
-            key={search || "all"}
+            key={`${search}-${tagged}` || "all"}
             variants={animationBlogList}
         >
-            { showBlogs.length
-                ? showBlogs.map((blog) => <BlogCard key={blog.blogID} blog={blog} />) 
+            {(showBlogs.length)
+                ? showBlogs.map((blog) => <BlogCard key={blog.slug} blog={blog} />) 
                 : <div className="blog-status-card loading">没有找到“{search}”相关的博客喵</div>
             }
         </AnimatedDiv>

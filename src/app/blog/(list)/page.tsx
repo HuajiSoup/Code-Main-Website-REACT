@@ -1,54 +1,41 @@
 import React from "react";
 
 import { Metadata } from "next";
-import { storageBlogsUrl } from "@/constants/storage";
-import fetchMetadatas from "./components/fetcher";
 import BlogLister from "./components/BlogLister";
+import fetchBlogList from "./components/fetcher";
+import { baseUrl } from "@/constants/storage";
 
 type BlogMeta = {
-    title: string;
-    blogID: string;
-    emoji: string;
-    cover?: string;
-    desc: string;
-    section?: string;
-    tags: string[];
-    lastEdit: string;
-    completed: boolean;
+    id: number,
+    slug: string,
+    title: string,
+    desc: string,
+    emoji: string,
+    tags: string[],
+    createdTime: string,
+    updatedTime: string,
+    completed: boolean,
+    cover: string | null,
 }
 
-type rawBlogMeta = {
-    title?: string;
-    blogID?: string;
-    emoji?: string;
-    cover?: string;
-    desc?: string;
-    section?: string;
-    tags?: string[];
-    lastEdit?: number;
-    completed?: boolean;
-}
-
-// AliyunOSS
-const rawToBlogMeta = (meta: rawBlogMeta): BlogMeta => {
-    const date = new Date(Number(meta?.lastEdit ?? 0));
-
+const rawToBlogMeta = (meta: BlogMeta): BlogMeta => {
     return {
+        id: meta.id,
+        slug: meta.slug,
         title: meta.title ?? "[无题]",
-        blogID: meta?.blogID ?? "0",
-        emoji: meta?.emoji ?? "",
-        cover: meta?.cover ? `${storageBlogsUrl}/blog-${meta.blogID}/${meta.cover}` : undefined,
-        desc: meta?.desc ?? "",
-        section: meta?.section,
-        tags: meta?.tags ?? [],
-        lastEdit: `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`,
-        completed: meta?.completed ?? true,
+        emoji: meta.emoji,
+        cover: meta.cover ? `${baseUrl}/blogs/${meta.slug}/${meta.cover}` : null,
+        desc: meta.desc ?? "[无简介]",
+        tags: meta.tags,
+        createdTime: meta.createdTime.split(" ")[0], // date part only
+        updatedTime: meta.updatedTime.split(" ")[0],
+        completed: meta.completed ?? true,
     }
 }
 
 const getBlogList = async () => {
     try {
-        const metadatas = await fetchMetadatas();
+        const metadatas = await fetchBlogList();
         const blogs = metadatas.map(rawToBlogMeta);
         return blogs;
     } catch (err) {
@@ -63,9 +50,9 @@ const PageBlogList: React.FC = async () => {
     return <BlogLister blogs={blogs} />;
 };
 
-export { rawToBlogMeta };
-export type { rawBlogMeta, BlogMeta };
+export { type BlogMeta, rawToBlogMeta };
 export default PageBlogList;
+
 export const metadata: Metadata = {
     title: "稽之博客 | Huaji Blogs",
     description: "阅读散落的滑稽先辈的文字，触摸古老的智慧。\

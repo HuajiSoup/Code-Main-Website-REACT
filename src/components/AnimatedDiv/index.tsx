@@ -35,7 +35,6 @@ const AnimatedDiv: React.FC<AnimatedPanelProps> = ({
             variants={variants}
             initial="hidden"
             animate="visible"
-            exit="hidden"
             {...props}
         >
             {children}

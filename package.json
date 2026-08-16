@@ -17,6 +17,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-markdown": "^10.1.0",
+    "react-photo-view": "^1.2.7",
     "rehype-katex": "^7.0.1",
     "rehype-prism-plus": "^2.0.1",
     "remark-gfm": "^4.0.1",

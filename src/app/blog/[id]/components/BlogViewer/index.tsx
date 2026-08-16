@@ -2,14 +2,16 @@
 
 import React, { memo } from "react";
 import "./index.scss";
+import 'react-photo-view/dist/react-photo-view.css';
 
 import Link from "next/link";
 import MyMarkdown from "@/components/MyMarkdown";
 import AnimatedDiv from "@/components/AnimatedDiv";
 import { BlogData } from "../../page";
 
-import { storageBlogsUrl } from "@/constants/storage";
 import { LogOut } from "lucide-react";
+import { baseUrl } from "@/constants/storage";
+import { PhotoProvider } from "react-photo-view";
 
 type ArticleViewerProps = {
     data: BlogData;
@@ -19,11 +21,11 @@ const BlogViewer: React.FC<ArticleViewerProps> = memo(({ data }) => {
     const meta = data.meta;
     const md = data.content.replaceAll(
         /(!\[.*?\]\()(\.\/)(.*?\))/g,
-        `$1${storageBlogsUrl}/blog-${meta.blogID}/$3`
+        `$1${baseUrl}/blogs/${meta.slug}/res/$3`
     );
 
     const ScrollToTop = () => {
-        window.scrollTo({top: 0, behavior: "smooth"});
+        window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     return (<>
@@ -39,14 +41,16 @@ const BlogViewer: React.FC<ArticleViewerProps> = memo(({ data }) => {
                 <div className="blog-article-header">
                     <h2 className="blog-article-title">{meta.emoji ?? "🍟"}{meta.title}{meta.emoji ?? "🍟"}</h2>
                     { meta.desc && <p className="blog-article-desc">{meta.desc}</p> }
-                    { meta.lastEdit && <p className="blog-article-time">
-                        {!meta.completed && <b>【连载中】</b>}最后更新于{meta.lastEdit}
-                    </p> }
+                    <p className="blog-article-time">
+                        {!meta.completed && <b>【连载中】</b>}最后更新于{meta.updatedTime}
+                    </p>
                 </div>
 
                 <hr />
                 <div className="blog-article-body">
-                    <MyMarkdown>{md}</MyMarkdown>
+                    <PhotoProvider loop={false} maskOpacity={0.7}>
+                        <MyMarkdown>{md}</MyMarkdown>
+                    </PhotoProvider>
                 </div>
                 <hr />
             </div>

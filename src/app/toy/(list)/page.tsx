@@ -2,36 +2,29 @@ import React from "react";
 
 import { Metadata } from "next";
 import ToyLister from "./components/ToyLister";
-import fetchMetadatas from "./components/fetcher";
-import { storageToysUrl } from "@/constants/storage";
+import fetchToyList from "./components/fetcher";
+import { baseUrl } from "@/constants/storage";
 
 type ToyData = {
+    id: number;
+    slug: string;
     title: string;
     desc: string;
-    slug: string;
-    url: string;
-    icon?: string;
+    cover: string | null;
 }
 
-type rawToyData = {
-    title?: string;
-    desc?: string;
-    slug: string;
-    icon?: string;
-}
-
-const rawToToyData = (meta: rawToyData): ToyData => {
+const rawToToyData = (meta: ToyData): ToyData => {
     return {
+        id: meta.id,
         title: meta.title ?? "[无题]",
         desc: meta.desc ?? "",
         slug: meta.slug,
-        url: `${storageToysUrl}/${meta.slug}`,
-        icon: meta.icon ? `${storageToysUrl}/${meta.slug}/${meta.icon}` : undefined,
+        cover: meta.cover ? `${baseUrl}/toys/${meta.slug}/${meta.cover}` : null,
     }
 }
 
 const getToyList = async (): Promise<ToyData[]> => {
-    const datas: rawToyData[] = await fetchMetadatas();
+    const datas: ToyData[] = await fetchToyList();
     const toys = datas.map(rawToToyData);
     
     return toys;
@@ -43,8 +36,7 @@ const PageToyList: React.FC = async () => {
     return <ToyLister toys={datas} />;
 }
 
-export type { ToyData, rawToyData };
-export { rawToToyData };
+export { type ToyData, rawToToyData };
 export default PageToyList;
 export const metadata: Metadata = {
     title: "稽之玩具 | Huaji Toys",

@@ -32,27 +32,22 @@
         margin: 10px 0;
     }
 
-    img {
+    // next/image fill 模式要求父容器 position:relative 且有明确尺寸。
+    // markdown 中图片尺寸/比例未知，用 inline-block 容器 + max-width 约束，
+    // 配合 aspect-ratio 给 fill 图片一个可填充的盒子，object-fit:contain 防变形。
+    .img-container {
         display: block;
-        margin: 8px auto;
-        max-width: 100%;
+        position: relative;
+        width: 90%;
         max-height: 50vh;
-        object-fit: scale-down;
+        aspect-ratio: 3 / 2;
+        margin: 8px auto;
+        overflow: hidden;
+        border-radius: 10px;
         cursor: pointer;
-    }
-    .image-viewer {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100vh;
-        background-color: rgba(black, 0.2);
 
-        img {
-            max-height: 100vh;
-            max-width: 100vw;
+        .img {
             object-fit: contain;
-            cursor: pointer;
         }
     }
 

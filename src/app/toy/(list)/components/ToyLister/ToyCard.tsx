@@ -5,6 +5,7 @@ import { Variants } from "motion/react";
 import Link from "next/link";
 import { ToyData } from "../../page";
 import { ArrowRight } from "lucide-react";
+import { baseUrl } from "@/constants/storage";
 
 const animationToyCard: Variants = {
     visible: {
@@ -26,13 +27,15 @@ const animationToyCard: Variants = {
 };
 
 const ToyCard: React.FC<{toy: ToyData}> = ({ toy }) => {
+    const url = `${baseUrl}/toys/${toy.slug}`;
+
     return (<>
         <motion.div className="toy-card" variants={animationToyCard}>
-            <Link href={toy.url} target="_blank" rel="noreferrer">
+            <Link href={url} target="_blank" rel="noreferrer">
                 <div className="toy-card-title-wrapper">
-                    <div className="toy-card-cover" style={{
-                        backgroundImage: `url(${toy.icon})`
-                    }}></div>
+                    <div className="toy-card-cover" style={toy.cover ? {
+                        backgroundImage: `url(${toy.cover})`
+                    } : {}}></div>
                     <h2 className="toy-card-title">{toy.title}</h2>
                     <ArrowRight className="toy-card-arrow" />
                 </div>

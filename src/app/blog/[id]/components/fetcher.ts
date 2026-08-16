@@ -1,10 +1,9 @@
-import { storageBlogsUrl } from "@/constants/storage";
+import { apiBaseUrl, baseUrl } from "@/constants/storage";
 
-export default async function fetchBlogData(id: string) {
-    const url = `${storageBlogsUrl}/blog-${id}`;
+export default async function fetchBlogData(slug: string) {
     const [metadata, content] = await Promise.all([
         fetch(
-            `${url}/metadata.json`,
+            `${apiBaseUrl}/blog/${slug}`,
             { next: { revalidate: 86400 } }
         )
         .then(res => {
@@ -16,7 +15,7 @@ export default async function fetchBlogData(id: string) {
         }),
 
         fetch(
-            `${url}/blog.md`,
+            `${baseUrl}/blogs/${slug}/blog.md`,
             { next: { revalidate: 86400 } }
         )
         .then(res => {
@@ -28,5 +27,10 @@ export default async function fetchBlogData(id: string) {
         })
     ]);
 
-    return metadata && content ? { metadata, content } : null;
+    if (!metadata || !content) return null;
+
+    return {
+        metadata: metadata.data.blog,
+        content
+    };
 }

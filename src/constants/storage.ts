@@ -1,6 +1,4 @@
-const storageUrl = "https://storage.huaji-universe.top";
-const storageBlogsUrl = "https://storage.huaji-universe.top/blogs";
-const storageToysUrl = "https://storage.huaji-universe.top/toys";
+const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || "???";
+const apiBaseUrl = `${baseUrl}/api`;
 
-export default storageUrl;
-export {storageBlogsUrl, storageToysUrl};
+export { baseUrl, apiBaseUrl };
